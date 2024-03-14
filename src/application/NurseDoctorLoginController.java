@@ -6,34 +6,43 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class NurseDoctorLoginController {
 
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private PasswordField passwordField;
-
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Label loginErrorLabel;
+    
+    //Handle the login validation process for doctors and nurses
     public void login(ActionEvent event) {
         UserManager userManager = UserManager.getInstance();
         boolean isValid = userManager.validateLogin(usernameField.getText(), passwordField.getText());
         
+        //If login was successful, set the error label to false and proceed with login process
         if (isValid) {
+        	loginErrorLabel.setVisible(false);
         	System.out.println("Login successful!");
-        } else {
+        } 
+        
+        //If login was unsuccessful, show the error label
+        else {
+        	loginErrorLabel.setText("Login Unsuccessful");
+        	loginErrorLabel.setVisible(true);
         	System.out.println("Login unsuccessful!");
         }
     }
-
+    
+    //Take the user to the reset password screen
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
     	System.out.println("Forgot password button pressed.");
     }
     
+    //Take the user back to the role selection screen if they press the back button
     public void goBack(ActionEvent event) throws Exception {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/application/role_selection.fxml"));

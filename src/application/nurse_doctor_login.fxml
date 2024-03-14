@@ -13,9 +13,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseDoctorLoginController">
    <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 15;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 15;" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" spacing="10">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" spacing="10">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Staff Login" textAlignment="CENTER">
                      <font>
@@ -24,7 +24,18 @@
                   </Label>
                   <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Username" />
                   <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="150.0" promptText="Password" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Login" />
+                  <Label fx:id="loginErrorLabel" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="RED">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Calibri" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Login">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#forgotPassword" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Forgot Password" textAlignment="CENTER" />
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#goBack" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Back" textAlignment="CENTER" />
                </children>
