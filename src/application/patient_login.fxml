@@ -23,7 +23,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Username" />
-                  <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Password" />
+                  <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="150.0" promptText="Password" />
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Login" textAlignment="CENTER" />
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#forgotPassword" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Forgot Password" textAlignment="CENTER" />
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#newUser" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="New User" textAlignment="CENTER" />

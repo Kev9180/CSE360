@@ -19,11 +19,19 @@ public class NurseDoctorLoginController {
     private PasswordField passwordField;
 
     public void login(ActionEvent event) {
-        // Handle login logic here
+        UserManager userManager = UserManager.getInstance();
+        boolean isValid = userManager.validateLogin(usernameField.getText(), passwordField.getText());
+        
+        if (isValid) {
+        	System.out.println("Login successful!");
+        } else {
+        	System.out.println("Login unsuccessful!");
+        }
     }
 
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
+    	System.out.println("Forgot password button pressed.");
     }
     
     public void goBack(ActionEvent event) throws Exception {

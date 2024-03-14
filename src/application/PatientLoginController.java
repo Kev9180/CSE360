@@ -19,15 +19,25 @@ public class PatientLoginController {
     private PasswordField passwordField;
 
     public void login(ActionEvent event) {
-        // Handle login logic here
+        UserManager userManager = UserManager.getInstance();
+        boolean isValid = userManager.validateLogin(usernameField.getText(), passwordField.getText());
+        
+        //If login was validated successfully, proceed to the Patient Portal
+        if (isValid) {
+        	System.out.println("Login successful!");
+        } else {
+        	System.out.println("Login unsuccessful!");
+        }
     }
 
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
+    	System.out.println("Forgot password button pressed.");
     }
 
     public void newUser(ActionEvent event) {
         // Handle new user logic here
+    	System.out.println("New user button pressed.");
     }
     
     public void goBack(ActionEvent event) throws Exception {

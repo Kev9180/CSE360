@@ -11,7 +11,7 @@ import javafx.scene.Parent;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		try {
+		try {		
 			Parent root = FXMLLoader.load(getClass().getResource("role_selection.fxml"));
 	        primaryStage.setTitle("Role Selection");
 	        primaryStage.setScene(new Scene(root, 800, 600));
