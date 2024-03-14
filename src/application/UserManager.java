@@ -6,6 +6,7 @@ import java.util.Map;
 public class UserManager {
 	private static UserManager instance;
 	private Map<String, User> users = new HashMap<>();
+	private User currentUser;
 	
 	//Constructor
 	public UserManager() {
@@ -31,6 +32,30 @@ public class UserManager {
 		return users.get(username);
 	}
 	
+	//Get the current logged in user
+	public User getCurrentUser() {
+		return currentUser;
+	}
+	
+	//Get the current logged in user's role
+	public Role getCurrentUserRole() {
+		if (currentUser != null) {
+			return currentUser.getRole();
+		}
+		
+		return null;
+	}
+	
+	//Method to update the currentUser on successful logins
+	public boolean login(String username, String password) {
+		if (validateLogin(username, password)) {
+			currentUser = getUser(username);
+			return true;
+		}
+		
+		return false;
+	}
+	
 	//Validate user login
 	public boolean validateLogin(String username, String password) {
 		User user = getUser(username);
@@ -40,6 +65,11 @@ public class UserManager {
 		}
 		
 		return false;
+	}
+	
+	//Method to log out the current user
+	public void logout() {
+		currentUser = null;
 	}
 	
 	//TODO: Preload a user for each role for testing purposes, remove later

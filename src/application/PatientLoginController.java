@@ -16,10 +16,11 @@ public class PatientLoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label loginErrorLabel;
-
+    
+    //Handle the login process for a patient
     public void login(ActionEvent event) {
         UserManager userManager = UserManager.getInstance();
-        boolean isValid = userManager.validateLogin(usernameField.getText(), passwordField.getText());
+        boolean isValid = userManager.login(usernameField.getText(), passwordField.getText());
         
         //If login was validated successfully, proceed to the Patient Portal
         if (isValid) {
@@ -35,17 +36,33 @@ public class PatientLoginController {
         }
     }
 
+    //Take the user to the reset password screen
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
     	System.out.println("Forgot password button pressed.");
     }
 
+    //Take the user to the new user registration screen
     public void newUser(ActionEvent event) {
         // Handle new user logic here
     	System.out.println("New user button pressed.");
     }
     
+    //Take the user back to the role selection screen if they press the back button
     public void goBack(ActionEvent event) throws Exception {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}    	
+    	
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/application/role_selection.fxml"));
         stage.setScene(new Scene(root, 800, 600));
