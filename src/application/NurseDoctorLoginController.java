@@ -56,7 +56,7 @@ public class NurseDoctorLoginController {
     	}    	
     	
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/application/role_selection.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
     }

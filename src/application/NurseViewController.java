@@ -7,18 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class RoleSelectionController {
+public class NurseViewController {
 	
-	//Handle patient login
-    public void handlePatient(ActionEvent event) throws Exception {
-        loadScene("/FXML/patient_login.fxml", event);
-    }
-    
-    //Handle nurse or doctor login
-    public void handleNurseDoctor(ActionEvent event) throws Exception {
-        loadScene("/FXML/nurse_doctor_login.fxml", event);
-    }
-    
+	
     //Method to load the scene
     private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
     	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -29,4 +20,3 @@ public class RoleSelectionController {
     	stage.show();
     }
 }
-

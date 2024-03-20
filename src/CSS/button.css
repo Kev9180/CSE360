@@ -1,0 +1,42 @@
+.button
+{
+	-fx-background-color: white;
+	-fx-border-radius: 4px;
+	-fx-border-color: #666666;
+}
+
+#patientbutton
+{
+	-fx-background-color:  #6039d2;
+}
+
+#selectedbutton
+{
+	-fx-background-color:  #6039d233;
+	-fx-border-color: 0px;
+}
+
+#unselectedbutton
+{
+	-fx-background-color:  #fefefe;
+	-fx-border-width: 0px;
+}
+
+#selectedoption
+{
+	-fx-border-style: hidden hidden solid hidden;
+	-fx-border-color: #6039d2;
+	-fx-border-width: 4px;
+}
+
+#unselectedoption
+{
+	-fx-border-width: 4px;
+	-fx-border-color: #00000000;
+	-fx-background-color:  #fefefe;
+}
+
+#backbutton
+{
+	-fx-border-width: 0px;
+}
