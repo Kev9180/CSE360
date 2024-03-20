@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-
+// this comment is a test to see if I setup git correctly! 
 
 public class Main extends Application {
 	@Override
