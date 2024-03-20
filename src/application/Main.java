@@ -14,7 +14,9 @@ public class Main extends Application {
 		try {		
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
 	        primaryStage.setTitle("Role Selection");
-	        primaryStage.setScene(new Scene(root, 800, 600));
+	        Scene scene = new Scene(root, 800, 600);
+	        //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        primaryStage.setScene(scene);
 	        primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

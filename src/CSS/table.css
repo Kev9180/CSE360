@@ -1,7 +1,7 @@
 .table-view .column-header-background{
     -fx-background-color: #f0f0f0;
     -fx-background-radius: 4px 4px 0px 0px;
-    -fx-background-insets: 0 11px 0 0;
+    
     -fx-padding: 4px 0 4px 0;
 }
 

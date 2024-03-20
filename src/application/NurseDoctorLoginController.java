@@ -18,14 +18,15 @@ public class NurseDoctorLoginController {
     @FXML private Label loginErrorLabel;
     
     //Handle the login validation process for doctors and nurses
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws Exception {
         UserManager userManager = UserManager.getInstance();
         boolean isValid = userManager.login(usernameField.getText(), passwordField.getText());
         
         //If login was successful, set the error label to false and proceed with login process
         if (isValid) {
         	loginErrorLabel.setVisible(false);
-        	System.out.println("Login successful!");
+        	
+        	loadScene("/FXML/nurse_patient_list.fxml", event);
         } 
         
         //If login was unsuccessful, show the error label
@@ -59,6 +60,16 @@ public class NurseDoctorLoginController {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
+    }
+    
+    //Method to load the scene
+    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    	Parent root = loader.load();
+    	loader.getController();
+    	stage.setScene(new Scene(root, 800, 600));
+    	stage.show();
     }
 }
 
