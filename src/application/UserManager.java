@@ -3,6 +3,10 @@ package application;
 import java.util.HashMap;
 import java.util.Map;
 
+/*	The UserManager class is a singleton and it's primary role is to manage user data
+ * 	and interactions related to user authentication and session management across the 
+ * 	application. 
+ */
 public class UserManager {
 	private static UserManager instance;
 	private Map<String, User> users = new HashMap<>();

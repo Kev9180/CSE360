@@ -1,0 +1,22 @@
+.table-view .column-header-background{
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 4px 4px 0px 0px;
+    
+    -fx-padding: 4px 0 4px 0;
+}
+
+.table-view .corner {
+    -fx-background-color: #000000;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}

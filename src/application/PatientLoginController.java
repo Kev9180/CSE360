@@ -26,6 +26,9 @@ public class PatientLoginController {
         if (isValid) {
         	loginErrorLabel.setVisible(false);
         	System.out.println("Login successful!");
+        	
+        	//TODO: Take the user to the patient portal
+        	
         } 
         
         //If login was unsuccessful, show the loginErrorLabel
