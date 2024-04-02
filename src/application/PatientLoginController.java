@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ public class PatientLoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label loginErrorLabel;
+    @FXML private Button patientLoginBtn;
     
     //Handle the login process for a patient
     public void login(ActionEvent event) {
@@ -46,9 +48,14 @@ public class PatientLoginController {
     }
 
     //Take the user to the new user registration screen
-    public void newUser(ActionEvent event) {
+    public void newUser(ActionEvent event) throws Exception {
         // Handle new user logic here
     	System.out.println("New user button pressed.");
+    	
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	Parent root = FXMLLoader.load(getClass().getResource("/FXML/new_user.fxml"));
+    	stage.setScene(new Scene(root, 800, 600));
+    	stage.show();
     }
     
     //Take the user back to the role selection screen if they press the back button

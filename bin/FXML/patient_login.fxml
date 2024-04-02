@@ -32,20 +32,20 @@
                         <Font name="Calibri" size="12.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Login" textAlignment="CENTER">
+                  <Button fx:id="patientLoginBtn" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#login" prefHeight="25.0" prefWidth="120.0" stylesheets="@../CSS/button.css" text="Login" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin></Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#forgotPassword" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Forgot Password" textAlignment="CENTER" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#newUser" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="New User" textAlignment="CENTER" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#goBack" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: lightblue;" text="Back" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#forgotPassword" prefHeight="25.0" prefWidth="120.0" stylesheets="@../CSS/button.css" text="Forgot Password" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#newUser" prefHeight="25.0" prefWidth="120.0" stylesheets="@../CSS/button.css" text="New User" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#goBack" prefHeight="25.0" prefWidth="120.0" stylesheets="@../CSS/button.css" text="Back" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>
       </Pane>
    </center>
    <top>
-      <Circle fill="#1fe8ff" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+      <Circle fill="#3ea3f4" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="40.0" />
          </BorderPane.margin>

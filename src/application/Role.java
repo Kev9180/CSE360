@@ -8,11 +8,12 @@ public class Role {
 		this.roleType = role;
 	}
 	
-	//Getter and Setter
+	//Get role type
 	public String getRoleType() {
 		return roleType;
 	}
 	
+	//Set role type
 	public void setRoleType(String role) {
 		this.roleType = role;
 	}

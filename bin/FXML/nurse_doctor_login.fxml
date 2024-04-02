@@ -47,7 +47,7 @@
       <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: lightgray;" text="(C) Pediatric Office, 123 E. Center St, Phoenix, AZ 85008" textAlignment="CENTER" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <Circle fill="#1fe8ff" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+      <Circle fill="#3ea3f4" radius="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="40.0" />
          </BorderPane.margin>

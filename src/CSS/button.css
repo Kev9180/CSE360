@@ -12,9 +12,17 @@
 	-fx-border-color: #666666;
 }
 
-#patientbutton
+#patientbutton,
+#createAccountBtn,
+#patientLoginBtn
 {
 	-fx-background-color:  #6039d2;
+}
+
+#clearFieldsBtn,
+#backBtn
+{
+	-fx-background-color: #3ea3f4;
 }
 
 #selectedbutton
