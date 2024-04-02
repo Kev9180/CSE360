@@ -67,7 +67,7 @@
             <TextField fx:id="confirmEmailTF" GridPane.columnIndex="4" GridPane.rowIndex="5" />
             <TextField fx:id="secQuestionTF" GridPane.columnIndex="4" GridPane.rowIndex="6" />
             <TextField fx:id="secAnswerTF" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-            <Button fx:id="createAccountBtn" mnemonicParsing="false" onAction="#createNewPatientAccount" prefHeight="25.0" prefWidth="100.0" stylesheets="@../CSS/button.css" text="Create Account" textFill="WHITE" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Button fx:id="createAccountBtn" mnemonicParsing="false" onAction="#createNewPatientAccount" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #6039d2;" text="Create Account" textFill="WHITE" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Label text="First Name" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets />
@@ -99,8 +99,8 @@
             <Label text="Security Answer" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <Label text="Email" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label text="Confirm Email" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <Button fx:id="clearFieldsBtn" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="100.0" stylesheets="@../CSS/button.css" text="Clear Fields" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="100.0" stylesheets="@../CSS/button.css" text="Back" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Button fx:id="clearFieldsBtn" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #3ea3f4;" text="Clear Fields" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #3ea3f4;" text="Back" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
          </children>
       </GridPane>
    </center>

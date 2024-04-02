@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,11 @@ public class PatientLoginController {
     @FXML private PasswordField passwordField;
     @FXML private Label loginErrorLabel;
     @FXML private Button patientLoginBtn;
+    
+    @FXML
+    public void initialize() {
+    	Platform.runLater(() -> patientLoginBtn.requestFocus());
+    }
     
     //Handle the login process for a patient
     public void login(ActionEvent event) {

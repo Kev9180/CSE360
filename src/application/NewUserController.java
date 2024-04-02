@@ -1,11 +1,13 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,6 +29,12 @@ public class NewUserController {
 	@FXML private TextField confirmEmailTF;
 	@FXML private TextField secQuestionTF;
 	@FXML private TextField secAnswerTF;
+	@FXML private Button clearFieldsBtn;
+	
+	@FXML
+	public void initialize() {
+		Platform.runLater(() -> clearFieldsBtn.requestFocus());
+	}
 	
 	//Method to create a new account as well as a new User and Patient entity for the new patient
 	public void createNewPatientAccount() {
