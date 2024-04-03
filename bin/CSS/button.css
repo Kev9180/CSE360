@@ -14,7 +14,8 @@
 
 #patientbutton,
 #createAccountBtn,
-#patientLoginBtn
+#patientLoginBtn,
+#staffLoginBtn
 {
 	-fx-background-color:  #6039d2;
 }

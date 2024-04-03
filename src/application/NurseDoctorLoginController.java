@@ -1,11 +1,13 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,6 +18,12 @@ public class NurseDoctorLoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label loginErrorLabel;
+    @FXML private Button staffLoginBtn;
+    
+    @FXML
+    public void initialize() {
+    	Platform.runLater(() -> staffLoginBtn.requestFocus());
+    }
     
     //Handle the login validation process for doctors and nurses
     public void login(ActionEvent event) throws Exception {

@@ -1,21 +1,11 @@
 package application;
 
-public class Role {
-	private String roleType;
+//Enum to define the types of Roles available for Users
+public enum Role {
+	PATIENT, NURSE, DOCTOR;
 	
-	//Constructor
-	public Role(String role) {
-		this.roleType = role;
+	@Override
+	public String toString() {
+		return name();
 	}
-	
-	//Get role type
-	public String getRoleType() {
-		return roleType;
-	}
-	
-	//Set role type
-	public void setRoleType(String role) {
-		this.roleType = role;
-	}
-	
 }

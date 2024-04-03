@@ -78,9 +78,9 @@ public class UserManager {
 	
 	//TODO: Preload a user for each role for testing purposes, remove later
 	private void preloadUsers() {
-		addUser(new User("patient1", "password", new Role("Patient")));
-		addUser(new User("nurse1", "password", new Role("Nurse")));
-		addUser(new User("doctor1", "password", new Role("Doctor")));
+		addUser(new User("patient1", "password", Role.PATIENT));
+		addUser(new User("nurse1", "password", Role.NURSE));
+		addUser(new User("doctor1", "password", Role.DOCTOR));
 	}
 	
 }
