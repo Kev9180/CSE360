@@ -26,7 +26,7 @@ public class PatientLoginController {
     }
     
     //Handle the login process for a patient
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws Exception {
         UserManager userManager = UserManager.getInstance();
         boolean isValid = userManager.login(usernameField.getText(), passwordField.getText());
         
@@ -35,7 +35,7 @@ public class PatientLoginController {
         	loginErrorLabel.setVisible(false);
         	System.out.println("Login successful!");
         	
-        	//TODO: Take the user to the patient portal
+        	loadScene("/FXML/patient_view.fxml", event);
         	
         } 
         
@@ -83,6 +83,14 @@ public class PatientLoginController {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
+    }
+    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    	Parent root = loader.load();
+    	loader.getController();
+    	stage.setScene(new Scene(root, 800, 600));
+    	stage.show();
     }
 }
 
