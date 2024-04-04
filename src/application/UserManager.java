@@ -1,5 +1,6 @@
 package application;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,6 +82,13 @@ public class UserManager {
 		addUser(new User("patient1", "password", Role.PATIENT));
 		addUser(new User("nurse1", "password", Role.NURSE));
 		addUser(new User("doctor1", "password", Role.DOCTOR));
+		
+		// instantiate the patient and give them visit info
+		PatientManager myPatientManager = PatientManager.getInstance();
+		Patient myPatient = new Patient("username", "password", Role.PATIENT, "first", "last", LocalDate.now(), "1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion", "securityAnswer");
+		Visit myVisit = new Visit(100, 100, 100, 100, null, null, null, "concerns", 10, "location", "examNotes", "medicationNotes");
+		myPatient.addVisit(myVisit);
+		myPatientManager.addPatient(myPatient);
 	}
 	
 }
