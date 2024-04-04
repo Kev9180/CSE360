@@ -228,7 +228,9 @@
                               </Button>
                            </children>
                         </HBox>
+                        
                         <Separator prefWidth="200.0" />
+                        
                         <BorderPane prefHeight="32.0" prefWidth="413.0">
                            <left>
                               <HBox prefHeight="32.0" prefWidth="264.0" BorderPane.alignment="CENTER">
@@ -274,7 +276,7 @@
                               </MenuButton>
                            </right>
                         </BorderPane>
-                        <TableView fx:id="patientList" prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/table.css">
+                        <TableView fx:id="patientList" prefHeight="340.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
                           <columns>
                             <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
                             <TableColumn fx:id="lastVisitDate" prefWidth="121.0" text="Last Visit Date" />

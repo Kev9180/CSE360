@@ -34,7 +34,7 @@ public class NurseDoctorLoginController {
     
     @FXML
     public void initialize() {
-    	Platform.runLater(() -> staffLoginBtn.requestFocus());
+    	Platform.runLater(() -> usernameField.requestFocus());
     }
     
     //Handle the login validation process for doctors and nurses

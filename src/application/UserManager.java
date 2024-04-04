@@ -87,8 +87,12 @@ public class UserManager {
 		PatientManager myPatientManager = PatientManager.getInstance();
 		Patient myPatient = new Patient("username", "password", Role.PATIENT, "first", "last", LocalDate.now(), "1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion", "securityAnswer");
 		Visit myVisit = new Visit(100, 100, 100, 100, null, null, null, "concerns", 10, "location", "examNotes", "medicationNotes");
+		Patient myPatient2 = new Patient("username", "password", Role.PATIENT, "first2", "last2", LocalDate.now(), "1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion", "securityAnswer");
+		Visit myVisit2 = new Visit(100, 100, 100, 100, null, null, null, "concerns", 10, "location", "examNotes", "medicationNotes");
 		myPatient.addVisit(myVisit);
 		myPatientManager.addPatient(myPatient);
+		myPatient.addVisit(myVisit2);
+		myPatientManager.addPatient(myPatient2);
 	}
 	
 }
