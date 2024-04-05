@@ -26,20 +26,19 @@ public class PatientLoginController {
     }
     
     //Handle the login process for a patient
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws Exception {
         UserManager userManager = UserManager.getInstance();
         boolean isValid = userManager.login(usernameField.getText(), passwordField.getText());
         
-        //If login was validated successfully, proceed to the Patient Portal
+        //If login was successful, set the error label to false and proceed with login process
         if (isValid) {
         	loginErrorLabel.setVisible(false);
         	System.out.println("Login successful!");
         	
-        	//TODO: Take the user to the patient portal
-        	
+        	//TODO: take the patient to the patient portal
         } 
         
-        //If login was unsuccessful, show the loginErrorLabel
+        //If login was unsuccessful, show the error label
         else {
         	loginErrorLabel.setText("Login unsuccessful");
         	loginErrorLabel.setVisible(true);

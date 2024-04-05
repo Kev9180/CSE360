@@ -64,20 +64,22 @@ public class NewUserController {
 		Role patientRole = Role.PATIENT;
 		
 		//Create a new Patient entity
-		Patient newPatient = new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber,
-										 streetAddress, city, state, zipcode, email, secQuestion, secAnswer);
+		//Patient newPatient = new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber,
+										// streetAddress, city, state, zipcode, email, secQuestion, secAnswer);
 		
 		//Add the patient to the list of Users
-		UserManager.getInstance().addUser(newPatient);
+		//UserManager.getInstance().addUser(newPatient);
 		
 		//Add the patient to the patient list
-		PatientManager.getInstance().addPatient(newPatient);
+		//PatientManager.getInstance().addPatient(newPatient);
+		
+		DatabaseUtil.addUser(new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber, streetAddress, city, state, zipcode, email, secQuestion, secAnswer));
 		
 		//Show a confirmation alert to let the user know their account has been created
 		showAlert("Account Created!", "The new patient account was successfully created. Thank you!");
 		
 		//TODO: Print a confirmation to the console for testing purposes
-		System.out.println("User account created for: " + newPatient.getRole() + " " + newPatient.getName());
+		System.out.println("User account created for: " + username);
 		
 		//Take the patient back to the login screen
 		goBackToLogin();
