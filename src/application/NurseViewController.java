@@ -1,22 +1,36 @@
 package application;
 
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
-public class NurseViewController {
+public class NurseViewController implements Initializable {
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -26,13 +40,62 @@ public class NurseViewController {
     @FXML private Label currentCount;
     @FXML private Label previousCount;
     
+    @FXML private TableView<Patient> patientList;
+    @FXML private TableColumn<Patient, String> name;
+    @FXML private TableColumn<Patient, LocalDate> lastVisitDate;
+    
+    private List<Patient> patients = PatientManager.getInstance().getPatients();
+    ObservableList<Patient> list = FXCollections.observableArrayList(patients);
+    
+    // tell the table what the columns should consist of
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+    	
+    	name.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
+    	
+    	// displays the user's most recent visit date
+        lastVisitDate.setCellValueFactory(new Callback<>() { 
+            @Override
+            public ObservableValue<LocalDate> call(TableColumn.CellDataFeatures<Patient, LocalDate> param) {
+                List<Visit> visitHistory = param.getValue().getVisitHistory();
+                int lastIndex = visitHistory.size() - 1;
+                if (lastIndex >= 0) {
+                    return new SimpleObjectProperty<>(visitHistory.get(lastIndex).getVisitDate());
+                } else {
+                    return new SimpleObjectProperty<>(null);
+                }
+            }
+        });
+        
+        // set the contents of the table
+        patientList.setItems(list);
+    }
+    
+    //Method to logout the patient before going back to the previous screen
+    public void logoutStaff() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
+    }
+    
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
+    	logoutStaff();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
+    	logoutStaff();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
@@ -52,9 +115,7 @@ public class NurseViewController {
     	categoryAllButton.setId("selectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
-    	//currentLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
     	allLabel.setTextFill(Color.web("#6039d2"));
-    	//currentCount.setFont(Font.font("System", FontWeight.BOLD, 12));
     	allCount.setTextFill(Color.web("#6039d2"));
     	
     	// deactivate categoryCurrent button

@@ -93,16 +93,225 @@ public class Patient extends User {
 		this.pharmacyEmail = pharmEmail;
 	}
 	
-	//TODO: Add a method to add a visit to the list of visits
+	public void addVisit(Visit visit) {
+		visitHistory.add(visit);
+	}
 	
-	
-	//Getter for username
 	public String getUsername() {
 		return super.getUsername();
 	}
 	
-	//Getter for name
 	public String getName() {
 		return this.firstName + " " + this.lastName;
+	}
+	
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return this.lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public LocalDate getDOB() {
+		return this.dateOfBirth;
+	}
+	
+	public void setDOB(LocalDate dob) {
+		this.dateOfBirth = dob;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+	
+	public void setPhoneNumber(String phoneNum) {
+		this.phoneNumber = phoneNum;
+	}
+	
+	public String getSecQuestion() {
+		return this.securityQuestion;
+	}
+	
+	public void setSecQuestion(String secQuestion) {
+		this.securityQuestion = secQuestion;
+	}
+	
+	public String getSecAnswer() {
+		return this.securityAnswer;
+	}
+	
+	public void setSecAnswer(String secAnswer) {
+		this.securityAnswer = secAnswer;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getCity() {
+		return this.city;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	public String getState() {
+		return this.state;
+	}
+	
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	public String getZipcode() {
+		return this.zipcode;
+	}
+	
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	
+	public String getBankName() {
+		return this.bankName;
+	}
+	
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	
+	public String getCardNum() {
+		return this.cardNumber;
+	}
+	
+	public void setCardNum(String cardNum) {
+		this.cardNumber = cardNum;
+	}
+	
+	public LocalDate getCardExpiration() {
+		return this.cardExpiration;
+	}
+	
+	public void setCardExpiration(LocalDate expiration) {
+		this.cardExpiration = expiration;
+	}
+	
+	public String getCardCVV() {
+		return this.cardCVV;
+	}
+	
+	public void setCardCVV(String cvv) {
+		this.cardCVV = cvv;
+	}
+	
+	public String getInsuranceProvider() {
+		return this.insuranceProvider;
+	}
+	
+	public void setInsuranceProvider(String provider) {
+		this.insuranceProvider = provider;
+	}
+	
+	public String getMemberId() {
+		return this.memberId;
+	}
+	
+	public void setMemberId(String id) {
+		this.memberId = id;
+	}
+	
+	public String getGroupNum() {
+		return this.groupNumber;
+	}
+	
+	public void setGroupNum(String groupNum) {
+		this.groupNumber = groupNum;
+	}
+	
+	public String getPharmName() {
+		return this.pharmacyName;
+	}
+	
+	public void setPharmName(String name) {
+		this.pharmacyName = name;
+	}
+	
+	public String getPharmAddress() {
+		return this.pharmacyAddress;
+	}
+	
+	public void setPharmAddress(String address) {
+		this.pharmacyAddress = address;
+	}
+	
+	public String getPharmCity() {
+		return this.pharmacyCity;
+	}
+	
+	public void setPharmCity(String city) {
+		this.pharmacyCity = city;
+	}
+	
+	public String getPharmState() {
+		return this.pharmacyState;
+	}
+	
+	public void setPharmState(String state) {
+		this.pharmacyState = state;
+	}
+	
+	public String getPharmZipcode() {
+		return this.pharmacyZipcode;
+	}
+	
+	public void setPharmZipcode(String zip) {
+		this.pharmacyZipcode = zip;
+	}
+	
+	public String getPharmEmail() {
+		return this.pharmacyEmail;
+	}
+	
+	public void setPharmEmail(String email) {
+		this.pharmacyEmail = email;
+	}
+	
+	public String getPharmPhoneNum() {
+		return this.pharmacyPhoneNumber;
+	}
+	
+	public void setPharmPhoneNum(String phoneNum) {
+		this.pharmacyPhoneNumber = phoneNum;
+	}
+	
+	//Getter for visit history
+	public List<Visit> getVisitHistory() {
+		return visitHistory;
+	}
+	
+	//
+	public String serialize() {
+		return "";
 	}
 }

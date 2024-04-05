@@ -12,7 +12,14 @@
 	-fx-border-color: #666666;
 }
 
+.transparent-button
+{
+	-fx-background-color: white;
+	-fx-border-width: 0px;
+}
+
 #patientbutton,
+#composebutton,
 #createAccountBtn,
 #patientLoginBtn,
 #staffLoginBtn
