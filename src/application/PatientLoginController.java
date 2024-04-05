@@ -64,8 +64,8 @@ public class PatientLoginController {
     	stage.show();
     }
     
-    //Take the user back to the role selection screen if they press the back button
-    public void goBack(ActionEvent event) throws Exception {
+    //Method to log the user out of the system
+    public void logout() {
     	UserManager userManager = UserManager.getInstance();
     	
     	//Get the current logged in user
@@ -78,6 +78,11 @@ public class PatientLoginController {
     	} else {
     		System.out.println("No user currently logged in.");
     	}    	
+    }
+    
+    //Take the user back to the role selection screen if they press the back button
+    public void goBack(ActionEvent event) throws Exception {
+    	logout();
     	
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));

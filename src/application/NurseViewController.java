@@ -71,13 +71,31 @@ public class NurseViewController implements Initializable {
         patientList.setItems(list);
     }
     
+    //Method to logout the patient before going back to the previous screen
+    public void logoutPatient() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
+    }
+    
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
+    	logoutPatient();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
+    	logoutPatient();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
