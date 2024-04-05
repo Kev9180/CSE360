@@ -19,7 +19,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseViewController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
@@ -229,7 +228,9 @@
                               </Button>
                            </children>
                         </HBox>
+                        
                         <Separator prefWidth="200.0" />
+                        
                         <BorderPane prefHeight="32.0" prefWidth="413.0">
                            <left>
                               <HBox prefHeight="32.0" prefWidth="264.0" BorderPane.alignment="CENTER">
@@ -275,10 +276,10 @@
                               </MenuButton>
                            </right>
                         </BorderPane>
-                        <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/table.css">
+                        <TableView fx:id="patientList" prefHeight="340.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Name" />
-                            <TableColumn prefWidth="121.0" text="Scheduled Date" />
+                            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="lastVisitDate" prefWidth="121.0" text="Last Visit Date" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

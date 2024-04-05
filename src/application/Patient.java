@@ -93,8 +93,10 @@ public class Patient extends User {
 		this.pharmacyEmail = pharmEmail;
 	}
 	
-	//TODO: Add a method to add a visit to the list of visits
-	
+	//Add a visit to the patient's visit history
+	public void addVisit(Visit visit) {
+		visitHistory.add(visit);
+	}
 	
 	//Getter for username
 	public String getUsername() {
@@ -104,5 +106,10 @@ public class Patient extends User {
 	//Getter for name
 	public String getName() {
 		return this.firstName + " " + this.lastName;
+	}
+	
+	//Getter for visit history
+	public List<Visit> getVisitHistory() {
+		return visitHistory;
 	}
 }

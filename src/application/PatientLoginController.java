@@ -22,7 +22,7 @@ public class PatientLoginController {
     
     @FXML
     public void initialize() {
-    	Platform.runLater(() -> patientLoginBtn.requestFocus());
+    	Platform.runLater(() -> usernameField.requestFocus());
     }
     
     //Handle the login process for a patient

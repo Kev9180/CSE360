@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * 		To acess the patient list from a file other than this one:
+ * 		To access the patient list from a file other than this one:
  * 		List<Patient> patients = PatientManager.getInstance().getPatients();
  * 
  * 		As an example, if you want to print the names of the patients in the patient list:
