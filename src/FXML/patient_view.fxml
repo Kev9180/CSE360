@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientViewController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
          <children>
@@ -53,14 +53,15 @@
             
             <Separator prefWidth="200.0" />
             
+            <!-- side buttons -->
             <VBox prefHeight="456.0" prefWidth="156.0" spacing="12.0">
                <children>
-                  <Button id="selectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="selectedbuttonRadio" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
-                              <Circle fill="WHITE" radius="16.0" stroke="#6039d2" strokeType="INSIDE" strokeWidth="3.0" />
-                              <Label text="Main" textFill="#603bd1">
+                              <Circle fill="WHITE" radius="16.0" stroke="#aaaaaa" strokeType="INSIDE" strokeWidth="3.0" />
+                              <Label text="Main" textFill="#666666">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -75,7 +76,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbuttonRadio" onAction="#messageButton"  contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -95,7 +96,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbuttonRadio" onAction="#appointmentButton"  contentDisplay="CENTER" layoutX="20.0" layoutY="22.0" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -115,7 +116,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="30.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbuttonRadio" onAction="#refillButton"  contentDisplay="CENTER" layoutX="30.0" layoutY="22.0" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -135,7 +136,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbuttonRadio" onAction="#settingButton"  contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -155,7 +156,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbuttonRadio" onAction="#aboutUsButton"  contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false"  prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -256,7 +257,7 @@
                         	<children>
                         		<BorderPane prefHeight="100" prefWidth="580.0">
 		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#messageButton" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE" >
 						                   <graphic>
 						                        <HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 							                        <children>
@@ -273,11 +274,12 @@
 											 </font>
 											 <cursor>
 											   <Cursor fx:constant="HAND" />
+											   
 											</cursor>
 										</Button>
 		                        	</left>
 		                        	<center>
-		                        		 <Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		 <Button id="unselectedbutton" onAction="#recordsButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
@@ -300,7 +302,7 @@
                         </BorderPane>
 		                        <BorderPane prefHeight="100" prefWidth="580.0">
 		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" onAction="#newAppointmentButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
@@ -321,7 +323,7 @@
 									    </Button>
 		                        	</left>
 		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" onAction="#billingButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
@@ -344,7 +346,7 @@
 		                        </BorderPane>
 		                    	<BorderPane prefHeight="100" prefWidth="580.0">
 		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" onAction="#settingButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
@@ -365,7 +367,7 @@
 									    </Button>
 		                        	</left>
 		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" onAction="#orderRefillButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
@@ -387,49 +389,49 @@
 		                        	</center>
 		                        </BorderPane>
 		                        <BorderPane prefHeight="100" prefWidth="580.0">
-                        	<left>
-                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
-				                        	<graphic>
-				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
-					                        			<children>
-					                        				<Label text="coming appointment" textFill="#603bd1">
-					                        					<font>
-								                                	<Font name="System Bold" size="16.0" />
-								                                 </font>
-								                            </Label>
-								                          </children>
-								                 </HBox>
-								             </graphic>
-								             	<font>
-								             		<Font size="16.0" />
-									            </font>
-									         <cursor>
-									         	<Cursor fx:constant="HAND" />
-									         </cursor>
-									    </Button>
-                        	</left>
-                        	<center>
-                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
-				                        	<graphic>
-				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
-					                        			<children>
-					                        				<Label text="Notifications" textFill="#603bd1">
-					                        					<font>
-								                                	<Font name="System Bold" size="16.0" />
-								                                 </font>
-								                            </Label>
-								                          </children>
-								                 </HBox>
-								             </graphic>
-								             	<font>
-								             		<Font size="16.0" />
-									            </font>
-									         <cursor>
-									         	<Cursor fx:constant="HAND" />
-									         </cursor>
-									    </Button>
-                        	</center>
-                        </BorderPane>
+		                        	<left>
+		                        		<Button id="unselectedbutton" onAction="#comingAppointmentButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+						                        	<graphic>
+						                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
+							                        			<children>
+							                        				<Label text="coming appointment" textFill="#603bd1">
+							                        					<font>
+										                                	<Font name="System Bold" size="16.0" />
+										                                 </font>
+										                            </Label>
+										                          </children>
+										                 </HBox>
+										             </graphic>
+										             	<font>
+										             		<Font size="16.0" />
+											            </font>
+											         <cursor>
+											         	<Cursor fx:constant="HAND" />
+											         </cursor>
+											    </Button>
+		                        	</left>
+		                        	<center>
+		                        		<Button id="unselectedbutton" onAction="#notificationButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="120" prefWidth="120" stylesheets="@../CSS/button.css" textFill="WHITE">
+						                        	<graphic>
+						                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
+							                        			<children>
+							                        				<Label text="Notifications" textFill="#603bd1">
+							                        					<font>
+										                                	<Font name="System Bold" size="16.0" />
+										                                 </font>
+										                            </Label>
+										                          </children>
+										                 </HBox>
+										             </graphic>
+										             	<font>
+										             		<Font size="16.0" />
+											            </font>
+											         <cursor>
+											         	<Cursor fx:constant="HAND" />
+											         </cursor>
+											    </Button>
+		                        	</center>
+		                        </BorderPane>
                         	</children>
                         	<padding>
 			                  <Insets top="40.0" />
