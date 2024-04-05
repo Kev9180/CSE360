@@ -11,6 +11,9 @@ import javafx.scene.Parent;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		DatabaseUtil.initializeDatabase();
+		//DatabaseUtil.preloadUsers();
+		
 		try {		
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
 	        primaryStage.setTitle("Role Selection");
