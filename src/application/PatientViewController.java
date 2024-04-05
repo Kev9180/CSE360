@@ -38,9 +38,10 @@ public class PatientViewController {
     }
     
     @FXML
-    private void messageButton(ActionEvent event) {
+    private void messageButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("message button");
+        loadScene("/FXML/pateint_meesage_board.fxml", event);
     }
     
     @FXML

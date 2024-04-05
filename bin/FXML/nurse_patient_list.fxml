@@ -51,9 +51,10 @@
                </padding>
             </HBox>
             <Separator prefWidth="200.0" />
+            
             <VBox prefHeight="456.0" prefWidth="156.0" spacing="12.0">
                <children>
-                  <Button id="selectedbuttonRadio" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="selectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectPatients" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -73,7 +74,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbuttonRadio" contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectMessages" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbutton" onAction="#messageButton" contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -171,6 +172,7 @@
                               <Insets top="24.0" />
                            </VBox.margin>
                         </VBox>
+                        
                         <HBox prefHeight="49.0" prefWidth="485.0" spacing="12.0">
                            <children>
                               <Button id="selectedoption" fx:id="categoryAllButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#categoryAll" prefHeight="49.0" prefWidth="90.0" stylesheets="@../CSS/button.css" textFill="WHITE" wrapText="true">
@@ -209,7 +211,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button id="unselectedoption" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#categoryPrevious" prefHeight="49.0" prefWidth="120.0" stylesheets="@../CSS/button.css" textFill="WHITE" wrapText="true">
+                              <Button id="unselectedoption" fx:id="categoryPreviousButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#categoryPrevious" prefHeight="49.0" prefWidth="120.0" stylesheets="@../CSS/button.css" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="1.0" />
                                  </font>
