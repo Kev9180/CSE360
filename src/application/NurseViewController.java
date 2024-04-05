@@ -72,7 +72,7 @@ public class NurseViewController implements Initializable {
     }
     
     //Method to logout the patient before going back to the previous screen
-    public void logoutPatient() {
+    public void logoutStaff() {
     	UserManager userManager = UserManager.getInstance();
     	
     	//Get the current logged in user
@@ -89,13 +89,13 @@ public class NurseViewController implements Initializable {
     
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	logoutPatient();
+    	logoutStaff();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
-    	logoutPatient();
+    	logoutStaff();
         loadScene("/FXML/role_selection.fxml", event);
     }
     
