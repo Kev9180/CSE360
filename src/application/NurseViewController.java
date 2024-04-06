@@ -99,6 +99,10 @@ public class NurseViewController implements Initializable {
         loadScene("/FXML/role_selection.fxml", event);
     }
     
+    public void messageButton(ActionEvent event) throws Exception {
+        loadScene("/FXML/nurse_doctor_message_board.fxml", event);
+    }
+    
     public void selectPatients(ActionEvent event) throws Exception {
     	
     }
