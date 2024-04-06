@@ -1,6 +1,5 @@
 package application;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,32 +7,32 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
 
 public class PatientViewController {
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
     
-    
-	//Handle back button (goes home)
-    public void previousScene(ActionEvent event) throws Exception {
-        loadScene("/FXML/role_selection.fxml", event);
+    //Method to logout the patient before going back to the previous screen
+    public void logoutPatient() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
+    	logoutPatient();
         loadScene("/FXML/role_selection.fxml", event);
     }
     

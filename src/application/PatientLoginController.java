@@ -47,20 +47,16 @@ public class PatientLoginController {
     }
 
     //Take the user to the reset password screen
-    public void forgotPassword(ActionEvent event) {
-        // Handle forgot password logic here
-    	System.out.println("Forgot password button pressed.");
+    public void forgotPassword(ActionEvent event) throws Exception {
+    	String fxmlFile = "/FXML/forgot_password.fxml";
+    	loadScene(fxmlFile, event);
     }
 
     //Take the user to the new user registration screen
     public void newUser(ActionEvent event) throws Exception {
-        // Handle new user logic here
-    	System.out.println("New user button pressed.");
-    	
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	Parent root = FXMLLoader.load(getClass().getResource("/FXML/new_user.fxml"));
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
+        // Handle new user logic here    	
+    	String fxmlFile = "/FXML/new_user.fxml";
+    	loadScene(fxmlFile, event);
     }
     
     //Method to log the user out of the system
@@ -83,11 +79,10 @@ public class PatientLoginController {
     public void goBack(ActionEvent event) throws Exception {
     	logout();
     	
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
+    	String fxmlFile = "/FXML/role_selection.fxml";
+    	loadScene(fxmlFile, event);
     }
+    
     private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
     	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));

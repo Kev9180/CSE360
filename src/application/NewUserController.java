@@ -62,17 +62,7 @@ public class NewUserController {
 		String secQuestion = secQuestionTF.getText().strip();
 		String secAnswer = secAnswerTF.getText().strip();
 		Role patientRole = Role.PATIENT;
-		
-		//Create a new Patient entity
-		//Patient newPatient = new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber,
-										// streetAddress, city, state, zipcode, email, secQuestion, secAnswer);
-		
-		//Add the patient to the list of Users
-		//UserManager.getInstance().addUser(newPatient);
-		
-		//Add the patient to the patient list
-		//PatientManager.getInstance().addPatient(newPatient);
-		
+			
 		DatabaseUtil.addUser(new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber, streetAddress, city, state, zipcode, email, secQuestion, secAnswer));
 		
 		//Show a confirmation alert to let the user know their account has been created
@@ -87,6 +77,7 @@ public class NewUserController {
 	
 	//Method to verify that password matches confirmPassword, and email matches confirmEmail
 	public boolean validateFields() {
+		String username = usernameTF.getText().strip();
 		String password = passwordPF.getText().strip();
 		String confirmPW = confirmPasswordPF.getText().strip();
 		String email = emailTF.getText().strip();
@@ -112,6 +103,12 @@ public class NewUserController {
 			return false;
 		} else if (!email.equals(confirmEmail)) {
 			showAlert("Emails do not match", "Please ensure that your emails match.");
+			return false;
+		}
+		
+		//Check if the username is taken
+		if (DatabaseUtil.usernameExists(username)) {
+			showAlert("Username Taken", "Please choose a different username.");
 			return false;
 		}
 		
