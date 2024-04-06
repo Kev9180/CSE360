@@ -243,7 +243,7 @@ public class DatabaseUtil {
 	    String sql = "SELECT password FROM userList WHERE username = ?";
 	    
 	    try (Connection conn = DriverManager.getConnection(DB_URL);
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	    		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        
 	        pstmt.setString(1, username);
 	        ResultSet rs = pstmt.executeQuery();
@@ -258,6 +258,57 @@ public class DatabaseUtil {
 	    return false;
 	}
 
-
-
+	//Method to update a user's password in the database
+	public static boolean updatePassword(String username, String newPassword) {
+		String sql = "UPDATE userList SET password = ? WHERE username = ?";
+		
+		try (Connection conn = DriverManager.getConnection(DB_URL);
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, username);
+			
+			int affectedRows = pstmt.executeUpdate();
+			
+			return affectedRows > 0;
+		} catch (SQLException e) {
+			System.err.println("Error updating password: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	//Method to check the database for a username to ensure only unique usernames are given out
+	public static boolean usernameExists(String username) {
+		String sql = "SELECT id FROM userList WHERE username = ?";
+		
+		try (Connection conn = DriverManager.getConnection(DB_URL);
+	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            System.err.println("Error checking for username: " + e.getMessage());
+            return false;
+        }
+	}
+	
+	//Method to return the password for a user
+	public static String getCurrentPassword(String username) {
+		String sql = "SELECT password FROM userList WHERE username = ?";
+		
+		try (Connection conn = DriverManager.getConnection(DB_URL);
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getString("password");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching password: " + e.getMessage());
+        }
+        return null;
+	}
 }

@@ -13,13 +13,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientViewController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="180.0" spacing="24.0">
                <children>
-                  <Button id="backbutton" mnemonicParsing="false" onAction="#previousScene" stylesheets="@../CSS/button.css">
+                  <Button id="backbutton" mnemonicParsing="false" onAction="#logout" stylesheets="@../CSS/button.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
