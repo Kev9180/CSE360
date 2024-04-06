@@ -25,11 +25,32 @@
 	-fx-background-color: -color-pressed;
 }
 
+.icon-button
+{
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-border-width: 0px;
+}
+
+.icon-button:hover
+{
+	-fx-background-color: -color-hover;
+	-fx-border-color: transparent;
+	-fx-border-width: 0px;
+}
+
+.icon-button:pressed
+{
+	-fx-background-color: -color-pressed;
+	-fx-border-color: transparent;
+	-fx-border-width: 0px;
+}
+
 .menu-button
 {
-	-fx-background-color: white;
-	-fx-border-radius: 0px;
-	-fx-border-color: -color-text;
+	-fx-background-color: #fefefe;
+	-fx-border-radius: 4px;
+	-fx-border-color: -color-border;
 }
 
 .transparent-button
@@ -119,7 +140,7 @@
 	-fx-border-style: hidden hidden solid hidden;
 	-fx-border-color: -color-accent;
 	-fx-border-width: 4px;
-	-fx-background-color:  transparent;
+	-fx-background-color:  -color-appbackground;
 }
 
 #selectedoption:hover
@@ -135,7 +156,7 @@
 {
 	-fx-border-width: 4px;
 	-fx-border-color: transparent;
-	-fx-background-color:  -color-background;
+	-fx-background-color:  -color-appbackground;
 	-fx-transition: -fx-background-color 0.9s;
 }
 
@@ -168,4 +189,26 @@
 {
 	-fx-border-width: 0px;
 	-fx-background-color: -color-pressed;
+}
+
+/* ListItem */
+.listItem 
+{
+	-fx-background-color: white;
+	-fx-border-width: 1px;
+	-fx-border-color: #f0f0f0;
+}
+
+.listItem:hover, .listItem.hover
+{
+	-fx-background-color: -color-hover;
+	-fx-border-width: 1px;
+	-fx-border-color: #f0f0f0;
+}
+
+.listItem:pressed, .listItem.pressed
+{
+	-fx-background-color: -color-pressed;
+	-fx-border-width: 1px;
+	-fx-border-color: #f0f0f0;
 }

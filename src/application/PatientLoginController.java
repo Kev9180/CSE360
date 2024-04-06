@@ -55,8 +55,7 @@ public class PatientLoginController {
     //Take the user to the new user registration screen
     public void newUser(ActionEvent event) throws Exception {
         // Handle new user logic here    	
-    	String fxmlFile = "/FXML/new_user.fxml";
-    	SceneManager.loadScene(getClass(), fxmlFile, event);
+    	SceneManager.loadScene(getClass(), "/FXML/new_user.fxml", event);
     }
     
     //Method to log the user out of the system

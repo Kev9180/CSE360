@@ -6,9 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -19,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseViewController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
          <children>
@@ -73,7 +72,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" onAction="#messageButton" contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" onAction="#messageButton" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
                            <children>
@@ -151,9 +150,9 @@
       </VBox>
    </left>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="620.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="634.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="600.0" prefWidth="620.0" spacing="12.0" style="-fx-background-color: #fefefe;">
+            <HBox prefHeight="600.0" prefWidth="600.0" spacing="12.0" style="-fx-background-color: #f8f8f8;">
                <children>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <VBox prefHeight="600.0" prefWidth="600.0">
@@ -235,12 +234,18 @@
                         
                         <BorderPane prefHeight="32.0" prefWidth="413.0">
                            <left>
-                              <HBox prefHeight="32.0" prefWidth="264.0" BorderPane.alignment="CENTER">
+                              <HBox prefHeight="32.0" prefWidth="342.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TextField prefHeight="39.0" prefWidth="249.0" promptText="Search for patients..." style="-fx-border-color: aaaaaa; -fx-background-color: fefefe; -fx-border-radius: 8px;">
+                                    <TextField prefHeight="32.0" prefWidth="301.0" promptText="Search for patients..." style="-fx-border-color: transparent; -fx-background-color: #f0f0f0;">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
                                     </TextField>
                                  </children>
                               </HBox>
@@ -249,7 +254,7 @@
                               <Insets bottom="16.0" top="16.0" />
                            </VBox.margin>
                            <right>
-                              <MenuButton mnemonicParsing="false" stylesheets="@../CSS/button.css" textOverrun="CLIP" wrapText="true" BorderPane.alignment="CENTER">
+                              <MenuButton mnemonicParsing="false" style="-fx-background-color: f8f8f8;" stylesheets="@../CSS/button.css" textOverrun="CLIP" wrapText="true" BorderPane.alignment="CENTER">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -278,15 +283,62 @@
                               </MenuButton>
                            </right>
                         </BorderPane>
-                        <TableView fx:id="patientList" prefHeight="340.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
-                          <columns>
-                            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="lastVisitDate" prefWidth="121.0" text="Last Visit Date" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="409.0" prefWidth="638.0" stylesheets="@../CSS/scrollpane.css" vbarPolicy="ALWAYS">
+                           <content>
+                              <VBox fx:id="patientList" scaleShape="false" spacing="4.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="581.0" style="-fx-background-color: f0f0f0;">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="125.0" text="Last Visit" textFill="#666666">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="32.0" right="32.0" />
+                                             </padding>
+                                          </Label>
+                                          <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="192.0" text="Name" textFill="#666666">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="72.0" right="72.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="166.0" text="Date of Birth" textFill="#666666">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="36.0" right="36.0" />
+                                             </padding>
+                                          </Label>
+                                          <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="90.0" text="Actions" textFill="#666666">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="16.0" right="16.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="4.0" top="4.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
                      </children>
                   </VBox>
                </children>

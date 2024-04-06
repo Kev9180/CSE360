@@ -1,7 +1,11 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -22,11 +26,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class NurseViewController implements Initializable {
+public class NurseViewController implements PatientListItemListener, Initializable{
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -36,36 +41,41 @@ public class NurseViewController implements Initializable {
     @FXML private Label currentCount;
     @FXML private Label previousCount;
     
-    @FXML private TableView<Patient> patientList;
-    @FXML private TableColumn<Patient, String> name;
-    @FXML private TableColumn<Patient, LocalDate> lastVisitDate;
+    @FXML private VBox patientList;
     
-    private List<Patient> patients = PatientManager.getInstance().getPatients();
-    ObservableList<Patient> list = FXCollections.observableArrayList(patients);
+    private List<Patient> patients;
+    
+    private List<PatientListItemController> controllers;
     
     // tell the table what the columns should consist of
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-    	name.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
-    	
-    	// displays the user's most recent visit date
-        lastVisitDate.setCellValueFactory(new Callback<>() { 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		patients = PatientManager.getInstance().getPatients();
+		// initially sort by most recent visit date
+        Collections.sort(patients, new Comparator<Patient>() {
             @Override
-            public ObservableValue<LocalDate> call(TableColumn.CellDataFeatures<Patient, LocalDate> param) {
-                List<Visit> visitHistory = param.getValue().getVisitHistory();
-                int lastIndex = visitHistory.size() - 1;
-                if (lastIndex >= 0) {
-                    return new SimpleObjectProperty<>(visitHistory.get(lastIndex).getVisitDate());
-                } else {
-                    return new SimpleObjectProperty<>(null);
+            public int compare(Patient o1, Patient o2) {
+            	// Get the visit dates from patients
+                LocalDate d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
+                LocalDate d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
+
+                // Handle null cases
+                if (d1 == null && d2 == null) {
+                    return 0; // Both dates are null, consider them equal
+                } else if (d1 == null) {
+                    return -1; // Null dates should come before non-null dates
+                } else if (d2 == null) {
+                    return 1; // Null dates should come before non-null dates
                 }
+
+                // Compare non-null dates
+                return d1.compareTo(d2);
             }
         });
         
-        // set the contents of the table
-        patientList.setItems(list);
-    }
+        updatePatientList();
+		
+	}
     
     //Method to logout the patient before going back to the previous screen
     public void logoutStaff() {
@@ -107,6 +117,43 @@ public class NurseViewController implements Initializable {
     	
     }
     
+    @Override
+    public void onMessageButtonClick() {
+    	// TODO Auto-generated method stub
+    	
+    }
+    
+    @Override
+    public void onListItemClick() {
+    	// TODO Auto-generated method stub
+    	
+    }
+    
+    @Override
+    public void onViewInfoButtonClick() {
+    	// TODO Auto-generated method stub
+    	
+    }
+    
+    // update patient list method
+    public void updatePatientList() {
+		controllers = new ArrayList<>();
+    	
+		// create patientListItems
+        // Load list items dynamically
+        for (int i = 0; i < patients.size(); i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_list_item.fxml"));
+                controllers.add(loader.getController());
+                patientList.getChildren().add(loader.load());
+                PatientListItemController listItemController = loader.getController();
+                listItemController.setParentController(this); // Pass reference to parent controller
+                listItemController.setLabels(patients.get(i));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
     /* im sorry i know this is awful */
     
@@ -179,4 +226,7 @@ public class NurseViewController implements Initializable {
     	allLabel.setTextFill(Color.web("#666666"));
     	allCount.setTextFill(Color.web("#666666"));
     }
+
+
+
 }
