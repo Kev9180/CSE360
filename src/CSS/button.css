@@ -1,21 +1,35 @@
+@import "styles.css";
+
 .radiobutton{
 	-fx-background-color: white;
 	-fx-border-radius: 0px;
-	-fx-border-color: #666666;
+	-fx-border-color: -color-border;
 }
 
-.button
+.button /* default slim border nofill button */
 {
-	-fx-background-color: white;
+	-fx-background-color: transparent;
 	-fx-border-radius: 0px;
-	-fx-border-color: #666666;
+	-fx-border-color: -color-border;
+}
+
+.button:hover
+{
+	-fx-background-color: -color-hover;
+	-fx-border-radius: 0px;
+	-fx-border-color: -color-border;
+}
+
+.button:pressed
+{
+	-fx-background-color: -color-pressed;
 }
 
 .menu-button
 {
 	-fx-background-color: white;
 	-fx-border-radius: 0px;
-	-fx-border-color: #666666;
+	-fx-border-color: -color-text;
 }
 
 .transparent-button
@@ -30,65 +44,128 @@
 #patientLoginBtn,
 #staffLoginBtn
 {
-	-fx-background-color:  #6039d2;
+	-fx-background-color:  -color-accent;
+}
+
+#patientbutton:hover,
+#composebutton:hover,
+#createAccountBtn:hover,
+#patientLoginBtn:hover,
+#staffLoginBtn:hover
+{
+	-fx-background-color:  -color-accent-hover;
+}
+
+#patientbutton:pressed,
+#composebutton:pressed,
+#createAccountBtn:pressed,
+#patientLoginBtn:pressed,
+#staffLoginBtn:pressed
+{
+	-fx-background-color:  -color-accent-pressed;
 }
 
 #clearFieldsBtn,
 #backBtn
 {
-	-fx-background-color: #3ea3f4;
+	-fx-background-color: -color-primary;
 }
 
 #selectedbutton
 {
-	-fx-background-color:  #cdc8de;
+	-fx-background-color:  -color-accent-selected;
 	-fx-border-width: 0px;
 	-fx-textFill: #603bd1;
 	-fx-stroke: #6039d2;
+}
+
+#unselectedbutton
+{
+	-fx-background-color:  transparent;
+	-fx-border-width: 0px;
+	-fx-textFill: -color-accent;
+	-fx-stroke: -color-accent;
 }
 
 #unselectedbutton:hover
 {
 	-fx-border-color: transparent;
-	-fx-background-color:  #cdc8de;
+	-fx-background-color:  -color-accent-hover-light;
 	-fx-border-width: 0px;
-	-fx-textFill: #603bd1;
-	-fx-stroke: #6039d2;
+	-fx-textFill: -color-accent;
+	-fx-stroke: -color-accent;
 }
 
 #selectedbuttonRadio
 {
 	-fx-border-color: transparent;
-	-fx-background-color:  #cdc8de;
+	-fx-background-color:  -color-accent-selected;
 	-fx-border-width: 0px;
-	-fx-textFill: #603bd1;
-	-fx-stroke: #6039d2;
+	-fx-textFill: -color-accent;
+	-fx-stroke: -color-accent;
 }
 
 #unselectedbuttonRadio
 {
 	-fx-border-color: transparent;
-	-fx-background-color:  #fefefe;
+	-fx-background-color:  -color-background;
 	-fx-border-width: 0px;
-	-fx-textFill: #666666;
+	-fx-textFill: -color-text;
 	-fx-stroke: #aaaaaa;
 }
 
-#selectedoption
+#selectedoption /* in nurseview/doctorview, this is the sort option at the top */
 {
 	-fx-border-style: hidden hidden solid hidden;
-	-fx-border-color: #6039d2;
+	-fx-border-color: -color-accent;
 	-fx-border-width: 4px;
+	-fx-background-color:  transparent;
 }
+
+#selectedoption:hover
+{
+	-fx-border-style: hidden hidden solid hidden;
+	-fx-border-color: -color-accent;
+	-fx-border-width: 4px;
+	-fx-background-color:  -color-hover;
+}
+
 
 #unselectedoption
 {
 	-fx-border-width: 4px;
 	-fx-border-color: transparent;
-	-fx-background-color:  #fefefe;
+	-fx-background-color:  -color-background;
+	-fx-transition: -fx-background-color 0.9s;
+}
+
+#unselectedoption:hover
+{
+	-fx-border-width: 4px;
+	-fx-border-color: transparent;
+	-fx-background-color:  -color-hover;
+}
+
+#unselectedoption:pressed
+{
+	-fx-border-width: 4px;
+	-fx-border-color: transparent;
+	-fx-background-color:  -color-pressed;
 }
 
 #backbutton
 {
 	-fx-border-width: 0px;
+}
+
+#backbutton:hover
+{
+	-fx-border-width: 0px;
+	-fx-background-color: -color-hover;
+}
+
+#backbutton:pressed
+{
+	-fx-border-width: 0px;
+	-fx-background-color: -color-pressed;
 }

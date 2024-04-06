@@ -144,7 +144,9 @@ public class patientMessageBoardController {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
     	Parent root = loader.load();
     	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/CSS/styles.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
 }

@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import javafx.application.Platform;
@@ -42,7 +41,7 @@ public class NewUserController {
 	}
 	
 	//Method to create a new account as well as a new User and Patient entity for the new patient
-	public void createNewPatientAccount() throws IOException {
+	public void createNewPatientAccount() throws Exception {
 		if (!validateFields()) {
 			return;
 		}
@@ -72,7 +71,7 @@ public class NewUserController {
 		System.out.println("User account created for: " + username);
 		
 		//Take the patient back to the login screen
-		goBackToLogin();
+		SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", zipcodeTF);
 	}
 	
 	//Method to verify that password matches confirmPassword, and email matches confirmEmail
@@ -148,20 +147,7 @@ public class NewUserController {
 	
 	
 	//Take the user back to the patient login screen if they press the back button
-    public void goBack(ActionEvent event) throws Exception {
-    	System.out.println("Back button pressed.");
-    	
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/patient_login.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
-    }
-    
-    //Take the user back to the patient login screen
-    public void goBackToLogin() throws IOException {
-    	Stage stage = (Stage) firstNameTF.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/patient_login.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
+    public void goBack(ActionEvent event) throws Exception {    	
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
 }

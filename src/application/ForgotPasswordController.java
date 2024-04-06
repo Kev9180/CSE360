@@ -52,7 +52,7 @@ public class ForgotPasswordController {
 	}
 	
 	//Method to reset the password for the specified user
-	public void resetPassword() throws IOException {
+	public void resetPassword() throws Exception {
 		if (!validateFields()) {
 			return;
 		}
@@ -74,7 +74,7 @@ public class ForgotPasswordController {
 		if (passwordReset) {
 			showAlert("Password Reset", "Your password has been reset. Returning to the login screen.");
 			System.out.println("Password reset for: " + username);
-			goBackToLogin();
+			SceneManager.loadScene(getClass(), "/FXML/patient_login.fxml", usernameTF);
 		} else {
 			showAlert("Password Reset Failed!", "Failed to reset your password. Please ensure you have entered the correct username, and try again.");
 		}	
@@ -82,17 +82,7 @@ public class ForgotPasswordController {
 	
 	//Take the user back to the patient login screen if they press the back button
     public void goBack(ActionEvent event) throws Exception {    	
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/patient_login.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
+        SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
-    
-    //Take the user back to the patient login screen
-    public void goBackToLogin() throws IOException {
-    	Stage stage = (Stage) usernameTF.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/patient_login.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
-    }
+   
 }

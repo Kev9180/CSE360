@@ -86,17 +86,17 @@ public class NurseViewController implements Initializable {
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
     	logoutStaff();
-        loadScene("/FXML/role_selection.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	logoutStaff();
-        loadScene("/FXML/role_selection.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     public void messageButton(ActionEvent event) throws Exception {
-        loadScene("/FXML/nurse_doctor_message_board.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     public void selectPatients(ActionEvent event) throws Exception {
@@ -178,15 +178,5 @@ public class NurseViewController implements Initializable {
     	Label allLabel = (Label) allBP.getLeft();
     	allLabel.setTextFill(Color.web("#666666"));
     	allCount.setTextFill(Color.web("#666666"));
-    }
-	
-    //Method to load the scene
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
     }
 }
