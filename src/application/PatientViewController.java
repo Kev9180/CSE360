@@ -86,9 +86,10 @@ public class PatientViewController {
     }
     
     @FXML
-    private void appointmentButton(ActionEvent event) {
+    private void appointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("appointment button");
+        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
