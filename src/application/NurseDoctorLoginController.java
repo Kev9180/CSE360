@@ -22,7 +22,7 @@ public class NurseDoctorLoginController {
     
     @FXML
     public void initialize() {
-    	Platform.runLater(() -> staffLoginBtn.requestFocus());
+    	Platform.runLater(() -> usernameField.requestFocus());
     }
     
     //Handle the login validation process for doctors and nurses
@@ -51,18 +51,25 @@ public class NurseDoctorLoginController {
     	System.out.println("Forgot password button pressed.");
     }
     
-    //Take the user back to the role selection screen if they press the back button
-    public void goBack(ActionEvent event) throws Exception {
+    //Method to logout the current user
+    public void logout() {
     	UserManager userManager = UserManager.getInstance();
     	
+    	//Get the current logged in user
     	User currentUser = userManager.getCurrentUser();
     	
+    	//If currentUser is not null, log the user out
     	if (currentUser != null) {
     		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
     		userManager.logout();
     	} else {
     		System.out.println("No user currently logged in.");
-    	}    	
+    	}
+    }
+    
+    //Take the user back to the role selection screen if they press the back button
+    public void goBack(ActionEvent event) throws Exception {
+    	logout();
     	
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
@@ -79,5 +86,6 @@ public class NurseDoctorLoginController {
     	stage.setScene(new Scene(root, 800, 600));
     	stage.show();
     }
+
 }
 
