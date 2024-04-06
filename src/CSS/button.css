@@ -1,14 +1,20 @@
+.radiobutton{
+	-fx-background-color: white;
+	-fx-border-radius: 0px;
+	-fx-border-color: #666666;
+}
+
 .button
 {
 	-fx-background-color: white;
-	-fx-border-radius: 4px;
+	-fx-border-radius: 0px;
 	-fx-border-color: #666666;
 }
 
 .menu-button
 {
 	-fx-background-color: white;
-	-fx-border-radius: 4px;
+	-fx-border-radius: 0px;
 	-fx-border-color: #666666;
 }
 
@@ -37,12 +43,35 @@
 {
 	-fx-background-color:  #cdc8de;
 	-fx-border-width: 0px;
+	-fx-textFill: #603bd1;
+	-fx-stroke: #6039d2;
 }
 
-#unselectedbutton
+#unselectedbutton:hover
 {
+	-fx-border-color: transparent;
+	-fx-background-color:  #cdc8de;
+	-fx-border-width: 0px;
+	-fx-textFill: #603bd1;
+	-fx-stroke: #6039d2;
+}
+
+#selectedbuttonRadio
+{
+	-fx-border-color: transparent;
+	-fx-background-color:  #cdc8de;
+	-fx-border-width: 0px;
+	-fx-textFill: #603bd1;
+	-fx-stroke: #6039d2;
+}
+
+#unselectedbuttonRadio
+{
+	-fx-border-color: transparent;
 	-fx-background-color:  #fefefe;
 	-fx-border-width: 0px;
+	-fx-textFill: #666666;
+	-fx-stroke: #aaaaaa;
 }
 
 #selectedoption
