@@ -24,12 +24,12 @@ public class nurseDoctorMessageBoardController {
     
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	loadScene("/FXML/nurse_patient_list.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
-        loadScene("/FXML/role_selection.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     
@@ -37,7 +37,7 @@ public class nurseDoctorMessageBoardController {
     private void patientListButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("patient button");
-        loadScene("/FXML/nurse_patient_list.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     
@@ -115,13 +115,5 @@ public class nurseDoctorMessageBoardController {
     	allCount.setTextFill(Color.web("#666666"));
     }
 	
-    //Method to load the scene
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
-    }
+
 }
