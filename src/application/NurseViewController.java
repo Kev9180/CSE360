@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -42,6 +43,9 @@ public class NurseViewController implements PatientListItemListener, Initializab
     @FXML private Label previousCount;
     
     @FXML private VBox patientList;
+    
+    @FXML private HBox parentContainer; // holds everything
+    @FXML private VBox replaceVBox; // right side that we can replace with another scene
     
     private List<Patient> patients;
     
@@ -74,6 +78,9 @@ public class NurseViewController implements PatientListItemListener, Initializab
         });
         
         updatePatientList();
+        
+        // also update patient count
+        allCount.setText("" + patients.size());
 		
 	}
     
@@ -118,19 +125,18 @@ public class NurseViewController implements PatientListItemListener, Initializab
     }
     
     @Override
-    public void onMessageButtonClick() {
+    public void onMessageButtonClick(Patient patient) {
     	// TODO Auto-generated method stub
     	
     }
     
     @Override
-    public void onListItemClick() {
-    	// TODO Auto-generated method stub
-    	
+    public void onListItemClick(Patient patient) {
+    	replaceRHS("/FXML/nurse_visit_history.fxml", patient);
     }
     
     @Override
-    public void onViewInfoButtonClick() {
+    public void onViewInfoButtonClick(Patient patient) {
     	// TODO Auto-generated method stub
     	
     }
@@ -153,6 +159,19 @@ public class NurseViewController implements PatientListItemListener, Initializab
                 e.printStackTrace();
             }
         }
+    }
+    
+    public void replaceRHS(String fxmlString, Patient patient) {
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlString));
+	    	int indexToReplace = parentContainer.getChildren().indexOf(replaceVBox);
+	    	parentContainer.getChildren().remove(indexToReplace);
+	    	parentContainer.getChildren().add(indexToReplace, loader.load());
+	    	NurseVisitHistoryController controller = loader.getController();
+	    	controller.initialize(patient);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     /* im sorry i know this is awful */

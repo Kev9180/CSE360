@@ -46,21 +46,21 @@ public class PatientListItemController {
     @FXML
     public void handleMessageButtonClick() {
     	if (parentController != null)
-    		parentController.onMessageButtonClick();
+    		parentController.onMessageButtonClick(patient);
     	System.out.println("Message Button Clicked");
     }
     
     @FXML
     public void handleViewInfoButtonClick() {
     	if (parentController != null)
-    		parentController.onViewInfoButtonClick();
+    		parentController.onViewInfoButtonClick(patient);
     	System.out.println("Patient Info Edit Clicked");
     }
     
     @FXML
     public void handleListItemClick() {
     	if (parentController != null)
-    		parentController.onListItemClick();
+    		parentController.onListItemClick(patient);
     	System.out.println("Item Clicked");
     }
     
