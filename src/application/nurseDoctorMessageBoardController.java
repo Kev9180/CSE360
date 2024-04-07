@@ -1,6 +1,8 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -151,20 +153,17 @@ public class nurseDoctorMessageBoardController {
         SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
+    // Method to open the message thread, load all messages from the thread, and concat them all together
     private void openMessageThread(MessageThread thread) {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/view_message.fxml"));
     		Parent composeMessageRoot = loader.load();
     		
     		ViewMessageController controller = loader.getController();
-    		
-    		controller.clearMessageView();
-    		
+    		    		
     		List<Message> messages = DatabaseUtil.getMessagesByThreadId(thread.getThreadId());
     		
-    		//TODO: Debugging
-    		System.out.println("Doctor: Number msgs fetched: " + messages.size());
-    		System.out.println("Doctor: Loading messages for thread: " + thread.getThreadId());
+    		messages.sort((m1, m2) -> m2.getTimestamp().compareTo(m1.getTimestamp()));
     		
     		StringBuilder fullThreadText = new StringBuilder();
     		
@@ -221,6 +220,7 @@ public class nurseDoctorMessageBoardController {
     	}
     }
     
+    // Method to delete a message thread
     private void deleteMessageThread(MessageThread thread) {
     	int threadId = thread.getThreadId();
     	
@@ -228,8 +228,4 @@ public class nurseDoctorMessageBoardController {
     	
     	loadMessages();
     }
-    
-    
-    
-
 }
