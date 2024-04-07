@@ -1,6 +1,6 @@
-@import "styles.css"
+@import "styles.css";
 
-.scroll-pane{
+.scroll-pane {
    -fx-background-color:transparent;
 }
 

@@ -2,12 +2,7 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 public class PatientViewController {
 
@@ -40,7 +35,7 @@ public class PatientViewController {
     private void messageButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("message button");
-        SceneManager.loadScene(getClass(), "/FXML/pateint_meesage_board.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_message_board.fxml", event);
     }
     
     @FXML
@@ -89,7 +84,7 @@ public class PatientViewController {
     private void appointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("appointment button");
-        loadScene("/FXML/patient_appointment_view.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML

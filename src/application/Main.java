@@ -11,6 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		DatabaseUtil.initializeDatabase();
+		DatabaseUtil.initializeMessageDatabase();
 		//DatabaseUtil.preloadUsers();
 		
 		try {		
