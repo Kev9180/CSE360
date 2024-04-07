@@ -56,7 +56,7 @@ public class PatientViewController {
         System.out.println("setting button");
         loadScene("/FXML/patient_setting_view.fxml", event);
     }
-    
+   
     @FXML
     private void comingAppointmentButton(ActionEvent event) {
         event.consume();
