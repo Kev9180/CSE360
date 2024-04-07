@@ -36,31 +36,31 @@ public class MessageManager {
 		return instance;
 	}
 	
-	// creates a new thread and adds it to User's inboxes
-	public void composeThread(String subject, User recipient, User sender, String message) {
-		Message myMessage = new Message(message, sender);
-		MessageThread myThread = new MessageThread(message, recipient, sender, myMessage);
-		threads.add(myThread);
-		
-		int threadID = threads.indexOf(myThread);
-		
-		sender.getMessageBoard().subscribeThread(threadID);
-		recipient.getMessageBoard().subscribeThread(threadID);
-	}
-	
-	public void replyThread(int threadID, User sender, String message) {
-		Message myMessage = new Message(message, sender);
-		MessageThread myThread = getThread(threadID);
-		myThread.addMessage(myMessage);
-		
-		// resubscribe users to thread
-		sender.getMessageBoard().subscribeThread(threadID);
-		
-		User recipient = myThread.getRecipient();
-		recipient.getMessageBoard().subscribeThread(threadID);
-	}
-	
-	public MessageThread getThread(int threadID) {
-		return threads.get(threadID);
-	}
+//	// creates a new thread and adds it to User's inboxes
+//	public void composeThread(String subject, User recipient, User sender, String message) {
+//		Message myMessage = new Message(message, sender);
+//		MessageThread myThread = new MessageThread(message, recipient, sender, myMessage);
+//		threads.add(myThread);
+//		
+//		int threadID = threads.indexOf(myThread);
+//		
+//		sender.getMessageBoard().subscribeThread(threadID);
+//		recipient.getMessageBoard().subscribeThread(threadID);
+//	}
+//	
+//	public void replyThread(int threadID, User sender, String message) {
+//		Message myMessage = new Message(message, sender);
+//		MessageThread myThread = getThread(threadID);
+//		myThread.addMessage(myMessage);
+//		
+//		// resubscribe users to thread
+//		sender.getMessageBoard().subscribeThread(threadID);
+//		
+//		User recipient = myThread.getRecipient();
+//		recipient.getMessageBoard().subscribeThread(threadID);
+//	}
+//	
+//	public MessageThread getThread(int threadID) {
+//		return threads.get(threadID);
+//	}
 }

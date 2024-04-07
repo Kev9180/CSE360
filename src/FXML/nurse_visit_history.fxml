@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseVisitHistoryController">
+   <children>
+      <HBox fx:id="parentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="772.0" spacing="12.0" style="-fx-background-color: #f8f8f8;">
+         <children>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1072.0">
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0">
+                     <children>
+                        <Label fx:id="name" prefHeight="35.0" prefWidth="507.0" text="Adam Adams" textFill="#6039d2">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Visit History" textFill="#666666" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="24.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <BorderPane prefHeight="54.0" prefWidth="600.0">
+                     <left>
+                        <Label prefHeight="35.0" prefWidth="184.0" text="Select a Visit:" textFill="#777777" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="2.0" />
+                           </padding>
+                        </Label>
+                     </left>
+                     <right>
+                        <Button id="composebutton" mnemonicParsing="false" onMouseClicked="#handleNewVisitClicked" prefHeight="33.0" prefWidth="94.0" stylesheets="@../CSS/button.css" text="New Visit" textFill="WHITE" BorderPane.alignment="CENTER" />
+                     </right>
+                     <padding>
+                        <Insets right="16.0" />
+                     </padding>
+                  </BorderPane>
+                  <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="457.0" minWidth="600.0" prefWidth="600.0" stylesheets="@../CSS/scrollpane.css" vbarPolicy="ALWAYS">
+                     <content>
+                        <VBox fx:id="patientList" scaleShape="false" spacing="4.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="581.0" style="-fx-background-color: f0f0f0;">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="125.0" text="Visit Date" textFill="#666666">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="32.0" right="32.0" />
+                                       </padding>
+                                    </Label>
+                                    <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="192.0" text="Examination Notes" textFill="#666666">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="32.0" right="32.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="166.0" text="Health Concerns" textFill="#666666">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="24.0" right="24.0" />
+                                       </padding>
+                                    </Label>
+                                    <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="90.0" text="Prescription" textFill="#666666">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="4.0" top="4.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

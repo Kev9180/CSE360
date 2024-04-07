@@ -2,27 +2,31 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class nurseDoctorMessageBoardController {
-	@FXML private Pane messageContainer;
+public class PatientMessageBoardController {
+	@FXML private VBox messageContainer;
 
     @FXML private Button newMessageBtn;
     
@@ -74,8 +78,8 @@ public class nurseDoctorMessageBoardController {
     	
     	messagesTable.setPlaceholder(new Label("No messages!"));
     }
-	
-	//
+    
+    //
     public void composeNewMessage() {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/compose_message.fxml"));
@@ -135,24 +139,55 @@ public class nurseDoctorMessageBoardController {
     
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	UserManager userManager = UserManager.getInstance();
-    	userManager.logout();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+    	loadScene("/FXML/patient_view.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
-    	UserManager userManager = UserManager.getInstance();
-    	userManager.logout();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+        loadScene("/FXML/role_selection.fxml", event);
     }
     
+    @FXML
+    private void appointmentButton(ActionEvent event) {
+        event.consume();
+        System.out.println("appointment button");
+    }
     
     @FXML
-    private void patientListButton(ActionEvent event) throws Exception {
+    private void aboutUsButton(ActionEvent event) {
         event.consume();
-        System.out.println("patient button");
-        SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+        System.out.println("about us button");
+    }
+    
+    @FXML
+    private void refillButton(ActionEvent event) {
+        event.consume();
+        System.out.println("refill button");
+    }
+    
+    @FXML
+    private void settingButton(ActionEvent event) {
+        event.consume();
+        System.out.println("setting button");
+    }
+    
+    @FXML
+    private void mainButton(ActionEvent event) throws Exception {
+        event.consume();
+        System.out.println("main button");
+        loadScene("/FXML/patient_view.fxml", event);
+    }
+    	
+    //Method to load the scene
+    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    	Parent root = loader.load();
+    	loader.getController();
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/CSS/styles.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
     
     // Method to open the message thread, load all messages from the thread, and concat them all together
@@ -162,9 +197,10 @@ public class nurseDoctorMessageBoardController {
     		Parent composeMessageRoot = loader.load();
     		
     		ViewMessageController controller = loader.getController();
-    		    		
-    		List<Message> messages = DatabaseUtil.getMessagesByThreadId(thread.getThreadId());
+    		controller.clearMessageView();
     		
+    		List<Message> messages = DatabaseUtil.getMessagesByThreadId(thread.getThreadId());
+    		    		
     		messages.sort((m1, m2) -> m2.getTimestamp().compareTo(m1.getTimestamp()));
     		
     		StringBuilder fullThreadText = new StringBuilder();

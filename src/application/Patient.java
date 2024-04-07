@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Patient extends User {
 	//Personal and contact information
-	private String firstName;
-	private String lastName;
 	private LocalDate dateOfBirth;
 	private String email;
 	private String phoneNumber;
@@ -50,11 +48,9 @@ public class Patient extends User {
 				   LocalDate dateOfBirth, String phoneNumber, String streetAddress, String city,
 				   String state, String zipcode, String email, String securityQuestion, String securityAnswer) {
 		//Call the User superclass constructor
-		super(username, password, role);
+		super(username, password, role, firstName, lastName);
 		
 		//Update Patient attributes
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.address = streetAddress;
