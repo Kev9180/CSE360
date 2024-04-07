@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -45,7 +46,9 @@ public class NurseViewController implements PatientListItemListener, Initializab
     @FXML private VBox patientList;
     
     @FXML private HBox parentContainer; // holds everything
-    @FXML private VBox replaceVBox; // right side that we can replace with another scene
+    @FXML private VBox replaceVBox; // initial right side that we can replace with another scene
+    
+    private Pane currentRHS; // current RHS we should replace
     
     private List<Patient> patients;
     
@@ -54,6 +57,9 @@ public class NurseViewController implements PatientListItemListener, Initializab
     // tell the table what the columns should consist of
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		// mark initial vbox to be the one to be replaced
+		currentRHS = replaceVBox;
+		
 		patients = PatientManager.getInstance().getPatients();
 		// initially sort by most recent visit date
         Collections.sort(patients, new Comparator<Patient>() {
@@ -84,21 +90,10 @@ public class NurseViewController implements PatientListItemListener, Initializab
 		
 	}
     
-    //Method to logout the patient before going back to the previous screen
-    public void logoutStaff() {
-    	UserManager userManager = UserManager.getInstance();
-    	
-    	//Get the current logged in user
-    	User currentUser = userManager.getCurrentUser();
-    	
-    	//If currentUser is not null, log the user out
-    	if (currentUser != null) {
-    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
-    		userManager.logout();
-    	} else {
-    		System.out.println("No user currently logged in.");
-    	}
-    }
+	
+	/* PATIENT LIST VIEW HANDLERS */
+	
+	
     
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
@@ -132,13 +127,33 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     @Override
     public void onListItemClick(Patient patient) {
-    	replaceRHS("/FXML/nurse_visit_history.fxml", patient);
+    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_visit_history.fxml");
+    	controller.initialize(patient, currentRHS, this);
     }
     
     @Override
     public void onViewInfoButtonClick(Patient patient) {
     	// TODO Auto-generated method stub
     	
+    }
+    
+    
+    /*  VISIT HISTORY VIEW HANDLERS */
+    
+    // go to patient info edit screen for the patient's visit
+    public void onItemClick(Patient patient, Visit visit, Pane container) {
+    	currentRHS = container;
+		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_patient_info.fxml");
+		controller.initialize(patient, visit, "Edit");
+		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    }
+    
+    // go to patient info creation screen and initialize it for the patient
+    public void onNewVisitClicked(Patient patient, Pane container) {
+    	currentRHS = container;
+    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_patient_info.fxml");
+    	controller.initialize(patient, null, "New");
+    	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
     
     // update patient list method
@@ -159,19 +174,6 @@ public class NurseViewController implements PatientListItemListener, Initializab
                 e.printStackTrace();
             }
         }
-    }
-    
-    public void replaceRHS(String fxmlString, Patient patient) {
-    	try {
-	    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlString));
-	    	int indexToReplace = parentContainer.getChildren().indexOf(replaceVBox);
-	    	parentContainer.getChildren().remove(indexToReplace);
-	    	parentContainer.getChildren().add(indexToReplace, loader.load());
-	    	NurseVisitHistoryController controller = loader.getController();
-	    	controller.initialize(patient);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
     }
     
     /* im sorry i know this is awful */
@@ -246,6 +248,20 @@ public class NurseViewController implements PatientListItemListener, Initializab
     	allCount.setTextFill(Color.web("#666666"));
     }
 
-
+    //Method to logout the patient before going back to the previous screen
+    public void logoutStaff() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
+    }
 
 }

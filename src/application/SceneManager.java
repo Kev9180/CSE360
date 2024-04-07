@@ -1,11 +1,14 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 public class SceneManager {
 	// used if triggered by button
@@ -38,5 +41,40 @@ public class SceneManager {
         scene.getStylesheets().add(clazz.getResource("/CSS/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+    }
+    
+    // in complex scenes, replace just the right side of the scene, leaving left navbar the same
+    // returns a controller object, please cast to your Controller filename
+    // for example: 
+    // NurseVisitHistoryController controller = (NurseVisitHistoryController) replaceRHS(getClass(), containerToReplace, fxmlString);
+    // controller.initialize();
+    public static Object replaceRHS(Class<?> clazz, Pane containerToReplace, String fxmlString) {
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlString));
+	    	Pane parentContainer = (Pane) containerToReplace.getParent();
+	    	int indexToReplace = parentContainer.getChildren().indexOf(containerToReplace);
+	    	parentContainer.getChildren().remove(indexToReplace);
+	    	parentContainer.getChildren().add(indexToReplace, loader.load());
+	    	Object controller = loader.getController();
+	    	return controller;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    // if your containerToReplace has no parent, you'll need to pass in a parent manually:
+    public static Object replaceRHS(Class<?> clazz, Pane parentContainer, Node containerToReplace, String fxmlString) {
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlString));
+	    	int indexToReplace = parentContainer.getChildren().indexOf(containerToReplace);
+	    	parentContainer.getChildren().remove(indexToReplace);
+	    	parentContainer.getChildren().add(indexToReplace, loader.load());
+	    	Object controller = loader.getController();
+	    	return controller;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
 }

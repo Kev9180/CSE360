@@ -1,5 +1,5 @@
 package application;
 
 public interface PatientVisitHistoryItemListener {
-	void onItemClick();
+	void onItemClick(Patient patient, Visit visit);
 }
