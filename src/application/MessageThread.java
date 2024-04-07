@@ -1,35 +1,35 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 
 public class MessageThread {
+	private final SimpleStringProperty sender;
+	private final SimpleStringProperty subject;
+	private final int threadId;
 	
-	private String subject;
-	private User recipient;
-	private User sender;
-	private List<Message> messages = new ArrayList<>();
-	
-	public MessageThread(String subject, User recipient, User sender, Message message) {
-		this.subject = subject;
-		this.recipient = recipient;
-		this.sender = sender;
-		addMessage(message);
+	public MessageThread(String sender, String subject, int threadId) {
+		this.sender = new SimpleStringProperty(sender);
+		this.subject = new SimpleStringProperty(subject);
+		this.threadId = threadId;
 	}
 	
-	public void addMessage(Message message) {
-		messages.add(message);
+	public String getSender() {
+		return sender.get();
+	}
+	
+	public SimpleStringProperty senderProperty() {
+		return sender;
 	}
 	
 	public String getSubject() {
+		return subject.get();
+	}
+	
+	public SimpleStringProperty subjectProperty() {
 		return subject;
 	}
 	
-	public User getRecipient() {
-		return recipient;
-	}
-	
-	public List<Message> getMessages() {
-		return messages;
+	public int getThreadId() {
+		return this.threadId;
 	}
 }

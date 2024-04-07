@@ -1,10 +1,10 @@
 .root {
 	/* Color Variables */
-	-color-primary: #3ea3f4; // light blue
+	-color-primary: #3ea3f4; /* light blue */
 	
-	-color-secondary: #2b2138; // dark blue
+	-color-secondary: #2b2138; /* dark blue */
 	
-	-color-accent: #6039d2; // accent purple
+	-color-accent: #6039d2; /* accent purple */
 	-color-accent-hover: #5736b5;
 	-color-accent-hover-light: #dfd7fa;
 	-color-accent-pressed: #472d91;
