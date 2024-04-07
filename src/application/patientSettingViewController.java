@@ -58,9 +58,10 @@ public class patientSettingViewController {
     }
     
     @FXML
-    private void billingButton(ActionEvent event) {
+    private void billingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("billing button");
+        loadScene("/FXML/patient_billing.fxml", event);
     }
     
     
