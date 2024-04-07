@@ -95,6 +95,7 @@ public class PatientMessageBoardController {
     
     private boolean isDuplicateMessage(ObservableList<MessageThread> messageThreads, int threadId) {
     	return messageThreads.stream().anyMatch(thread -> thread.getThreadId() == threadId);
+    	//return false;
     }
     
     // Method to load the messages into the table

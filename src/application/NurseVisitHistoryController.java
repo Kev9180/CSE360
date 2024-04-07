@@ -24,7 +24,7 @@ public class NurseVisitHistoryController implements Initializable, PatientVisitH
     private Visit visit;
     private NurseViewController parentController;
 
-	public void initialize(Patient patient, Pane replacePane, NurseViewController parentController) {
+	public void initialize(Patient patient, NurseViewController parentController) {
 		this.parentController = parentController;
 		this.patient = patient;
 		//this.parentContainer = parentContainer;

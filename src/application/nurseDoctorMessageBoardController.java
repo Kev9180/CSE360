@@ -18,10 +18,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class nurseDoctorMessageBoardController {
-	@FXML private VBox messageContainer;
+	@FXML private Pane messageContainer;
 
     @FXML private Button newMessageBtn;
     
@@ -90,6 +91,7 @@ public class nurseDoctorMessageBoardController {
     
     private boolean isDuplicateMessage(ObservableList<MessageThread> messageThreads, int threadId) {
     	return messageThreads.stream().anyMatch(thread -> thread.getThreadId() == threadId);
+    	//return false;
     }
     
     // Method to load the messages into the table

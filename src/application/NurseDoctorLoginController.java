@@ -49,6 +49,11 @@ public class NurseDoctorLoginController {
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
     	System.out.println("Forgot password button pressed.");
+    	
+    	// print out all usernames and password
+    	for (User user : DatabaseUtil.getAllUsers()) {
+    		System.out.println("User: " + user.getUsername() + ", Password: " + user.getPassword());
+    	}
     }
     
     //Method to logout the current user

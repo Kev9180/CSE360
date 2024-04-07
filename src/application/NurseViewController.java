@@ -46,9 +46,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     @FXML private VBox patientList;
     
     @FXML private HBox parentContainer; // holds everything
-    @FXML private VBox replaceVBox; // initial right side that we can replace with another scene
-    
-    private Pane currentRHS; // current RHS we should replace
+  
     
     private List<Patient> patients;
     
@@ -58,7 +56,6 @@ public class NurseViewController implements PatientListItemListener, Initializab
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// mark initial vbox to be the one to be replaced
-		currentRHS = replaceVBox;
 		
 		patients = PatientManager.getInstance().getPatients();
 		// initially sort by most recent visit date
@@ -70,15 +67,10 @@ public class NurseViewController implements PatientListItemListener, Initializab
                 LocalDate d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
 
                 // Handle null cases
-                if (d1 == null && d2 == null) {
-                    return 0; // Both dates are null, consider them equal
-                } else if (d1 == null) {
-                    return -1; // Null dates should come before non-null dates
-                } else if (d2 == null) {
-                    return 1; // Null dates should come before non-null dates
-                }
-
-                // Compare non-null dates
+                if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal
+                else if (d1 == null)  			return -1; // Null dates should come before non-null dates
+                else if (d2 == null)  			return 1; // Null dates should come before non-null dates
+                
                 return d1.compareTo(d2);
             }
         });
@@ -109,50 +101,57 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     public void messageButton(ActionEvent event) throws Exception {
     	event.consume();
-    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_message_board.fxml", event);
+    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
     
     public void selectPatients(ActionEvent event) throws Exception {
-    	
+    	event.consume();
+    	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
     }
     
     public void selectMessages(ActionEvent event) throws Exception {
+    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     	
     }
     
     @Override
     public void onMessageButtonClick(Patient patient) {
-    	// TODO Auto-generated method stub
+    	// jump to the messaging scene, and select the patient from the drop-down menu
+    	MessageController controller = (MessageController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/compose_message.fxml");
     	
+    	// find correct patient in the combo box
+    	String formattedName = "Patient " + patient.getFirstName() + " " + patient.getLastName() + " | Username: " + patient.getUsername();
+    	controller.setDefaultOption(formattedName);
     }
     
     @Override
     public void onListItemClick(Patient patient) {
-    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_visit_history.fxml");
-    	controller.initialize(patient, currentRHS, this);
+    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_visit_history.fxml");
+    	controller.initialize(patient, this);
     }
     
     @Override
     public void onViewInfoButtonClick(Patient patient) {
-    	// TODO Auto-generated method stub
+    	// jump to the edit patient info scene
+    	
     	
     }
     
     
     /*  VISIT HISTORY VIEW HANDLERS */
     
+    
+    
     // go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
-    	currentRHS = container;
-		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_patient_info.fxml");
+		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
 		controller.initialize(patient, visit, "Edit");
 		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
     }
     
     // go to patient info creation screen and initialize it for the patient
     public void onNewVisitClicked(Patient patient, Pane container) {
-    	currentRHS = container;
-    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceRHS(getClass(), currentRHS, "/FXML/nurse_patient_info.fxml");
+    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
     	controller.initialize(patient, null, "New");
     	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
