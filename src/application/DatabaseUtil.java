@@ -216,6 +216,26 @@ public class DatabaseUtil {
 	    return users;
 	}
 	
+	// Method to get a list of all nurses and doctors
+	public static List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM userList";
+		
+		try (Connection conn = DriverManager.getConnection(DB_URL);
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			
+	        while (rs.next()) {
+	        	Role role = Role.valueOf(rs.getString("role"));
+	            users.add(new User(rs.getString("username"), rs.getString("password"), role, rs.getString("firstName"), rs.getString("lastName")));
+	        }
+	    } catch (SQLException e) {
+	        System.err.println(e.getMessage());
+	    }
+	    return users;
+	}
+	
 	// Method to get a user Id from a name and role
 	public static int getUserIdByNameAndRole(String firstName, String lastName, String role) {
 		String sql = "SELECT id FROM userList WHERE firstName = ? AND lastName = ? AND role = ?";
@@ -612,6 +632,73 @@ public class DatabaseUtil {
         }
         return threads;
     }
+    
+    // Method to delete a message thread
+    public static void deleteMessageThread(int threadId) {
+        String sql = "DELETE FROM msgList WHERE thread_id = ?";
 
+        try (Connection conn = DriverManager.getConnection(MSG_DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, threadId);
+            
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                System.out.println("Deleted " + affectedRows + " messages from thread " + threadId);
+            } else {
+                System.out.println("No messages were deleted.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error deleting message thread: " + e.getMessage());
+        }
+    }
 
+    // Method to get all messages in a thread
+    public static List<Message> getMessagesByThreadId(int threadId) {
+    	List<Message> messages = new ArrayList<>();
+        String sql = "SELECT * FROM msgList WHERE thread_id = ? ORDER BY timestamp";
+
+        try (Connection conn = DriverManager.getConnection(MSG_DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, threadId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                messages.add(new Message(
+                    rs.getInt("id"),
+                    rs.getInt("sender_id"),
+                    rs.getInt("recipient_id"),
+                    rs.getString("subject"),
+                    rs.getString("body"),
+                    rs.getString("timestamp"),
+                    rs.getInt("read_status"),
+                    rs.getInt("thread_id")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching messages by thread ID: " + e.getMessage());
+        }
+
+        return messages;
+    }
+    
+    // Method to get a sender name by their id
+    public static String getSenderNameById(int senderId) {
+    	String sql = "SELECT firstName, lastName FROM userList WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, senderId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("firstName") + " " + rs.getString("lastName");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching sender name: " + e.getMessage());
+        }
+        return "Unknown Sender";
+    }
 }

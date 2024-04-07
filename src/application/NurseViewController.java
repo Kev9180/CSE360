@@ -113,7 +113,8 @@ public class NurseViewController implements PatientListItemListener, Initializab
     }
     
     public void messageButton(ActionEvent event) throws Exception {
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+    	event.consume();
+    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_message_board.fxml", event);
     }
     
     public void selectPatients(ActionEvent event) throws Exception {

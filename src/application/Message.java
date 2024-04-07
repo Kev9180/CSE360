@@ -55,21 +55,8 @@ public class Message {
     public int getThreadId() {
         return threadId;
     }
-	
-//	private String message;
-//	private LocalDate date;
-//	private User sender;
-//	public Message(String message, User sender) {
-//		this.message = message;
-//		this.sender = sender;
-//		this.date = LocalDate.now();
-//	}
-//	
-//	public String getMessage() {
-//		return message;
-//	}
-//
-//	public LocalDate getDate() {
-//		return date;
-//	}
+    
+    public String getSenderName() {
+    	return DatabaseUtil.getSenderNameById(this.senderId);
+    }
 }

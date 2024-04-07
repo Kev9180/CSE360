@@ -254,8 +254,9 @@
                         <Separator prefWidth="200.0" />
                         <TableView fx:id="messagesTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
                           <columns>
-                            <TableColumn fx:id="senderColumn" prefWidth="75.0" text="From" />
-                            <TableColumn fx:id="subjectColumn" prefWidth="121.0" text="Subject" />
+                            <TableColumn fx:id="senderColumn" prefWidth="150.0" text="From" />
+                            <TableColumn fx:id="subjectColumn" prefWidth="300.0" text="Subject" />
+                              <TableColumn fx:id="actionsColumn" prefWidth="105.0" text="Actions" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

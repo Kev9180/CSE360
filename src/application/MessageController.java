@@ -14,7 +14,9 @@ import javafx.scene.control.TextField;
 public class MessageController {
 	@FXML private Button sendMessageBtn;
 	@FXML private Button backBtn;
+	
 	@FXML private ComboBox<String> recipientCB;
+	
 	@FXML private TextField subjectTF;
 	@FXML private TextArea messageText;
 	
@@ -34,10 +36,7 @@ public class MessageController {
 		
 		if (recipientId != -1 && senderId != -1) {
 			DatabaseUtil.sendMessage(senderId, recipientId, subject, messageBody);
-			System.out.println("Message sent successfully.");
 			clearForm();
-		} else {
-			System.out.println("Failed to send the message. Invalid recipient or sender.");
 		}
 	}
 	
@@ -55,7 +54,18 @@ public class MessageController {
 			return -1;
 		}
 		
-		String role = parts[0];
+		String roleStr = parts[0];
+		String role = "";
+		
+		if (roleStr.equals("Dr."))
+			role = "DOCTOR";
+		else if (roleStr.equals("Nurse"))
+			role = "NURSE";
+		else if (roleStr.equals("Patient"))
+			role = "PATIENT";
+		else
+			role = "ERROR";
+		
 		String firstName = parts[1];
 		String lastName = parts[2];
 		
@@ -63,24 +73,48 @@ public class MessageController {
 	}
 	
 	public void goBack(ActionEvent event) throws Exception {
-		System.out.println("Back button pressed");
+		String fxmlFile = "";
+		Role currentUserRole = UserManager.getInstance().getCurrentUserRole();
 		
-		String fxmlFile = "/FXML/patient_message_board.fxml";
+		if (currentUserRole.equals(Role.PATIENT))
+			fxmlFile = "/FXML/patient_message_board.fxml";
+		else if (currentUserRole.equals(Role.NURSE) || currentUserRole.equals(Role.DOCTOR))
+			fxmlFile = "/FXML/nurse_doctor_message_board.fxml";
+		else
+			fxmlFile = "/FXML/role_selection.fxml";
+		
 		SceneManager.loadScene(getClass(), fxmlFile, event);
 		
 	}
 	
 	private void loadRecipientList() {
+		List<User> userList = null;
 		ObservableList<String> recipients = FXCollections.observableArrayList();
+		Role currentUserRole = UserManager.getInstance().getCurrentUserRole();
 		
-		List<User> userList = DatabaseUtil.getNursesAndDoctors();
+		if (currentUserRole == Role.PATIENT)
+			userList = DatabaseUtil.getNursesAndDoctors();
+		if (currentUserRole == Role.NURSE || currentUserRole == Role.DOCTOR)
+			userList = DatabaseUtil.getAllUsers();
 		
 		for (User user : userList) {
-			String formattedName = user.getRole() + " " + user.getFirstName() + " " + user.getLastName();
+			String roleStr = user.getRole().toString();
+			String role = "";
+			
+			if (roleStr.equals("DOCTOR"))
+				role = "Dr.";
+			else if (roleStr.equals("NURSE"))
+				role = "Nurse";
+			else if (roleStr.equals("PATIENT"))
+				role = "Patient";
+			else
+				role = "ERROR";
+			
+			
+			String formattedName = role + " " + user.getFirstName() + " " + user.getLastName() + " | Username: " + user.getUsername();
 			recipients.add(formattedName);
 		}
 		
 		recipientCB.setItems(recipients);
 	}
-
 }

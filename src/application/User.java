@@ -74,5 +74,9 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	//Get full name
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 	
 }

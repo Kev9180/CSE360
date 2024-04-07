@@ -3,7 +3,6 @@ package application;
 import javafx.beans.property.SimpleStringProperty;
 
 public class MessageThread {
-	
 	private final SimpleStringProperty sender;
 	private final SimpleStringProperty subject;
 	private final int threadId;
