@@ -39,17 +39,19 @@ public class PatientViewController {
     }
     
     @FXML
-    private void newAppointmentButton(ActionEvent event) {
+    private void newAppointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("new appointment button");
+        
     }
     
     @FXML
-    private void settingButton(ActionEvent event) {
+    private void settingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("setting button");
+        loadScene("/FXML/patient_setting_view.fxml", event);
     }
-    
+   
     @FXML
     private void comingAppointmentButton(ActionEvent event) {
         event.consume();
@@ -63,9 +65,10 @@ public class PatientViewController {
     }
     
     @FXML
-    private void billingButton(ActionEvent event) {
+    private void billingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("billing button");
+        loadScene("/FXML/patient_billing.fxml", event);
     }
     
     @FXML
