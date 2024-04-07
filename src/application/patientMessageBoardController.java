@@ -22,6 +22,21 @@ public class patientMessageBoardController {
     @FXML private Label unreadCount;
     @FXML private Label readCount;
     
+    public void logoutPatient() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
+    }
+    
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
     	loadScene("/FXML/patient_view.fxml", event);
@@ -33,9 +48,10 @@ public class patientMessageBoardController {
     }
     
     @FXML
-    private void appointmentButton(ActionEvent event) {
+    private void appointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("appointment button");
+        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
@@ -51,9 +67,10 @@ public class patientMessageBoardController {
     }
     
     @FXML
-    private void settingButton(ActionEvent event) {
+    private void settingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("setting button");
+        loadScene("/FXML/patient_setting_view.fxml", event);
     }
     
     @FXML
