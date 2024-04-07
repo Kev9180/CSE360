@@ -35,7 +35,7 @@ public class PatientLoginController {
         	loginErrorLabel.setVisible(false);
         	System.out.println("Login successful!");
         	
-        	loadScene("/FXML/patient_view.fxml", event);        	
+        	SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);      	
         } 
         
         //If login was unsuccessful, show the error label
@@ -49,14 +49,13 @@ public class PatientLoginController {
     //Take the user to the reset password screen
     public void forgotPassword(ActionEvent event) throws Exception {
     	String fxmlFile = "/FXML/forgot_password.fxml";
-    	loadScene(fxmlFile, event);
+    	SceneManager.loadScene(getClass(), fxmlFile, event);
     }
 
     //Take the user to the new user registration screen
     public void newUser(ActionEvent event) throws Exception {
         // Handle new user logic here    	
-    	String fxmlFile = "/FXML/new_user.fxml";
-    	loadScene(fxmlFile, event);
+    	SceneManager.loadScene(getClass(), "/FXML/new_user.fxml", event);
     }
     
     //Method to log the user out of the system
@@ -79,17 +78,8 @@ public class PatientLoginController {
     public void goBack(ActionEvent event) throws Exception {
     	logout();
     	
-    	String fxmlFile = "/FXML/role_selection.fxml";
-    	loadScene(fxmlFile, event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
-    
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
-    }
+   
 }
 

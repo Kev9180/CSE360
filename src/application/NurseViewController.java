@@ -1,7 +1,11 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -22,11 +26,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class NurseViewController implements Initializable {
+public class NurseViewController implements PatientListItemListener, Initializable{
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -36,77 +43,138 @@ public class NurseViewController implements Initializable {
     @FXML private Label currentCount;
     @FXML private Label previousCount;
     
-    @FXML private TableView<Patient> patientList;
-    @FXML private TableColumn<Patient, String> name;
-    @FXML private TableColumn<Patient, LocalDate> lastVisitDate;
+    @FXML private VBox patientList;
     
-    private List<Patient> patients = PatientManager.getInstance().getPatients();
-    ObservableList<Patient> list = FXCollections.observableArrayList(patients);
+    @FXML private HBox parentContainer; // holds everything
+  
+    
+    private List<Patient> patients;
+    
+    private List<PatientListItemController> controllers;
     
     // tell the table what the columns should consist of
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-    	name.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
-    	
-    	// displays the user's most recent visit date
-        lastVisitDate.setCellValueFactory(new Callback<>() { 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// mark initial vbox to be the one to be replaced
+		
+		patients = PatientManager.getInstance().getPatients();
+		// initially sort by most recent visit date
+        Collections.sort(patients, new Comparator<Patient>() {
             @Override
-            public ObservableValue<LocalDate> call(TableColumn.CellDataFeatures<Patient, LocalDate> param) {
-                List<Visit> visitHistory = param.getValue().getVisitHistory();
-                int lastIndex = visitHistory.size() - 1;
-                if (lastIndex >= 0) {
-                    return new SimpleObjectProperty<>(visitHistory.get(lastIndex).getVisitDate());
-                } else {
-                    return new SimpleObjectProperty<>(null);
-                }
+            public int compare(Patient o1, Patient o2) {
+            	// Get the visit dates from patients
+                LocalDate d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
+                LocalDate d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
+
+                // Handle null cases
+                if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal
+                else if (d1 == null)  			return -1; // Null dates should come before non-null dates
+                else if (d2 == null)  			return 1; // Null dates should come before non-null dates
+                
+                return d1.compareTo(d2);
             }
         });
         
-        // set the contents of the table
-        patientList.setItems(list);
-    }
+        updatePatientList();
+        
+        // also update patient count
+        allCount.setText("" + patients.size());
+		
+	}
     
-    //Method to logout the patient before going back to the previous screen
-    public void logoutStaff() {
-    	UserManager userManager = UserManager.getInstance();
-    	
-    	//Get the current logged in user
-    	User currentUser = userManager.getCurrentUser();
-    	
-    	//If currentUser is not null, log the user out
-    	if (currentUser != null) {
-    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
-    		userManager.logout();
-    	} else {
-    		System.out.println("No user currently logged in.");
-    	}
-    }
+	
+	/* PATIENT LIST VIEW HANDLERS */
+	
+	
     
 	//Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
     	logoutStaff();
-        loadScene("/FXML/role_selection.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	logoutStaff();
-        loadScene("/FXML/role_selection.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     public void messageButton(ActionEvent event) throws Exception {
-        loadScene("/FXML/nurse_doctor_message_board.fxml", event);
+    	event.consume();
+    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
     
     public void selectPatients(ActionEvent event) throws Exception {
-    	
+    	event.consume();
+    	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
     }
     
     public void selectMessages(ActionEvent event) throws Exception {
+    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     	
     }
     
+    @Override
+    public void onMessageButtonClick(Patient patient) {
+    	// jump to the messaging scene, and select the patient from the drop-down menu
+    	MessageController controller = (MessageController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/compose_message.fxml");
+    	
+    	// find correct patient in the combo box
+    	String formattedName = "Patient " + patient.getFirstName() + " " + patient.getLastName() + " | Username: " + patient.getUsername();
+    	controller.setDefaultOption(formattedName);
+    }
+    
+    @Override
+    public void onListItemClick(Patient patient) {
+    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_visit_history.fxml");
+    	controller.initialize(patient, this);
+    }
+    
+    @Override
+    public void onViewInfoButtonClick(Patient patient) {
+    	// jump to the edit patient info scene
+    	
+    	
+    }
+    
+    
+    /*  VISIT HISTORY VIEW HANDLERS */
+    
+    
+    
+    // go to patient info edit screen for the patient's visit
+    public void onItemClick(Patient patient, Visit visit, Pane container) {
+		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+		controller.initialize(patient, visit, "Edit");
+		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    }
+    
+    // go to patient info creation screen and initialize it for the patient
+    public void onNewVisitClicked(Patient patient, Pane container) {
+    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+    	controller.initialize(patient, null, "New");
+    	System.out.println("New Patient Info Form for Patient" + patient.getName());
+    }
+    
+    // update patient list method
+    public void updatePatientList() {
+		controllers = new ArrayList<>();
+    	
+		// create patientListItems
+        // Load list items dynamically
+        for (int i = 0; i < patients.size(); i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_list_item.fxml"));
+                controllers.add(loader.getController());
+                patientList.getChildren().add(loader.load());
+                PatientListItemController listItemController = loader.getController();
+                listItemController.setParentController(this); // Pass reference to parent controller
+                listItemController.setLabels(patients.get(i));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
     /* im sorry i know this is awful */
     
@@ -179,14 +247,21 @@ public class NurseViewController implements Initializable {
     	allLabel.setTextFill(Color.web("#666666"));
     	allCount.setTextFill(Color.web("#666666"));
     }
-	
-    //Method to load the scene
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
+
+    //Method to logout the patient before going back to the previous screen
+    public void logoutStaff() {
+    	UserManager userManager = UserManager.getInstance();
+    	
+    	//Get the current logged in user
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	//If currentUser is not null, log the user out
+    	if (currentUser != null) {
+    		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
+    		userManager.logout();
+    	} else {
+    		System.out.println("No user currently logged in.");
+    	}
     }
+
 }

@@ -6,13 +6,17 @@ public class User {
 	private String password;
 	private MessageBoard messageBoard;
 	private Role role;
+	protected String firstName;
+	protected String lastName;
 	
 	//Constructor
-	public User(String username, String password, Role role) {
+	public User(String username, String password, Role role, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
 		this.messageBoard = new MessageBoard(this);
 		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	//Get username
@@ -50,5 +54,29 @@ public class User {
 		this.role = role;
 	}
 	
+	//Get first name
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	//Set first name
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	//Get last name
+	public String getLastName() {
+		return lastName;
+	}
+	
+	//Set last name
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	//Get full name
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 	
 }

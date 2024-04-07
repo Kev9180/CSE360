@@ -34,7 +34,7 @@ public class NurseDoctorLoginController {
         if (isValid) {
         	loginErrorLabel.setVisible(false);
         	
-        	loadScene("/FXML/nurse_patient_list.fxml", event);
+        	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
         } 
         
         //If login was unsuccessful, show the error label
@@ -49,6 +49,11 @@ public class NurseDoctorLoginController {
     public void forgotPassword(ActionEvent event) {
         // Handle forgot password logic here
     	System.out.println("Forgot password button pressed.");
+    	
+    	// print out all usernames and password
+    	for (User user : DatabaseUtil.getAllUsers()) {
+    		System.out.println("User: " + user.getUsername() + ", Password: " + user.getPassword());
+    	}
     }
     
     //Method to logout the current user
@@ -70,22 +75,10 @@ public class NurseDoctorLoginController {
     //Take the user back to the role selection screen if they press the back button
     public void goBack(ActionEvent event) throws Exception {
     	logout();
-    	
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-    //Method to load the scene
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-    	stage.setScene(new Scene(root, 800, 600));
-    	stage.show();
-    }
+
 
 }
 
