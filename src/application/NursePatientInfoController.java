@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,22 +56,24 @@ public class NursePatientInfoController {
     }
 
     @FXML
-    void handleSaveVisit(MouseEvent event) {
+    void handleSaveVisit(MouseEvent event) throws IOException {
     	Visit newVisit = createVisit();
     	// TODO: update (or create) visit in the database
+    	VisitHistoryManager.storeVisit(patient, newVisit);
+    	System.out.println("Visit created");
     }
     
     public Visit createVisit() {
     	try {
-	    	int height = Integer.parseInt(heightTF.getText());
-	    	int weight = Integer.parseInt(weightTF.getText());
-	    	int temperature = Integer.parseInt(tempTF.getText());
-	    	int bloodPressure = Integer.parseInt(bloodPressureTF.getText());
+    		String height = heightTF.getText();
+    		String weight = weightTF.getText();
+    		String temperature = tempTF.getText();
+    		String bloodPressure = bloodPressureTF.getText();
 	    	List<String> immunizations = new ArrayList<>(); // TODO
 	    	List<String> allergies = new ArrayList<>(); // TODO
 	    	List<String> prescribedMedication = new ArrayList<>(); // TODO
 	    	String healthConcerns = healthConcernsTA.getText();
-	    	int dosage = 0; // TODO
+	    	String dosage = "0"; // TODO
 	    	String location = ""; // for doctor
 	    	String physicalExamNotes = "";
 	    	String medicationNotes = "";
