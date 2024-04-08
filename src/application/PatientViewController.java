@@ -44,10 +44,10 @@ public class PatientViewController {
     }
     
     @FXML
-    private void newAppointmentButton(ActionEvent event) throws Exception {
+    private void passwordButton(ActionEvent event) throws Exception {
         event.consume();
-        System.out.println("new appointment button");
-        
+        System.out.println("message button");
+        loadScene("/FXML/forgot_password.fxml", event);
     }
     
     @FXML
@@ -58,15 +58,17 @@ public class PatientViewController {
     }
    
     @FXML
-    private void comingAppointmentButton(ActionEvent event) {
+    private void newAppointmentButton(ActionEvent event) throws Exception {
         event.consume();
-        System.out.println("coming appointment button");
+        System.out.println("new appointment button");
+        loadScene("/FXML/new_appointment_form.fxml", event);
     }
     
     @FXML
-    private void recordsButton(ActionEvent event) {
+    private void recordsButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("records button");
+        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
@@ -76,17 +78,7 @@ public class PatientViewController {
         loadScene("/FXML/patient_billing.fxml", event);
     }
     
-    @FXML
-    private void orderRefillButton(ActionEvent event) {
-        event.consume();
-        System.out.println("order refill button");
-    }
-    
-    @FXML
-    private void notificationButton(ActionEvent event) {
-        event.consume();
-        System.out.println("notifications button");
-    }
+   
     
     @FXML
     private void appointmentButton(ActionEvent event) throws Exception {
@@ -101,11 +93,7 @@ public class PatientViewController {
         System.out.println("about us button");
     }
     
-    @FXML
-    private void refillButton(ActionEvent event) {
-        event.consume();
-        System.out.println("refill button");
-    }
+   
     
     //-------------------------------
     

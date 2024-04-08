@@ -115,26 +115,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="30.0" layoutY="22.0" mnemonicParsing="false" onAction="#refillButton" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
-                           <children>
-                              <Circle fill="WHITE" radius="16.0" stroke="#aaaaaa" strokeType="INSIDE" strokeWidth="3.0" />
-                              <Label text="Refills" textFill="#666666">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false" onAction="#settingButton" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">

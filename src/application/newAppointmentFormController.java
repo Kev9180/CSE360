@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 
-public class newAppointmentFormComtroller {
+public class newAppointmentFormController {
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;

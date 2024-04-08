@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientViewController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
          <children>
@@ -97,26 +97,6 @@
                               <Label text="Appointments" textFill="#666666">
                                  <font>
                                     <Font size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="30.0" layoutY="22.0" mnemonicParsing="false" onAction="#refillButton" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
-                           <children>
-                              <Circle fill="WHITE" radius="16.0" stroke="#aaaaaa" strokeType="INSIDE" strokeWidth="3.0" />
-                              <Label text="Refills" textFill="#666666">
-                                 <font>
-                                    <Font size="16.0" />
                                  </font>
                               </Label>
                            </children>
@@ -360,11 +340,11 @@
 									    </Button>
 		                        	</left>
 		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#orderRefillButton" prefHeight="100.0" prefWidth="160.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#passwordButton" prefHeight="100.0" prefWidth="160.0" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
       				                        		<HBox alignment="CENTER" prefHeight="89.0" prefWidth="127.0" spacing="16.0">
       					                        			<children>
-      					                        				<Label text="Order Refill" textFill="#603bd1">
+      					                        				<Label text="Change Password" textFill="#603bd1">
       					                        					<font>
       								                                	<Font name="System Bold" size="16.0" />
       								                                 </font>
@@ -379,50 +359,6 @@
 									         	<Cursor fx:constant="HAND" />
 									         </cursor>
 									    </Button>
-		                        	</center>
-		                        </BorderPane>
-		                        <BorderPane prefHeight="100" prefWidth="580.0">
-		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#comingAppointmentButton" prefHeight="100.0" prefWidth="157.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-						                        	<graphic>
-						                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
-							                        			<children>
-							                        				<Label text="coming appointment" textFill="#603bd1">
-							                        					<font>
-										                                	<Font name="System Bold" size="16.0" />
-										                                 </font>
-										                            </Label>
-										                          </children>
-										                 </HBox>
-										             </graphic>
-										             	<font>
-										             		<Font size="16.0" />
-											            </font>
-											         <cursor>
-											         	<Cursor fx:constant="HAND" />
-											         </cursor>
-											    </Button>
-		                        	</left>
-		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#notificationButton" prefHeight="100.0" prefWidth="158.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-						                        	<graphic>
-						                        		<HBox alignment="CENTER" prefHeight="88.0" prefWidth="121.0" spacing="16.0">
-							                        			<children>
-							                        				<Label prefHeight="25.0" prefWidth="118.0" text="Notifications" textFill="#603bd1">
-							                        					<font>
-										                                	<Font name="System Bold" size="16.0" />
-										                                 </font>
-										                            </Label>
-										                          </children>
-										                 </HBox>
-										             </graphic>
-										             	<font>
-										             		<Font size="16.0" />
-											            </font>
-											         <cursor>
-											         	<Cursor fx:constant="HAND" />
-											         </cursor>
-											    </Button>
 		                        	</center>
 		                        </BorderPane>
                         	</children>
