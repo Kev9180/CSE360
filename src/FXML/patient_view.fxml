@@ -111,10 +111,10 @@
                   </Button>
                   <Button id="unselectedbutton" contentDisplay="CENTER" layoutX="40.0" layoutY="22.0" mnemonicParsing="false" onAction="#settingButton" prefHeight="60.0" prefWidth="180.0" stylesheets="@../CSS/button.css" textFill="WHITE">
                      <graphic>
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="160.0" spacing="16.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="146.0" spacing="16.0">
                            <children>
                               <Circle fill="WHITE" radius="16.0" stroke="#aaaaaa" strokeType="INSIDE" strokeWidth="3.0" />
-                              <Label text="Settings" textFill="#666666">
+                              <Label prefHeight="25.0" prefWidth="87.0" text="Patient Info" textFill="#666666">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -204,7 +204,7 @@
       </VBox>
    </left>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="620.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="screenContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="614.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="600.0" prefWidth="620.0" spacing="12.0" style="-fx-background-color: #fefefe;">
                <children>
@@ -256,7 +256,7 @@
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>
-					                        				<Label text="Records" textFill="#603bd1">
+					                        				<Label text="Visit History" textFill="#603bd1">
 					                        					<font>
 								                                	<Font name="System Bold" size="16.0" />
 								                                 </font>
@@ -275,14 +275,17 @@
                         </BorderPane>
 		                        <BorderPane prefHeight="100" prefWidth="580.0">
 		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newAppointmentButton" prefHeight="100.0" prefWidth="157.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newAppointmentButton" prefHeight="100.0" prefWidth="184.0" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
-				                        		<HBox alignment="CENTER" prefHeight="89.0" prefWidth="229.0" spacing="16.0">
+				                        		<HBox alignment="CENTER" prefHeight="92.0" prefWidth="181.0" spacing="16.0">
 					                        			<children>
-					                        				<Label prefHeight="25.0" prefWidth="133.0" text="new appointment" textFill="#603bd1">
+					                        				<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="166.0" text="Appointment" textAlignment="CENTER" textFill="#603bd1">
 					                        					<font>
 								                                	<Font name="System Bold" size="16.0" />
 								                                 </font>
+                                                   <HBox.margin>
+                                                      <Insets right="35.0" />
+                                                   </HBox.margin>
 								                            </Label>
 								                          </children>
 								                 </HBox>
@@ -295,38 +298,18 @@
 									         </cursor>
 									    </Button>
 		                        	</left>
-		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#billingButton" prefHeight="100.0" prefWidth="161.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-				                        	<graphic>
-				                        		<HBox alignment="CENTER" prefHeight="88.0" prefWidth="135.0" spacing="16.0">
-					                        			<children>
-					                        				<Label text="Billing" textFill="#603bd1">
-					                        					<font>
-								                                	<Font name="System Bold" size="16.0" />
-								                                 </font>
-								                            </Label>
-								                          </children>
-								                 </HBox>
-								             </graphic>
-								             	<font>
-								             		<Font size="16.0" />
-									            </font>
-									         <cursor>
-									         	<Cursor fx:constant="HAND" />
-									         </cursor>
-									    </Button>
-		                        	</center>
-		                        </BorderPane>
-		                    	<BorderPane prefHeight="100" prefWidth="580.0">
-		                        	<left>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#settingButton" prefHeight="100.0" prefWidth="157.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+                                 <center>
+		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#settingButton" prefHeight="100.0" prefWidth="157.0" stylesheets="@../CSS/button.css" textFill="WHITE" BorderPane.alignment="CENTER">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="88.0" prefWidth="133.0" spacing="16.0">
 					                        			<children>
-					                        				<Label text="Settings" textFill="#603bd1">
+					                        				<Label alignment="CENTER" prefHeight="25.0" prefWidth="96.0" text="Patient Info" textFill="#603bd1">
 					                        					<font>
 								                                	<Font name="System Bold" size="16.0" />
 								                                 </font>
+                                                   <HBox.margin>
+                                                      <Insets right="35.0" />
+                                                   </HBox.margin>
 								                            </Label>
 								                          </children>
 								                 </HBox>
@@ -338,28 +321,7 @@
 									         	<Cursor fx:constant="HAND" />
 									         </cursor>
 									    </Button>
-		                        	</left>
-		                        	<center>
-		                        		<Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#passwordButton" prefHeight="100.0" prefWidth="160.0" stylesheets="@../CSS/button.css" textFill="WHITE">
-				                        	<graphic>
-      				                        		<HBox alignment="CENTER" prefHeight="89.0" prefWidth="127.0" spacing="16.0">
-      					                        			<children>
-      					                        				<Label text="Change Password" textFill="#603bd1">
-      					                        					<font>
-      								                                	<Font name="System Bold" size="16.0" />
-      								                                 </font>
-      								                            </Label>
-      								                          </children>
-      								                 </HBox>
-								             </graphic>
-								             	<font>
-								             		<Font size="13.0" />
-									            </font>
-									         <cursor>
-									         	<Cursor fx:constant="HAND" />
-									         </cursor>
-									    </Button>
-		                        	</center>
+                                 </center>
 		                        </BorderPane>
                         	</children>
                         	<padding>

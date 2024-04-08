@@ -1,11 +1,16 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 public class PatientViewController {
-
+	@FXML private VBox screenContainer;
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
     
@@ -47,9 +52,15 @@ public class PatientViewController {
     
     @FXML
     private void settingButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("setting button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_setting_view.fxml", event);
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_setting_view.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
     }
    
     @FXML
@@ -66,12 +77,7 @@ public class PatientViewController {
         SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
     }
     
-    @FXML
-    private void billingButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("billing button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_billing.fxml", event);
-    }
+
     
    
     
