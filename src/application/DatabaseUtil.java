@@ -72,12 +72,12 @@ public class DatabaseUtil {
 		Patient myPatient = new Patient("username1", "password", Role.PATIENT, "first", "last", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit = new Visit(100, 100, 100, 100, null, null, null, "concerns", 10, "location", "examNotes",
+		Visit myVisit = new Visit("100", "100", "100", "100", null, null, null, "concerns", "10", "location", "examNotes",
 				"medicationNotes");
 		Patient myPatient2 = new Patient("username2", "password", Role.PATIENT, "first2", "last2", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit2 = new Visit(100, 100, 100, 100, null, null, null, "concerns", 10, "location", "examNotes",
+		Visit myVisit2 = new Visit("100", "100", "100", "100", null, null, null, "concerns", "10", "location", "examNotes",
 				"medicationNotes");
 		myPatient.addVisit(myVisit);
 		addUser(myPatient);

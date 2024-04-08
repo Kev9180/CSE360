@@ -6,9 +6,25 @@ import java.time.LocalDate;
 
 
 public class Visit {
+	// information about each visit
+	private String height;
+	private String weight;
+	private String temperature;
+	private String bloodPressure;
+	private List<String> immunizations = new ArrayList<String>();
+	private List<String> allergies = new ArrayList<String>();
+	private List<String> prescribedMedication = new ArrayList<String>();
+	private String healthConcerns;
+	private String dosage;
+	private String location;
+	private String physicalExamNotes;
+	private String medicationNotes;
+	private LocalDate visitDate;
 	
-	public Visit(int height, int weight, int temperature, int bloodPressure, List<String> immunizations,
-			List<String> allergies, List<String> prescribedMedication, String healthConcerns, int dosage,
+	public Visit() {}
+	
+	public Visit(String height, String weight, String temperature, String bloodPressure, List<String> immunizations,
+			List<String> allergies, List<String> prescribedMedication, String healthConcerns, String dosage,
 			String location, String physicalExamNotes, String medicationNotes) {
 		this.height = height;
 		this.weight = weight;
@@ -25,44 +41,29 @@ public class Visit {
 		this.visitDate = LocalDate.now();
 	}
 	
-	// information about each visit
-	private int height;
-	private int weight;
-	private int temperature;
-	private int bloodPressure;
-	private List<String> immunizations = new ArrayList<String>();
-	private List<String> allergies = new ArrayList<String>();
-	private List<String> prescribedMedication = new ArrayList<String>();
-	private String healthConcerns;
-	private int dosage;
-	private String location;
-	private String physicalExamNotes;
-	private String medicationNotes;
-	private LocalDate visitDate;	
-	
 	// I'm going insane
-	public int getHeight() {
+	public String getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
+	public void setHeight(String height) {
 		this.height = height;
 	}
-	public int getWeight() {
+	public String getWeight() {
 		return weight;
 	}
-	public void setWeight(int weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-	public int getTemperature() {
+	public String getTemperature() {
 		return temperature;
 	}
-	public void setTemperature(int temperature) {
+	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
-	public int getBloodPressure() {
+	public String getBloodPressure() {
 		return bloodPressure;
 	}
-	public void setBloodPressure(int bloodPressure) {
+	public void setBloodPressure(String bloodPressure) {
 		this.bloodPressure = bloodPressure;
 	}
 	public List<String> getImmunizations() {
@@ -89,10 +90,10 @@ public class Visit {
 	public void setHealthConcerns(String healthConcerns) {
 		this.healthConcerns = healthConcerns;
 	}
-	public int getDosage() {
+	public String getDosage() {
 		return dosage;
 	}
-	public void setDosage(int dosage) {
+	public void setDosage(String dosage) {
 		this.dosage = dosage;
 	}
 	public String getLocation() {
@@ -115,5 +116,8 @@ public class Visit {
 	}
 	public LocalDate getVisitDate() {
 		return this.visitDate;
+	}
+	public void setVisitDate(LocalDate date) {
+		this.visitDate = date;
 	}
 }
