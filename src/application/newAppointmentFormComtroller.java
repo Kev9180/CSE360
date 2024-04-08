@@ -85,6 +85,13 @@ public class newAppointmentFormComtroller {
         loadScene("/FXML/patient_setting_view.fxml", event);
     }
     
+    @FXML
+    private void finishButton(ActionEvent event) throws Exception {
+        event.consume();
+        System.out.println("setting button");
+        loadScene("/FXML/patient_appointment_view.fxml", event);
+    }
+    
     //-------------------------------
     
     //Method to load the scene

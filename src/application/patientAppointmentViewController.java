@@ -60,6 +60,13 @@ public class patientAppointmentViewController {
     }
     
     @FXML
+    private void newAppointmentButton(ActionEvent event) throws Exception {
+        event.consume();
+        System.out.println("message button");
+        loadScene("/FXML/new_appointment_form.fxml", event);
+    }
+    
+    @FXML
     private void mainButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("main button");

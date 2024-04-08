@@ -278,7 +278,7 @@
                                        <children>
                                           <BorderPane prefHeight="60.0" prefWidth="565.0">
                                              <right>
-                                                <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="177.0" stylesheets="@../CSS/button.css" text="New Appointment" textFill="#6039d2" BorderPane.alignment="CENTER" />
+                                                <Button onAction="#newAppointmentButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="177.0" stylesheets="@../CSS/button.css" text="New Appointment" textFill="#6039d2" BorderPane.alignment="CENTER" />
                                              </right>
                                              <left>
                                                 <Label text="Coming Appointment: 00/00/0000" textFill="#6039d2" BorderPane.alignment="CENTER" />
