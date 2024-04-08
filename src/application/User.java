@@ -4,7 +4,6 @@ package application;
 public class User {
 	private String username;
 	private String password;
-	private MessageBoard messageBoard;
 	private Role role;
 	protected String firstName;
 	protected String lastName;
@@ -13,7 +12,6 @@ public class User {
 	public User(String username, String password, Role role, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
-		this.messageBoard = new MessageBoard(this);
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -38,12 +36,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	//Get MessageBoard
-	public MessageBoard getMessageBoard() {
-		return this.messageBoard;
-	}
-	
+		
 	//Get role
 	public Role getRole() {
 		return role;

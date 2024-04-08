@@ -8,30 +8,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class NurseViewController implements PatientListItemListener, Initializable{
 
@@ -101,7 +88,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     public void messageButton(ActionEvent event) throws Exception {
     	event.consume();
-    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
     
     public void selectPatients(ActionEvent event) throws Exception {
@@ -110,7 +97,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     }
     
     public void selectMessages(ActionEvent event) throws Exception {
-    	nurseDoctorMessageBoardController controller = (nurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     	
     }
     

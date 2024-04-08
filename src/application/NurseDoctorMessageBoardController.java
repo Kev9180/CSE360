@@ -1,8 +1,6 @@
 package application;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
-public class nurseDoctorMessageBoardController {
+public class NurseDoctorMessageBoardController {
 	@FXML private Pane messageContainer;
 
     @FXML private Button newMessageBtn;

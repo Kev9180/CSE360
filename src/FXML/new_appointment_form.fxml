@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.newAppointmentFormController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewAppointmentFormController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" style="-fx-background-color: #fefefe;" BorderPane.alignment="CENTER">
          <children>
@@ -254,7 +254,7 @@
                         </BorderPane>
                         <BorderPane prefHeight="185.0" prefWidth="590.0">
                            <top>
-                              <MenuButton mnemonicParsing="false" prefHeight="28.0" prefWidth="294.0" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="Select a Doctor" BorderPane.alignment="CENTER">
+                              <MenuButton mnemonicParsing="false" prefHeight="28.0" prefWidth="294.0" stylesheets="@../CSS/button.css" text="Select a Doctor" BorderPane.alignment="CENTER">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -265,7 +265,7 @@
                               <DatePicker prefHeight="25.0" prefWidth="250.0" promptText="Select a Date" BorderPane.alignment="CENTER" />
                            </center>
                            <right>
-                              <MenuButton mnemonicParsing="false" prefHeight="28.0" prefWidth="226.0" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="Select a Time" BorderPane.alignment="CENTER">
+                              <MenuButton mnemonicParsing="false" prefHeight="28.0" prefWidth="226.0" stylesheets="@../CSS/button.css" text="Select a Time" BorderPane.alignment="CENTER">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -284,12 +284,12 @@
                            <children>
                               <BorderPane prefHeight="72.0" prefWidth="590.0" GridPane.rowIndex="1">
                                  <right>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #3ea3f4;" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="Add reason" BorderPane.alignment="CENTER" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #3ea3f4;" stylesheets="@../CSS/button.css" text="Add reason" BorderPane.alignment="CENTER" />
                                  </right>
                               </BorderPane>
                               <BorderPane prefHeight="51.0" prefWidth="590.0">
                                  <center>
-                                    <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="295.0" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="Reason for visit" BorderPane.alignment="CENTER">
+                                    <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="295.0" stylesheets="@../CSS/button.css" text="Reason for visit" BorderPane.alignment="CENTER">
                                       <items>
                                         <MenuItem mnemonicParsing="false" text="Action 1" />
                                         <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -301,7 +301,7 @@
                         </GridPane>
                         <BorderPane prefHeight="198.0" prefWidth="590.0">
                            <top>
-                              <MenuButton mnemonicParsing="false" prefHeight="23.0" prefWidth="246.0" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="When to be notified" BorderPane.alignment="CENTER">
+                              <MenuButton mnemonicParsing="false" prefHeight="23.0" prefWidth="246.0" stylesheets="@../CSS/button.css" text="When to be notified" BorderPane.alignment="CENTER">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -319,7 +319,7 @@
                               <TextArea prefHeight="87.0" prefWidth="590.0" BorderPane.alignment="CENTER" />
                            </bottom>
                         </BorderPane>
-                        <Button onAction="#finishButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #3ea3f4;" stylesheets="@../../../../eclipse-workspace/CSE360-main/src/CSS/button.css" text="Finish" />
+                        <Button mnemonicParsing="false" onAction="#finishButton" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #3ea3f4;" stylesheets="@../CSS/button.css" text="Finish" />
                         
                      </children>
                   </VBox>

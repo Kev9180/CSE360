@@ -42,35 +42,35 @@ public class PatientViewController {
     private void passwordButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("message button");
-        loadScene("/FXML/forgot_password.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/forgot_password.fxml", event);
     }
     
     @FXML
     private void settingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("setting button");
-        loadScene("/FXML/patient_setting_view.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_setting_view.fxml", event);
     }
    
     @FXML
     private void newAppointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("new appointment button");
-        loadScene("/FXML/new_appointment_form.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/new_appointment_form.fxml", event);
     }
     
     @FXML
     private void recordsButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("records button");
-        loadScene("/FXML/patient_appointment_view.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
     private void billingButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("billing button");
-        loadScene("/FXML/patient_billing.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_billing.fxml", event);
     }
     
    
