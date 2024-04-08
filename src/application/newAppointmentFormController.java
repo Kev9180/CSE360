@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 
-public class patientAppointmentViewController {
+public class newAppointmentFormController {
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -60,13 +60,6 @@ public class patientAppointmentViewController {
     }
     
     @FXML
-    private void newAppointmentButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("message button");
-        loadScene("/FXML/new_appointment_form.fxml", event);
-    }
-    
-    @FXML
     private void mainButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("main button");
@@ -90,6 +83,13 @@ public class patientAppointmentViewController {
         event.consume();
         System.out.println("setting button");
         loadScene("/FXML/patient_setting_view.fxml", event);
+    }
+    
+    @FXML
+    private void finishButton(ActionEvent event) throws Exception {
+        event.consume();
+        System.out.println("setting button");
+        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     //-------------------------------
