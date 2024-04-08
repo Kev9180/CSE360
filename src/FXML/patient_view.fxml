@@ -213,7 +213,7 @@
                      <children>
                         <VBox prefHeight="46.0" prefWidth="590.0">
                            <children>
-                              <Label text="Welcome John Smith" textFill="#6039d2">
+                              <Label fx:id="welcome" text="Welcome " textFill="#6039d2">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
