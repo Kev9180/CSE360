@@ -49,9 +49,11 @@ public class NurseViewController implements PatientListItemListener, Initializab
         Collections.sort(patients, new Comparator<Patient>() {
             @Override
             public int compare(Patient o1, Patient o2) {
-            	// Get the visit dates from patients
-                LocalDate d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
-                LocalDate d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
+            	// Get the visit dates from patients            	
+            	List<Visit> visit1 = o1.getVisitHistory();
+            	List<Visit> visit2 = o2.getVisitHistory();
+                LocalDate d1 = (visit1.isEmpty() || visit1 == null) ? null : visit1.getLast().getVisitDate();
+                LocalDate d2 = (visit2.isEmpty() || visit2 == null) ? null : visit2.getLast().getVisitDate();
 
                 // Handle null cases
                 if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal

@@ -17,18 +17,24 @@ public class PatientVisitHistoryItemController {
     private Patient patient;
     private PatientVisitHistoryItemListener parentController;
     
-    public void setLabels(Patient patient, Visit visit) {
-    	this.patient = patient;
+    public void setLabels(Visit visit) {
     	this.visit = visit;
     	
     	String dateStr = visit.getVisitDate() == null ? "Never" : visit.getVisitDate().toString();
     	dateLabel.setText(dateStr);
     	
-    	String examStr = visit.getPhysicalExamNotes() == null ? "N/A" : visit.getPhysicalExamNotes();
+    	String examStr = visit.getPhysicalExamNotes() == "" ? "N/A" : visit.getPhysicalExamNotes();
     	examLabel.setText(examStr);
     	
-    	String prescriptionStr = visit.getPrescribedMedication() == null ? "None" : visit.getPrescribedMedication().getLast();
+    	String concernsStr = visit.getHealthConcerns() == "" ? "N/A" : visit.getHealthConcerns();
+    	concernsLabel.setText(concernsStr);
+    	
+    	String prescriptionStr = (visit.getPrescribedMedication() == null || visit.getPrescribedMedication().isEmpty()) ? "None" : visit.getPrescribedMedication().getLast();
     	prescriptionLabel.setText(prescriptionStr);
+    }
+    
+    public void setPatient(Patient patient) {
+    	this.patient = patient;
     }
     
     @FXML
