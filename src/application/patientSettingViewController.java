@@ -2,9 +2,14 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-public class PatientViewController {
+public class patientSettingViewController {
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -28,42 +33,28 @@ public class PatientViewController {
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	logoutPatient();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+        loadScene("/FXML/role_selection.fxml", event);
+    }
+    
+    @FXML
+    private void mainButton(ActionEvent event) throws Exception {
+        event.consume();
+        System.out.println("main button");
+        loadScene("/FXML/patient_view.fxml", event);
     }
     
     @FXML
     private void messageButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("message button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_message_board.fxml", event);
+        loadScene("/FXML/pateint_meesage_board.fxml", event);
     }
     
     @FXML
-    private void passwordButton(ActionEvent event) throws Exception {
+    private void changePasswordButton(ActionEvent event) throws Exception {
         event.consume();
-        System.out.println("message button");
+        System.out.println("billing button");
         loadScene("/FXML/forgot_password.fxml", event);
-    }
-    
-    @FXML
-    private void settingButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("setting button");
-        loadScene("/FXML/patient_setting_view.fxml", event);
-    }
-   
-    @FXML
-    private void newAppointmentButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("new appointment button");
-        loadScene("/FXML/new_appointment_form.fxml", event);
-    }
-    
-    @FXML
-    private void recordsButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("records button");
-        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
@@ -73,13 +64,12 @@ public class PatientViewController {
         loadScene("/FXML/patient_billing.fxml", event);
     }
     
-   
     
     @FXML
     private void appointmentButton(ActionEvent event) throws Exception {
         event.consume();
         System.out.println("appointment button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
+        loadScene("/FXML/patient_appointment_view.fxml", event);
     }
     
     @FXML
@@ -88,8 +78,21 @@ public class PatientViewController {
         System.out.println("about us button");
     }
     
-   
+    @FXML
+    private void refillButton(ActionEvent event) {
+        event.consume();
+        System.out.println("refill button");
+    }
     
     //-------------------------------
-
+    
+    //Method to load the scene
+    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    	Parent root = loader.load();
+    	loader.getController();
+    	stage.setScene(new Scene(root, 800, 600));
+    	stage.show();
+    }
 }
