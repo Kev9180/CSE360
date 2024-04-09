@@ -62,7 +62,6 @@ public class NurseVisitHistoryController implements Initializable, PatientVisitH
         // Load list items dynamically
         for (int i = 0; i < visitHistory.size(); i++) {
             try {
-            	System.out.println("Adding visit item " + i);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_visit_item.fxml"));
                 //controllers.add(loader.getController());
                 visitList.getChildren().add(loader.load());

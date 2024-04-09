@@ -1,24 +1,31 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class PatientVisitInfoController {
+public class PatientVisitInfoController implements PatientImmunizationItemListener {
 	
 	@FXML private Label name;
 	@FXML private TextField bloodPressureTF;
 	@FXML private TextField heightTF;
 	@FXML private TextField tempTF;
-	@FXML private TextField vaccineDateTF;
+    @FXML private DatePicker vaccineDateDP;
 	@FXML private TextField vaccineNameTF;
 	@FXML private TextField weightTF;
 	@FXML private TextArea allergiesTA;
@@ -30,6 +37,8 @@ public class PatientVisitInfoController {
 	private Patient patient;
 	private Visit visit;
 	private String mode;
+	private List<PatientImmunizationItemController> immunizationListItemControllers;
+	private List<String> temporaryImmunizations = new ArrayList<>();;
 	
 	// sets labels
 	// @Params: patient contains info about which patient was clicked on
@@ -49,12 +58,22 @@ public class PatientVisitInfoController {
 			saveButton.setDisable(true);
 		}
 		
+		if (mode != "New") {
+			temporaryImmunizations = visit.getImmunizations();
+		}
+		
 		updateLabels();
+		updateImmunizationsList();
 	}
 
     @FXML
     void handleAddVaccine(MouseEvent event) {
-    	
+    	System.out.println("immunizations length is " + temporaryImmunizations.size());
+    	String immunization = vaccineNameTF.getText() + "|" + vaccineDateDP.getValue();
+    	temporaryImmunizations.add(immunization);
+    	vaccineNameTF.clear();
+    	vaccineDateDP.setValue(LocalDate.now());
+    	updateImmunizationsList();
     }
 
     @FXML
@@ -72,7 +91,9 @@ public class PatientVisitInfoController {
 
     		
     		// pass in the old visit, so we know which one to change
-    		patient.setVisit(visit, newVisit);
+    		newVisit.setVisitDate(visit.getVisitDate());
+    		newVisit.setVisitDateFormatted(visit.getVisitDateFormatted());
+    		patient.addVisit(newVisit);
     		System.out.println("Visit Updated");
     	}
     }
@@ -83,15 +104,17 @@ public class PatientVisitInfoController {
     		String weight = weightTF.getText();
     		String temperature = tempTF.getText();
     		String bloodPressure = bloodPressureTF.getText();
-	    	List<String> immunizations = new ArrayList<>(); // TODO
-	    	List<String> allergies = new ArrayList<>(); // TODO
-	    	List<String> prescribedMedication = new ArrayList<>(); // TODO
+    		// immunizations
+	    	List<String> immunizations = getImmunizationsList();
+	    	List<String> allergies = Arrays.asList(allergiesTA.getText().split(",")); 
+	    	List<String> prescribedMedication = visit.getPrescribedMedication(); // for doctor
 	    	String healthConcerns = healthConcernsTA.getText();
 	    	String dosage = "0"; // TODO
-	    	String location = ""; // for doctor
-	    	String physicalExamNotes = "";
-	    	String medicationNotes = "";
+	    	String location = visit.getLocation(); // for doctor
+	    	String physicalExamNotes = visit.getPhysicalExamNotes();
+	    	String medicationNotes = visit.getMedicationNotes();
 	    	Visit visit = new Visit(height, weight, temperature, bloodPressure, immunizations, allergies, prescribedMedication, healthConcerns, dosage, location, physicalExamNotes, medicationNotes);
+	    	System.out.println("i was here");
 	    	return visit;
     	} catch (NumberFormatException e) {
     		e.printStackTrace();
@@ -118,5 +141,52 @@ public class PatientVisitInfoController {
 			healthConcernsTA.clear();
 		}
     }
+    
+    public void updateImmunizationsList() {
+    	if (temporaryImmunizations.size() < 1)
+    		return;
+		// create patientListItems
+        // Load list items dynamically
+    	immunizationListItemControllers = new ArrayList<>();
+    	
+    	// delete all list items (except the header)
+    	ObservableList<Node> children = vaccineList.getChildren();
+    	int numChildren = children.size();
+
+    	for (int i = 1; i < numChildren; i++) {
+    	    children.remove(1); // Remove the child at index indexToRemoveFrom
+    	}
+    	
+        for (int i = 0; i < temporaryImmunizations.size(); i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_immunization_item.fxml"));
+                //controllers.add(loader.getController());
+                vaccineList.getChildren().add(loader.load());
+                PatientImmunizationItemController listItemController = loader.getController();
+                listItemController.setListener(this);
+                listItemController.setLabels(temporaryImmunizations, i);
+                immunizationListItemControllers.add(listItemController);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    // fetch the immunizations from the current state of the table
+    public List<String> getImmunizationsList() {
+    	List<String> output = new ArrayList<>();
+    	for (PatientImmunizationItemController listItemController : immunizationListItemControllers) {
+    		String immunization = listItemController.getLabels();
+    		output.add(immunization);
+    	}
+    	System.out.println(output);
+    	return output;
+    }
+
+	@Override
+	public void onDeleteItem(int index) {
+		temporaryImmunizations.remove(index);
+		updateImmunizationsList();
+	}
 
 }
