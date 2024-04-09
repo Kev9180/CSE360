@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class VisitHistoryManager {
 		
 		// The actual visit filename inside of the specific patient directory will be yyyy-MM-dd_HH-mm-ss_visit.txt
 		// Create a date formatter to format the date for the filename
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 		String filename = visit.getVisitDate().format(formatter) + "_visit.txt";
 		
 		try (FileWriter writer = new FileWriter(new File(directory, filename))) {
@@ -129,7 +130,7 @@ public class VisitHistoryManager {
                         visit.setMedicationNotes(parts[1]);
                         break;
                     case "Visit Date":
-                        visit.setVisitDate(LocalDate.parse(parts[1]));
+                        visit.setVisitDate(LocalDateTime.parse(parts[1]));
                         break;
 					}
 				}

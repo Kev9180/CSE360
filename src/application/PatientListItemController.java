@@ -1,5 +1,6 @@
 package application;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -24,7 +25,7 @@ public class PatientListItemController {
 	    
 	    String dateStr = "Never";
 	    if (visitHistory.size() > 0) {
-	    	LocalDate date = visitHistory.get(visitHistory.size() - 1).getVisitDate();
+	    	LocalDateTime date = visitHistory.get(visitHistory.size() - 1).getVisitDate();
 	    	dateStr = date.toString();
 	    }
 	    

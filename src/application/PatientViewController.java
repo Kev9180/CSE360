@@ -87,15 +87,4 @@ public class PatientViewController {
         System.out.println("appointment button");
         SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
     }
-    
-    @FXML
-    private void aboutUsButton(ActionEvent event) {
-        event.consume();
-        System.out.println("about us button");
-    }
-    
-   
-    
-    //-------------------------------
-
 }

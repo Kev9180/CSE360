@@ -2,7 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class Visit {
@@ -19,7 +19,7 @@ public class Visit {
 	private String location;
 	private String physicalExamNotes;
 	private String medicationNotes;
-	private LocalDate visitDate;
+	private LocalDateTime visitDate;
 	
 	public Visit() {}
 	
@@ -38,7 +38,7 @@ public class Visit {
 		this.location = location;
 		this.physicalExamNotes = physicalExamNotes;
 		this.medicationNotes = medicationNotes;
-		this.visitDate = LocalDate.now();
+		this.visitDate = LocalDateTime.now();
 	}
 	
 	// I'm going insane
@@ -114,10 +114,10 @@ public class Visit {
 	public void setMedicationNotes(String medicationNotes) {
 		this.medicationNotes = medicationNotes;
 	}
-	public LocalDate getVisitDate() {
+	public LocalDateTime getVisitDate() {
 		return this.visitDate;
 	}
-	public void setVisitDate(LocalDate date) {
+	public void setVisitDate(LocalDateTime date) {
 		this.visitDate = date;
 	}
 }
