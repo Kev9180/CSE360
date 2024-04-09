@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class NursePatientInfoController {
+public class PatientVisitInfoController {
 	
 	@FXML private Label name;
 	@FXML private TextField bloodPressureTF;
@@ -47,6 +47,8 @@ public class NursePatientInfoController {
 		if (mode == "View") {
 			saveButton.setDisable(true);
 		}
+		
+		updateLabels();
 	}
 
     @FXML
@@ -57,9 +59,15 @@ public class NursePatientInfoController {
     @FXML
     void handleSaveVisit(MouseEvent event) throws IOException {
     	Visit newVisit = createVisit();
-    	// TODO: update (or create) visit in the database
-    	VisitHistoryManager.storeVisit(patient, newVisit);
-    	System.out.println("Visit created");
+    	if (mode == "New") {
+    		patient.addVisit(newVisit);
+    		System.out.println("Visit created");
+    	}
+    	else {
+    		// pass in the old visit, so we know which one to change
+    		patient.setVisit(visit, newVisit);
+    		System.out.println("Visit Updated");
+    	}
     }
     
     public Visit createVisit() {
@@ -82,6 +90,17 @@ public class NursePatientInfoController {
     		e.printStackTrace();
     	}
     	return null;
+    }
+    
+    public void updateLabels() {
+		// update all the text fields and lists to show visit data
+		bloodPressureTF.setText(visit.getBloodPressure());
+		heightTF.setText(visit.getHeight());
+		tempTF.setText(visit.getTemperature());
+		// TODO: update vaccinelist, prescriptions list
+		weightTF.setText(visit.getWeight());
+		allergiesTA.setText(String.join(", ", visit.getAllergies()));
+		healthConcernsTA.setText(visit.getHealthConcerns());
     }
 
 }

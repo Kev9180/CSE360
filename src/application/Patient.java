@@ -309,9 +309,9 @@ public class Patient extends User {
 		return VisitHistoryManager.getVisitsForPatient(this.getUsername());
 	}
 	
-	public void setVisitHistory(Visit newVisit) {
+	public void setVisit(Visit oldVisit, Visit newVisit) {
 		try {
-			VisitHistoryManager.updateVisit(this, newVisit.getVisitDate(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
+			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDate(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -133,14 +133,14 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     // go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
-		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
 		controller.initialize(patient, visit, "Edit");
 		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
     }
     
     // go to patient info creation screen and initialize it for the patient
     public void onNewVisitClicked(Patient patient, Pane container) {
-    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
     	controller.initialize(patient, null, "New");
     	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
