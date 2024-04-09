@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientSettingViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientSettingViewController">
    <children>
       <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="600.0" />
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <content>
-            <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="1100.0" prefWidth="600.0">
+            <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="1100.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
                <children>
                   <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="598.0">
                      <children>

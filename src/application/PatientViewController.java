@@ -38,16 +38,15 @@ public class PatientViewController {
     
     @FXML
     private void messageButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("message button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_message_board.fxml", event);
-    }
-    
-    @FXML
-    private void passwordButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("message button");
-        SceneManager.loadScene(getClass(), "/FXML/forgot_password.fxml", event);
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_message_board.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
     }
     
     @FXML
@@ -65,16 +64,28 @@ public class PatientViewController {
    
     @FXML
     private void newAppointmentButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("new appointment button");
-        SceneManager.loadScene(getClass(), "/FXML/new_appointment_form.fxml", event);
-    }
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/new_appointment_form.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	}
     
     @FXML
-    private void recordsButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("records button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
+    private void visitHistoryButton(ActionEvent event) throws Exception {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_appointment_view.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
     }
     
 
@@ -83,8 +94,14 @@ public class PatientViewController {
     
     @FXML
     private void appointmentButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("appointment button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_appointment_view.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}    
     }
 }

@@ -145,13 +145,6 @@
                   <BorderPane prefHeight="58.0" prefWidth="158.0">
                      <left>
                         <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="122.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label text="john.smith@example.com">
-                                 <font>
-                                    <Font size="8.0" />
-                                 </font>
-                              </Label>
-                           </children>
                            <BorderPane.margin>
                               <Insets bottom="5.0" left="10.0" />
                            </BorderPane.margin>
@@ -232,7 +225,7 @@
 										</Button>
 		                        	</left>
 		                        	<center>
-		                        		 <Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#recordsButton" prefHeight="100.0" prefWidth="163.0" stylesheets="@../CSS/button.css" textFill="WHITE">
+		                        		 <Button id="unselectedbutton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#visitHistoryButton" prefHeight="100.0" prefWidth="163.0" stylesheets="@../CSS/button.css" textFill="WHITE">
 				                        	<graphic>
 				                        		<HBox alignment="CENTER" prefHeight="120.0" prefWidth="120.0" spacing="16.0">
 					                        			<children>

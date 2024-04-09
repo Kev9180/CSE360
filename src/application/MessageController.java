@@ -107,22 +107,9 @@ public class MessageController {
 		recipientCB.setValue(option);
 	}
 	
+	@FXML
 	public void goBack(ActionEvent event) throws Exception {
-		String fxmlFile = "";
-		Role currentUserRole = UserManager.getInstance().getCurrentUserRole();
-		
-		if (currentUserRole.equals(Role.PATIENT))
-			fxmlFile = "/FXML/patient_message_board.fxml";
-		else if (currentUserRole.equals(Role.NURSE) || currentUserRole.equals(Role.DOCTOR)) {
-			fxmlFile = "/FXML/nurse_patient_list.fxml";
-			NurseViewController controller = (NurseViewController) SceneManager.loadScene(getClass(), fxmlFile, event);
-			controller.messageButton(new ActionEvent());
-			return;
-		}
-		else
-			fxmlFile = "/FXML/role_selection.fxml";
-		
+		String fxmlFile = "/FXML/patient_view.fxml";
 		SceneManager.loadScene(getClass(), fxmlFile, event);
-		
 	}
 }
