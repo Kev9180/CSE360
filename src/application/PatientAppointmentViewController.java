@@ -58,7 +58,7 @@ public class PatientAppointmentViewController {
 		}
 	}
 	
-	//
+	// Setup the listener for the combo box to update info when user selects a different date from the combo box
 	private void setupComboBoxListener() {
 		visitDateCB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LocalDate>() {
 			@Override
@@ -84,13 +84,26 @@ public class PatientAppointmentViewController {
 	            allergiesTF.setText(String.join(", ", visit.getAllergies()));
 	            medicationsTF.setText(String.join(", ", visit.getPrescribedMedication()));
 	            healthConcernsTF.setText(visit.getHealthConcerns());
-	            dosageTF.setText(visit.getDosage());
+	            dosageTF.setText(String.join(", ", visit.getDosages()));
 	            medicationNotesTF.setText(visit.getMedicationNotes());
 	            physicalExamNotesTF.setText(visit.getPhysicalExamNotes());
 	            visitDateTF.setText(date.toString());
 	            break;
 	        }
 	    }
+	    
+	    heightTF.setEditable(false);
+        weightTF.setEditable(false);
+        tempTF.setEditable(false);
+        bloodPressureTF.setEditable(false);
+        immunizationsTF.setEditable(false);
+        allergiesTF.setEditable(false);
+        medicationsTF.setEditable(false);
+        healthConcernsTF.setEditable(false);
+        dosageTF.setEditable(false);
+        medicationNotesTF.setEditable(false);
+        physicalExamNotesTF.setEditable(false);
+        visitDateTF.setEditable(false);
 	}
 	
 	@FXML	// Method to go back to the patient view screen

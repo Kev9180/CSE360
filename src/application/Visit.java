@@ -25,6 +25,12 @@ public class Visit {
 	
 	public Visit() {}
 	
+	public Visit(String healthConcerns, LocalDateTime dateTime, LocalDate date) {
+		this.healthConcerns = healthConcerns;
+		this.visitDateFormatted = dateTime;
+		this.visitDate = date;
+	}
+	
 	public Visit(String height, String weight, String temperature, String bloodPressure, List<String> immunizations,
 			List<String> allergies, List<String> prescribedMedication, String healthConcerns, List<String> dosages,
 			String location, String physicalExamNotes, String medicationNotes) {

@@ -1,0 +1,17 @@
+Patient Username: patient1
+First Name: John
+Last Name: Doe
+Height: 69
+Weight: 180
+Temperature: 99.2
+Blood Pressure: 120/88
+Allergies: None
+Immunizations: Varicella/MMR|2016-04-01,Japanese Encephalitis|2016-04-01,Smallpox|2016-04-01
+Prescribed Medications: 
+Health Concerns: Sore throat, congestion
+Dosage: 
+Location: null
+Physical Exam Notes: null
+Medication Notes: null
+Visit Date: 2024-04-12
+Visit Date Formatted: 2024-04-12T11:00
