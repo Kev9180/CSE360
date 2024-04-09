@@ -29,7 +29,7 @@ public class NurseDoctorLoginController {
         if (isValid) {
         	loginErrorLabel.setVisible(false);
         	
-        	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
+        	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
         } 
         
         //If login was unsuccessful, show the error label

@@ -16,7 +16,7 @@ public class Visit {
 	private List<String> allergies = new ArrayList<String>();
 	private List<String> prescribedMedication = new ArrayList<String>();
 	private String healthConcerns;
-	private String dosage;
+	private List<String> dosages = new ArrayList<String>();
 	private String location;
 	private String physicalExamNotes;
 	private String medicationNotes;
@@ -26,7 +26,7 @@ public class Visit {
 	public Visit() {}
 	
 	public Visit(String height, String weight, String temperature, String bloodPressure, List<String> immunizations,
-			List<String> allergies, List<String> prescribedMedication, String healthConcerns, String dosage,
+			List<String> allergies, List<String> prescribedMedication, String healthConcerns, List<String> dosages,
 			String location, String physicalExamNotes, String medicationNotes) {
 		this.height = height;
 		this.weight = weight;
@@ -36,7 +36,7 @@ public class Visit {
 		this.allergies = allergies;
 		this.prescribedMedication = prescribedMedication;
 		this.healthConcerns = healthConcerns;
-		this.dosage = dosage;
+		this.dosages = dosages;
 		this.location = location;
 		this.physicalExamNotes = physicalExamNotes;
 		this.medicationNotes = medicationNotes;
@@ -93,11 +93,11 @@ public class Visit {
 	public void setHealthConcerns(String healthConcerns) {
 		this.healthConcerns = healthConcerns;
 	}
-	public String getDosage() {
-		return dosage;
+	public List<String> getDosages() {
+		return dosages;
 	}
-	public void setDosage(String dosage) {
-		this.dosage = dosage;
+	public void setDosages(List<String> dosages) {
+		this.dosages = dosages;
 	}
 	public String getLocation() {
 		return location;

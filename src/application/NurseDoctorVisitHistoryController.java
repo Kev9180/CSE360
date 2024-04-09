@@ -11,22 +11,24 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class NurseVisitHistoryController implements Initializable, PatientVisitHistoryItemListener{
+public class NurseDoctorVisitHistoryController implements Initializable, PatientVisitHistoryItemListener{
 
     @FXML private Label name;
     @FXML private VBox visitList;
     @FXML private HBox parentContainer; // parent VBox that will get replaced when switching scenes
+    @FXML private Button newVisitButton;
     
     private Patient patient;
     private List<Visit> visitHistory;
-    private NurseViewController parentController;
+    private NurseDoctorPatientVisitController parentController;
 
-	public void initialize(Patient patient, NurseViewController parentController) {
+	public void initialize(Patient patient, NurseDoctorPatientVisitController parentController) {
 		this.parentController = parentController;
 		this.patient = patient;
 		this.visitHistory = patient.getVisitHistory();
@@ -43,16 +45,19 @@ public class NurseVisitHistoryController implements Initializable, PatientVisitH
 
                 // Handle null cases
                 if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal
-                else if (d1 == null)  			return -1; // Null dates should come before non-null dates
-                else if (d2 == null)  			return 1; // Null dates should come before non-null dates
+                else if (d1 == null)  			return 1; // Null dates should come after non-null dates
+                else if (d2 == null)  			return -1; // Null dates should come after non-null dates
                 
-                return d1.compareTo(d2);
+                return d2.compareTo(d1);
             }
         });
         
         updateVisitList();
 		
-		// TODO: create new patient_visit_item.fxml and load it	
+		// disable new visit button if is doctor
+        if(UserManager.getInstance().getCurrentUserRole() == Role.DOCTOR) {
+        	newVisitButton.setVisible(false);
+        }
 	}
 	
     // update patient list method

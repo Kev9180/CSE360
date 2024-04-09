@@ -68,7 +68,6 @@ public class PatientVisitInfoController implements PatientImmunizationItemListen
 
     @FXML
     void handleAddVaccine(MouseEvent event) {
-    	System.out.println("immunizations length is " + temporaryImmunizations.size());
     	String immunization = vaccineNameTF.getText() + "|" + vaccineDateDP.getValue();
     	temporaryImmunizations.add(immunization);
     	vaccineNameTF.clear();
@@ -104,17 +103,15 @@ public class PatientVisitInfoController implements PatientImmunizationItemListen
     		String weight = weightTF.getText();
     		String temperature = tempTF.getText();
     		String bloodPressure = bloodPressureTF.getText();
-    		// immunizations
 	    	List<String> immunizations = getImmunizationsList();
 	    	List<String> allergies = Arrays.asList(allergiesTA.getText().split(",")); 
 	    	List<String> prescribedMedication = visit.getPrescribedMedication(); // for doctor
 	    	String healthConcerns = healthConcernsTA.getText();
-	    	String dosage = "0"; // TODO
+	    	List<String> dosages = visit.getDosages(); // TODO
 	    	String location = visit.getLocation(); // for doctor
 	    	String physicalExamNotes = visit.getPhysicalExamNotes();
 	    	String medicationNotes = visit.getMedicationNotes();
-	    	Visit visit = new Visit(height, weight, temperature, bloodPressure, immunizations, allergies, prescribedMedication, healthConcerns, dosage, location, physicalExamNotes, medicationNotes);
-	    	System.out.println("i was here");
+	    	Visit visit = new Visit(height, weight, temperature, bloodPressure, immunizations, allergies, prescribedMedication, healthConcerns, dosages, location, physicalExamNotes, medicationNotes);
 	    	return visit;
     	} catch (NumberFormatException e) {
     		e.printStackTrace();

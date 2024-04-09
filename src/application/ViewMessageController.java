@@ -50,8 +50,7 @@ public class ViewMessageController {
 		if (currentUserRole.equals(Role.PATIENT))
 			fxmlFile = "/FXML/patient_view.fxml";
 		else if (currentUserRole.equals(Role.NURSE) || currentUserRole.equals(Role.DOCTOR)) {
-			fxmlFile = "/FXML/nurse_patient_list.fxml";
-			NurseViewController controller = (NurseViewController) SceneManager.loadScene(getClass(), fxmlFile, event);
+			NurseDoctorPatientVisitController controller = (NurseDoctorPatientVisitController) SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
 			controller.messageButton(new ActionEvent());
 			return;
 		}

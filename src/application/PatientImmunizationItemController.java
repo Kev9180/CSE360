@@ -8,15 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class PatientImmunizationItemController {
-
-    @FXML
-    private Label dateAdministered;
-
-    @FXML
-    private Label immunizationName;
-    
-    @FXML
-    private HBox itemContainer;
+	
+    @FXML private Label dateAdministered;
+    @FXML private Label immunizationName;
+    @FXML private HBox itemContainer;
     
     private PatientImmunizationItemListener listener;
     

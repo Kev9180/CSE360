@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class NurseViewController implements PatientListItemListener, Initializable{
+public class NurseDoctorPatientVisitController implements PatientListItemListener, Initializable{
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -61,10 +61,10 @@ public class NurseViewController implements PatientListItemListener, Initializab
 
                 // Handle null cases
                 if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal
-                else if (d1 == null)  			return -1; // Null dates should come before non-null dates
-                else if (d2 == null)  			return 1; // Null dates should come before non-null dates
+                else if (d1 == null)  			return 1; // Null dates should come after non-null dates
+                else if (d2 == null)  			return -1; // Null dates should come after non-null dates
                 
-                return d1.compareTo(d2);
+                return d2.compareTo(d1);
             }
         });
         
@@ -99,7 +99,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     public void selectPatients(ActionEvent event) throws Exception {
     	event.consume();
-    	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
     }
     
     public void selectMessages(ActionEvent event) throws Exception {
@@ -119,7 +119,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     @Override
     public void onListItemClick(Patient patient) {
-    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_visit_history.fxml");
+    	NurseDoctorVisitHistoryController controller = (NurseDoctorVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_doctor_visit_history.fxml");
     	controller.initialize(patient, this);
     }
     

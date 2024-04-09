@@ -45,7 +45,7 @@ public class VisitHistoryManager {
             writer.write("Prescribed Medications: " + String.join(",", visit.getPrescribedMedication()) + "\n");
             
             writer.write("Health Concerns: " + visit.getHealthConcerns() + "\n");
-            writer.write("Dosage: " + visit.getDosage() + "\n");
+            writer.write("Dosage: " + String.join(",", visit.getDosages()) + "\n");
             writer.write("Location: " + visit.getLocation() + "\n");
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
@@ -118,7 +118,7 @@ public class VisitHistoryManager {
                         visit.setHealthConcerns(parts[1]);
                         break;
                     case "Dosage":
-                        visit.setDosage(parts[1]);
+                        visit.setDosages(parseListFromString(parts[1]));
                         break;
                     case "Location":
                         visit.setLocation(parts[1]);
@@ -203,7 +203,7 @@ public class VisitHistoryManager {
             writer.write("Prescribed Medications: " + String.join(",", visit.getPrescribedMedication()) + "\n");
             
             writer.write("Health Concerns: " + visit.getHealthConcerns() + "\n");
-            writer.write("Dosage: " + visit.getDosage() + "\n");
+            writer.write("Dosages: " + String.join(",", visit.getDosages()) + "\n");
             writer.write("Location: " + visit.getLocation() + "\n");
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");

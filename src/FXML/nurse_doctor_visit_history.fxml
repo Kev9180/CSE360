@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseVisitHistoryController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseDoctorVisitHistoryController">
    <children>
       <HBox fx:id="parentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="772.0" spacing="12.0" style="-fx-background-color: #f8f8f8;">
          <children>
@@ -42,7 +42,7 @@
                         </Label>
                      </left>
                      <right>
-                        <Button id="composebutton" mnemonicParsing="false" onMouseClicked="#handleNewVisitClicked" prefHeight="33.0" prefWidth="94.0" stylesheets="@../CSS/button.css" text="New Visit" textFill="WHITE" BorderPane.alignment="CENTER" />
+                        <Button id="composebutton" fx:id="newVisitButton" mnemonicParsing="false" onMouseClicked="#handleNewVisitClicked" prefHeight="33.0" prefWidth="94.0" stylesheets="@../CSS/button.css" text="New Visit" textFill="WHITE" BorderPane.alignment="CENTER" />
                      </right>
                      <padding>
                         <Insets right="16.0" />
