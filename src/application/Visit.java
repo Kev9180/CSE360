@@ -118,7 +118,7 @@ public class Visit {
 		this.medicationNotes = medicationNotes;
 	}
 	public LocalDateTime getVisitDateFormatted() {
-		return this.visitDateFormatted;
+		return visitDateFormatted;
 	}
 	public void setVisitDateFormatted(LocalDateTime date) {
 		this.visitDateFormatted = date;

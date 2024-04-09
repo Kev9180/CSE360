@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -64,6 +65,12 @@ public class PatientVisitInfoController {
     		System.out.println("Visit created");
     	}
     	else {
+    		//TODO: this is printing true right here, so may be an issue with how the old visit object is being generated or passed in
+    		LocalDateTime time = visit.getVisitDateFormatted();
+    		boolean dateFormattedNull = time == null;
+    		System.out.println("Old visit date formatted is null: " + dateFormattedNull);
+
+    		
     		// pass in the old visit, so we know which one to change
     		patient.setVisit(visit, newVisit);
     		System.out.println("Visit Updated");

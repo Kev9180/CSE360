@@ -50,6 +50,7 @@ public class VisitHistoryManager {
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -131,6 +132,9 @@ public class VisitHistoryManager {
                     case "Visit Date":
                         visit.setVisitDate(LocalDate.parse(parts[1]));
                         break;
+                    case "Visit Date Formatted":
+                    	visit.setVisitDateFormatted(LocalDateTime.parse(parts[1]));
+                    	break;
 					}
 				}
 			}
@@ -204,6 +208,7 @@ public class VisitHistoryManager {
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

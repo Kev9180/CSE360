@@ -25,55 +25,15 @@ public class NewAppointmentFormController {
     	}
     }
     
-	//Handle back button (goes home)
-    public void previousScene(ActionEvent event) throws Exception {
-    	logoutPatient();
-    	SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
-    }
-    
 	//Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	logoutPatient();
         SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
-    
-    @FXML
-    private void messageButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("message button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_message_board.fxml", event);
-    }
-    
-    @FXML
-    private void mainButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("main button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
-    }
-    
-    @FXML
-    private void aboutUsButton(ActionEvent event) {
-        event.consume();
-        System.out.println("about us button");
-    }
-    
-    @FXML
-    private void refillButton(ActionEvent event) {
-        event.consume();
-        System.out.println("refill button");
-    }
-    
-    @FXML
-    private void settingButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("setting button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_setting_view.fxml", event);
-    }
-    
+  
     @FXML
     private void finishButton(ActionEvent event) throws Exception {
         event.consume();
-        System.out.println("setting button");
-        SceneManager.loadScene(getClass(), "/FXML/patient_appointment_view.fxml", event);
+        SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
     }
 }
