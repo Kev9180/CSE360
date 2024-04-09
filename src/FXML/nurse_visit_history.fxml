@@ -50,7 +50,7 @@
                   </BorderPane>
                   <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="457.0" minWidth="600.0" prefWidth="600.0" stylesheets="@../CSS/scrollpane.css" vbarPolicy="ALWAYS">
                      <content>
-                        <VBox fx:id="patientList" scaleShape="false" spacing="4.0">
+                        <VBox fx:id="visitList" scaleShape="false" spacing="4.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="581.0" style="-fx-background-color: f0f0f0;">
                                  <children>

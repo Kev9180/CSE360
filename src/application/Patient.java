@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,6 @@ public class Patient extends User {
 	//Security question attributes
 	private String securityQuestion;
 	private String securityAnswer;
-	
-	//List of visits
-	private List<Visit> visitHistory = new ArrayList<>();
 	
 	//Address attributes
 	private String address;
@@ -90,7 +88,12 @@ public class Patient extends User {
 	}
 	
 	public void addVisit(Visit visit) {
-		visitHistory.add(visit);
+		try {
+			VisitHistoryManager.storeVisit(this, visit);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//visitHistory.add(visit);
 	}
 	
 	public String getUsername() {
@@ -303,7 +306,15 @@ public class Patient extends User {
 	
 	//Getter for visit history
 	public List<Visit> getVisitHistory() {
-		return visitHistory;
+		return VisitHistoryManager.getVisitsForPatient(this.getUsername());
+	}
+	
+	public void setVisit(Visit oldVisit, Visit newVisit) {
+		try {
+			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDate(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//

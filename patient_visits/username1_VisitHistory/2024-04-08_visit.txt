@@ -1,6 +1,6 @@
-Patient Username: patient1
-First Name: John
-Last Name: Doe
+Patient Username: username1
+First Name: first
+Last Name: last
 Height: 68
 Weight: 123
 Temperature: 98.5

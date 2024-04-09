@@ -49,6 +49,11 @@ public class NurseViewController implements PatientListItemListener, Initializab
         Collections.sort(patients, new Comparator<Patient>() {
             @Override
             public int compare(Patient o1, Patient o2) {
+
+            	// Get the visit dates from patients            	
+            	List<Visit> visit1 = o1.getVisitHistory();
+            	List<Visit> visit2 = o2.getVisitHistory();
+
             	// Get the visit dates from patients
                 LocalDateTime d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
                 LocalDateTime d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
@@ -131,14 +136,14 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     // go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
-		NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
 		controller.initialize(patient, visit, "Edit");
 		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
     }
     
     // go to patient info creation screen and initialize it for the patient
     public void onNewVisitClicked(Patient patient, Pane container) {
-    	NursePatientInfoController controller = (NursePatientInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_patient_info.fxml");
+    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
     	controller.initialize(patient, null, "New");
     	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
