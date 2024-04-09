@@ -36,7 +36,7 @@ public class PatientVisitInfoController {
 	// mode <"Edit", "View", "New"> changes if text is editable, as well as action upon clicking save
 	public void initialize(Patient patient, Visit visit, String mode) {
 		this.patient = patient;
-		this.visit = visit;
+		this.visit = visit != null ? visit : new Visit();	//Make sure to check if visit if null and make a new visit if so
 		this.mode = mode;
 		
 		String patientName = patient.getName();
@@ -94,13 +94,22 @@ public class PatientVisitInfoController {
     
     public void updateLabels() {
 		// update all the text fields and lists to show visit data
-		bloodPressureTF.setText(visit.getBloodPressure());
-		heightTF.setText(visit.getHeight());
-		tempTF.setText(visit.getTemperature());
-		// TODO: update vaccinelist, prescriptions list
-		weightTF.setText(visit.getWeight());
-		allergiesTA.setText(String.join(", ", visit.getAllergies()));
-		healthConcernsTA.setText(visit.getHealthConcerns());
+		if (visit != null) {
+	    	bloodPressureTF.setText(visit.getBloodPressure());
+			heightTF.setText(visit.getHeight());
+			tempTF.setText(visit.getTemperature());
+			// TODO: update vaccinelist, prescriptions list
+			weightTF.setText(visit.getWeight());
+			allergiesTA.setText(String.join(", ", visit.getAllergies()));
+			healthConcernsTA.setText(visit.getHealthConcerns());
+		} else {
+			bloodPressureTF.clear();
+			heightTF.clear();
+			tempTF.clear();
+			weightTF.clear();
+			allergiesTA.clear();
+			healthConcernsTA.clear();
+		}
     }
 
 }

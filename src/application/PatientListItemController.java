@@ -25,7 +25,7 @@ public class PatientListItemController {
 	    
 	    String dateStr = "Never";
 	    if (visitHistory.size() > 0) {
-	    	LocalDateTime date = visitHistory.get(visitHistory.size() - 1).getVisitDate();
+	    	LocalDate date = visitHistory.get(visitHistory.size() - 1).getVisitDate();
 	    	dateStr = date.toString();
 	    }
 	    

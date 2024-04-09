@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Patient extends User {
@@ -311,7 +310,7 @@ public class Patient extends User {
 	
 	public void setVisit(Visit oldVisit, Visit newVisit) {
 		try {
-			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDate(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
+			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDateFormatted(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
