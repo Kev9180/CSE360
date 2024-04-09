@@ -1,21 +1,20 @@
 package application;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class PatientAppointmentViewController {
 	@FXML private Button backBtn;
 	@FXML private Button newAppointmentBtn;
-	@FXML private ComboBox<LocalDate> visitDateCB;
+	@FXML private ComboBox<LocalDateTime> visitDateCB;
 	@FXML private VBox visitDisplayBox;
 	@FXML private TextField heightTF;
 	@FXML private TextField weightTF;
@@ -32,13 +31,14 @@ public class PatientAppointmentViewController {
 	
 	private Patient patient;
 	
-	// Update the patient, set the table column value, populate table, and make the rows clickable
+	//Update the patient, set the table column value, populate table, and make the rows clickable
 	public void initialize() {
 		User currentUser = UserManager.getInstance().getCurrentUser();
 		String username = currentUser.getUsername();
 		
 		List<Patient> patientList = DatabaseUtil.getPatients();
 		
+		//Find the patient in the patientList
 		for (Patient patient : patientList) {
 			if (username.equals(patient.getUsername()))
 				this.patient = patient;
@@ -46,36 +46,65 @@ public class PatientAppointmentViewController {
 		
 		populateVisitDates();
 		setupComboBoxListener();
+		setupComboBoxDisplay();
 	}
 	
-	// Populate all of the patient's visit dates into the combo box
+	//Populate all of the patient's visit dates into the combo box
 	private void populateVisitDates() {
 		String username = patient.getUsername();
 		List<Visit> visits = VisitHistoryManager.getVisitsForPatient(username);
 		
 		for (Visit visit : visits) {
-			visitDateCB.getItems().add(visit.getVisitDate());
+			visitDateCB.getItems().add(visit.getVisitDateFormatted());
 		}
 	}
 	
-	// Setup the listener for the combo box to update info when user selects a different date from the combo box
+	//Setup the listener for the combo box to update info when user selects a different date from the combo box
 	private void setupComboBoxListener() {
-		visitDateCB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LocalDate>() {
-			@Override
-	        public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
-	            if (newValue != null) {
-	                // When a new date is selected, load the visit details
-	                loadVisitDetails(newValue);
-	            }
-	        }
-		});
+		visitDateCB.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                loadVisitDetails(newValue); //newValue is already a LocalDateTime
+            }
+        });	
 	}
 	
-	//
-	private void loadVisitDetails(LocalDate date) {
+	//Setup the display to display a readable date format instead of the regular LocalDateTime
+	private void setupComboBoxDisplay() {
+        visitDateCB.setCellFactory(cell -> new ListCell<LocalDateTime>() {
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))); //Customize as needed
+                }
+            }
+        });
+
+        visitDateCB.setButtonCell(new ListCell<LocalDateTime>() {
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))); //Ensure button cell matches list cells
+                }
+            }
+        });
+    }
+	
+	//Load the specifics of the visit into each of the corresponding textfields 
+	private void loadVisitDetails(LocalDateTime dateTime) {
 		List<Visit> visits = VisitHistoryManager.getVisitsForPatient(patient.getUsername());
+		
+		//Iterate through the visits in the list to find the matching appointment
 	    for (Visit visit : visits) {
-	        if (visit.getVisitDate().equals(date)) {
+	    	//If the LocalDateTime values match, update the display values
+	        if (visit.getVisitDateFormatted().equals(dateTime)) {
 	            heightTF.setText(visit.getHeight());
 	            weightTF.setText(visit.getWeight());
 	            tempTF.setText(visit.getTemperature());
@@ -87,11 +116,12 @@ public class PatientAppointmentViewController {
 	            dosageTF.setText(String.join(", ", visit.getDosages()));
 	            medicationNotesTF.setText(visit.getMedicationNotes());
 	            physicalExamNotesTF.setText(visit.getPhysicalExamNotes());
-	            visitDateTF.setText(date.toString());
+	            visitDateTF.setText(dateTime.toString());
 	            break;
 	        }
 	    }
 	    
+	    //Set all of the fields to non-editable
 	    heightTF.setEditable(false);
         weightTF.setEditable(false);
         tempTF.setEditable(false);
@@ -106,7 +136,7 @@ public class PatientAppointmentViewController {
         visitDateTF.setEditable(false);
 	}
 	
-	@FXML	// Method to go back to the patient view screen
+	@FXML	//Method to go back to the patient view screen
 	public void goBack(ActionEvent event) throws Exception {
 		String fxmlFile = "/FXML/patient_view.fxml";
 		SceneManager.loadScene(getClass(), fxmlFile, event);

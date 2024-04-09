@@ -1,0 +1,17 @@
+Patient Username: patient1
+First Name: John
+Last Name: Doe
+Height: 70
+Weight: 177
+Temperature: 101
+Blood Pressure: 120/80
+Allergies: Grass
+Immunizations: varicella|2024-04-08
+Prescribed Medications: 
+Health Concerns: pain
+Dosage: 
+Location: null
+Physical Exam Notes: null
+Medication Notes: null
+Visit Date: 2024-04-09
+Visit Date Formatted: 2024-04-09T13:05:42.127228900
