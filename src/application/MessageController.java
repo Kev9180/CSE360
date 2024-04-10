@@ -113,6 +113,7 @@ public class MessageController {
 		recipientCB.setValue(option);
 	}
 	
+	// Navigates back to the screen defined after event has been triggered
 	@FXML
 	public void goBack(ActionEvent event) throws Exception {
 		String fxmlFile = "/FXML/patient_view.fxml";

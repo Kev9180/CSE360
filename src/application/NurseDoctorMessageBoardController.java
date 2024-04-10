@@ -145,7 +145,7 @@ public class NurseDoctorMessageBoardController {
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-    
+    // Prevents further processing of a button click, logs a message, then navigates to a new screen using a scene manager
     @FXML
     private void patientListButton(ActionEvent event) throws Exception {
         event.consume();

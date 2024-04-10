@@ -79,7 +79,8 @@ public class NewAppointmentFormController {
 	    requestedTimeCB.setItems(times);
 	}
    
-	@FXML	// Method to submit the appointment request - adds a blank appointment to the users visit history for their requested date
+	// Method to submit the appointment request - adds a blank appointment to the users visit history for their requested date
+	@FXML	
 	private void submitAppointmentRequest(ActionEvent event) throws Exception {
 		if (!validateFields()) {
 			return;
@@ -149,7 +150,8 @@ public class NewAppointmentFormController {
 		alert.showAndWait();
 	}
 	
-    @FXML	// Method to take the user back to patient view
+	// Method to take the user back to patient view
+    @FXML	
     private void goBack(ActionEvent event) throws Exception {
         event.consume();
         SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
