@@ -364,7 +364,7 @@ public class DatabaseUtil {
 		try (Connection connection = DriverManager.getConnection(DB_URL); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, username);
 			
-			// Attempt to find a user with the matching username in the databse
+			// Attempt to find a user with the matching username in the database
 			try (ResultSet rs = pstmt.executeQuery()) {
 				// If a user was found, extract their role and return the new User
 				if (rs.next()) {
@@ -774,7 +774,7 @@ public class DatabaseUtil {
             if (rs.next()) {
                 return rs.getString("firstName") + " " + rs.getString("lastName");
             }
-        } catch (SQLException e) {	// PRint the error
+        } catch (SQLException e) {	// Print the error
             System.err.println("Error fetching sender name: " + e.getMessage());
         }
         return "Unknown Sender";
