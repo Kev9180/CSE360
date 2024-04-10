@@ -52,13 +52,15 @@ public class PatientSettingViewController {
 		populateFields();
 	}
 	
-	@FXML	// Method to go back to the patient view screen
+	// Method to go back to the patient view screen
+	@FXML	
 	public void goBack(ActionEvent event) throws Exception {
 		String fxmlFile = "/FXML/patient_view.fxml";
 		SceneManager.loadScene(getClass(), fxmlFile, event);
 	}
 	
-    @FXML	// Method to update the patient information with the values the user has typed into the fields
+	// Method to update the patient information with the values the user has typed into the fields
+    @FXML
     public void updateInfo(ActionEvent event) throws Exception {
     	patient.setFirstName(firstNameTF.getText().trim());
     	patient.setLastName(lastNameTF.getText().trim());
