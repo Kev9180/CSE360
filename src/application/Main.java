@@ -14,6 +14,7 @@ public class Main extends Application {
 		DatabaseUtil.initializeMessageDatabase();
 		//DatabaseUtil.preloadUsers();
 		
+		//Gets role selection fxml file and sets as root screen to be the opener.
 		try {		
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML/role_selection.fxml"));
 	        primaryStage.setTitle("Role Selection");
