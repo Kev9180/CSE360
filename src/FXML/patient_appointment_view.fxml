@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientAppointmentViewController">
+<Pane fx:id="screenContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientAppointmentViewController">
    <children>
       <Separator orientation="VERTICAL" prefHeight="600.0" />
       <VBox prefHeight="600.0" prefWidth="600.0">
@@ -149,7 +149,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="600.0" spacing="300.0">
                <children>
                   <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #3ea3f4;" text="Back" textFill="WHITE" />
-                  <Button fx:id="newAppointmentBtn" mnemonicParsing="false" style="-fx-background-color: #6039d2;" text="Request New Appointment" textFill="WHITE">
+                  <Button fx:id="newAppointmentBtn" mnemonicParsing="false" onAction="#newAppointmentScreen" style="-fx-background-color: #6039d2;" text="Request New Appointment" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

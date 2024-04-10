@@ -1,17 +1,22 @@
 package application;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class PatientAppointmentViewController {
+	@FXML private Pane screenContainer;
 	@FXML private Button backBtn;
 	@FXML private Button newAppointmentBtn;
 	@FXML private ComboBox<LocalDateTime> visitDateCB;
@@ -141,6 +146,19 @@ public class PatientAppointmentViewController {
 		String fxmlFile = "/FXML/patient_view.fxml";
 		SceneManager.loadScene(getClass(), fxmlFile, event);
 	}
+	
+	@FXML
+    private void newAppointmentScreen(ActionEvent event) throws Exception {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/new_appointment_form.fxml"));
+    		Parent settingsRoot = loader.load();
+    		
+    		screenContainer.getChildren().clear();
+    		screenContainer.getChildren().add(settingsRoot);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 	
 	
 	
