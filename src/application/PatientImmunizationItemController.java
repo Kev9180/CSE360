@@ -30,7 +30,7 @@ public class PatientImmunizationItemController {
     public void setListener(PatientImmunizationItemListener listener) {
         this.listener = listener;
     }
-    
+    //
     public String getLabels() {
     	return immunizationName.getText() + "|" + dateAdministered.getText();
     }
