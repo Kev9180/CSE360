@@ -32,6 +32,7 @@ public class PatientViewController {
     }
     
     @FXML Label welcome;
+    @FXML Label corner;
     public void initialize() {
     	UserManager userManager = UserManager.getInstance();
     	User currentUser = userManager.getCurrentUser();
@@ -40,6 +41,7 @@ public class PatientViewController {
     	String str1 = welcome.getText();
     	String str = str1 + name;
     	welcome.setText(str);
+    	corner.setText(name);
     }
     
 	//Handle logout button 

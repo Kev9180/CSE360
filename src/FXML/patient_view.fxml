@@ -166,7 +166,7 @@
                      <left>
                         <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="122.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="john.smith@example.com">
+                              <Label fx:id="corner">
                                  <font>
                                     <Font size="8.0" />
                                  </font>

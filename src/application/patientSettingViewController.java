@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class patientSettingViewController {
@@ -28,6 +29,15 @@ public class patientSettingViewController {
     	} else {
     		System.out.println("No user currently logged in.");
     	}
+    }
+    
+    @FXML Label corner;
+    public void initialize() {
+    	UserManager userManager = UserManager.getInstance();
+    	User currentUser = userManager.getCurrentUser();
+    	
+    	String name = currentUser.getUsername();
+    	corner.setText(name);
     }
     
 	//Handle logout button 
