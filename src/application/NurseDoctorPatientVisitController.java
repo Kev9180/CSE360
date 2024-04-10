@@ -33,20 +33,20 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     
     @FXML private VBox patientList;
     
-    @FXML private HBox parentContainer; // holds everything
+    @FXML private HBox parentContainer; // Holds everything
   
     
     private List<Patient> patients;
     
     private List<PatientListItemController> controllers;
     
-    // tell the table what the columns should consist of
+    // Tell the table what the columns should consist of
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// mark initial vbox to be the one to be replaced
+		// Mark initial vbox to be the one to be replaced
 		
 		patients = PatientManager.getInstance().getPatients();
-		// initially sort by most recent visit date
+		// Initially sort by most recent visit date
         Collections.sort(patients, new Comparator<Patient>() {
             @Override
             public int compare(Patient o1, Patient o2) {
@@ -70,7 +70,7 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
         
         updatePatientList();
         
-        // also update patient count
+        // Also update patient count
         allCount.setText("" + patients.size());
 		
 	}
@@ -80,13 +80,13 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
 	
 	
     
-	//Handle back button (goes home)
+	// Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
     	logoutStaff();
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-	//Handle logout button 
+	// Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	logoutStaff();
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
@@ -135,25 +135,25 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     
     
     
-    // go to patient info edit screen for the patient's visit
+    // Go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
     	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
 		controller.initialize(patient, visit, "Edit");
 		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
     }
     
-    // go to patient info creation screen and initialize it for the patient
+    // Go to patient info creation screen and initialize it for the patient
     public void onNewVisitClicked(Patient patient, Pane container) {
     	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
     	controller.initialize(patient, null, "New");
     	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
     
-    // update patient list method
+    // Update patient list method
     public void updatePatientList() {
 		controllers = new ArrayList<>();
     	
-		// create patientListItems
+		// Create patientListItems
         // Load list items dynamically
         for (int i = 0; i < patients.size(); i++) {
             try {
@@ -169,24 +169,22 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
         }
     }
     
-    /* im sorry i know this is awful */
-    
     public void categoryAll(ActionEvent event) throws Exception {
-    	// activate categoryAll button
+    	// Activate categoryAll button
     	categoryAllButton.setId("selectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
     	allLabel.setTextFill(Color.web("#6039d2"));
     	allCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryCurrent button
+    	// Deactivate categoryCurrent button
     	categoryCurrentButton.setId("unselectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#666666"));
     	currentCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryPrevious button
+    	// Deactivate categoryPrevious button
     	categoryPreviousButton.setId("unselectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
@@ -195,21 +193,21 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     }
     
     public void categoryCurrent(ActionEvent event) throws Exception {
-    	// activate categoryCurrent button
+    	// Activate categoryCurrent button
     	categoryCurrentButton.setId("selectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#6039d2"));
     	currentCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryAll button
+    	// Deactivate categoryAll button
     	categoryAllButton.setId("unselectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
     	allLabel.setTextFill(Color.web("#666666"));
     	allCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryPrevious button
+    	// Deactivate categoryPrevious button
     	categoryPreviousButton.setId("unselectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
@@ -219,21 +217,21 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     }
     
     public void categoryPrevious(ActionEvent event) throws Exception {
-    	// activate categoryPrevious button
+    	// Activate categoryPrevious button
     	categoryPreviousButton.setId("selectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
     	previousLabel.setTextFill(Color.web("#6039d2"));
     	previousCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryCurrent button
+    	// Deactivate categoryCurrent button
     	categoryCurrentButton.setId("unselectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#666666"));
     	currentCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryAll button
+    	// Deactivate categoryAll button
     	categoryAllButton.setId("unselectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
@@ -241,14 +239,14 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	allCount.setTextFill(Color.web("#666666"));
     }
 
-    //Method to logout the patient before going back to the previous screen
+    // Method to logout the patient before going back to the previous screen
     public void logoutStaff() {
     	UserManager userManager = UserManager.getInstance();
     	
-    	//Get the current logged in user
+    	// Get the current logged in user
     	User currentUser = userManager.getCurrentUser();
     	
-    	//If currentUser is not null, log the user out
+    	// If currentUser is not null, log the user out
     	if (currentUser != null) {
     		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
     		userManager.logout();
