@@ -21,7 +21,7 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
 
     @FXML private Label name;
     @FXML private VBox visitList;
-    @FXML private HBox parentContainer; // parent VBox that will get replaced when switching scenes
+    @FXML private HBox parentContainer; // Parent VBox that will get replaced when switching scenes
     @FXML private Button newVisitButton;
     
     private Patient patient;
@@ -32,10 +32,10 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
 		this.parentController = parentController;
 		this.patient = patient;
 		this.visitHistory = patient.getVisitHistory();
-		// set name at top to be patient's name
+		// Set name at top to be patient's name
 		name.setText(patient.getName());
 		
-		// sort visitHistory
+		// Sort visitHistory
         Collections.sort(visitHistory, new Comparator<Visit>() {
             @Override
             public int compare(Visit visit1, Visit visit2) {
@@ -54,21 +54,21 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
         
         updateVisitList();
 		
-		// disable new visit button if is doctor
+		// Disable new visit button if is doctor
         if(UserManager.getInstance().getCurrentUserRole() == Role.DOCTOR) {
         	newVisitButton.setVisible(false);
         }
 	}
 	
-    // update patient list method
+    // Update patient list method
     public void updateVisitList() {
     	
-		// create patientListItems
+		// Create patientListItems
         // Load list items dynamically
         for (int i = 0; i < visitHistory.size(); i++) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_visit_item.fxml"));
-                //controllers.add(loader.getController());
+                // Controllers.add(loader.getController());
                 visitList.getChildren().add(loader.load());
                 PatientVisitHistoryItemController listItemController = loader.getController();
                 listItemController.setParentController(this); // Pass reference to parent controller
@@ -80,7 +80,7 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
         }
     }
 	
-	// pass this back to parent controller (NurseViewController) to process
+	// Pass this back to parent controller (NurseViewController) to process
 	@Override
 	public void onItemClick(Patient patient, Visit visit) {
 		parentController.onItemClick(patient, visit, parentContainer);
@@ -92,7 +92,7 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
 		
 	}
 	
-	// pass this back to parent controller (NurseViewController) to process
+	// Pass this back to parent controller (NurseViewController) to process
     @FXML
     void handleNewVisitClicked(MouseEvent event) {
     	parentController.onNewVisitClicked(patient, parentContainer);

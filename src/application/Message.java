@@ -1,7 +1,7 @@
 package application;
 
-// a Message that exists only within MessageThreads. 
-// contains info about who sent the message. 
+// A Message that exists only within MessageThreads. 
+// Contains info about who sent the message. 
 public class Message {
 	public int id;
 	public int senderId;
@@ -12,6 +12,7 @@ public class Message {
 	public int readStatus;
 	public int threadId;
 	
+	// Setters
 	public Message(int id, int senderId, int recipientId, String subject, String body, String timestamp, int readStatus, int threadId) {
 		this.id = id;
 		this.senderId = senderId;

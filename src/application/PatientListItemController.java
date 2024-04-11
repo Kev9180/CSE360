@@ -20,7 +20,7 @@ public class PatientListItemController {
     public void setLabels(Patient patient) {
     	this.patient = patient;
 	    
-	    // set patient visit date
+	    // Set patient visit date
 	    List<Visit> visitHistory = patient.getVisitHistory();
 	    
 	    String dateStr = "Never";
@@ -31,10 +31,10 @@ public class PatientListItemController {
 	    
     	dateLabel.setText(dateStr);
     	
-    	// set patient name 
+    	// Set patient name 
     	nameLabel.setText(patient.getName());
     	
-    	// set patient DOB
+    	// Set patient DOB
     	dobLabel.setText(patient.getDOB().toString());
     }
     
@@ -42,6 +42,7 @@ public class PatientListItemController {
     	return patient;
     }
     
+    // Notifies parent controller if it exists about a message button click and logs it
     @FXML
     public void handleMessageButtonClick() {
     	if (parentController != null)
@@ -49,6 +50,7 @@ public class PatientListItemController {
     	System.out.println("Message Button Clicked");
     }
     
+    // Notifies the parent controller if it exists about a view info button click and logs it
     @FXML
     public void handleViewInfoButtonClick() {
     	if (parentController != null)
@@ -56,6 +58,7 @@ public class PatientListItemController {
     	System.out.println("Patient Info Edit Clicked");
     }
     
+    // Notifies the parent controller if it exists about a list item button click and logs it
     @FXML
     public void handleListItemClick() {
     	if (parentController != null)
@@ -63,6 +66,7 @@ public class PatientListItemController {
     	System.out.println("Item Clicked");
     }
     
+    // Edits the styles of the buttons based on the action of hover or press
     @FXML
     void handleMouseEnter(MouseEvent event) {
     	patientEntry.getStyleClass().add("hover");
@@ -79,7 +83,7 @@ public class PatientListItemController {
     	patientEntry.getStyleClass().add("pressed");
     }
     
-    // pass parent controller to nurse/doctor patient list view
+    // Pass parent controller to nurse/doctor patient list view
     public void setParentController(PatientListItemListener parentController) {
         this.parentController = parentController;
     }

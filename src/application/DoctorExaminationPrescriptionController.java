@@ -77,7 +77,7 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
     	dosageSP.getValueFactory().setValue(null);
     	updatePrescriptionsList();
     }
-
+//s
 
     @FXML
     void handleSaveVisit(MouseEvent event) {
