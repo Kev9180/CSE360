@@ -5,13 +5,14 @@ Height: 69
 Weight: 180
 Temperature: 99.2
 Blood Pressure: 120/88
-Allergies: None
-Immunizations: Varicella/MMR|2016-04-01,Japanese Encephalitis|2016-04-01,Smallpox|2016-04-01
-Prescribed Medications: 
+Allergies: I was here
+Immunizations: Varicella/MMR|2016-04-01,Japanese Encephalitis|2016-04-01,test1|2024-04-01
+Prescribed Medications: Amoxicillin,Test1
 Health Concerns: Sore throat, congestion
-Dosage: 
-Location: null
-Physical Exam Notes: null
-Medication Notes: null
+Dosage: 25mg Daily,25mg 2x Daily
+Location: cvs
+Physical Exam Notes: human asdjflaskdlfasdjfasdkl
+Medication Notes: okay\n
+nice:true
 Visit Date: 2024-04-12
 Visit Date Formatted: 2024-04-12T11:00

@@ -15,7 +15,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -23,7 +25,7 @@ import javafx.scene.layout.VBox;
 
 public class DoctorExaminationPrescriptionController implements PatientPrescriptionItemListener{
 
-    @FXML private Spinner<?> dosageSP;
+    @FXML private Spinner<Integer> dosageSP;
     @FXML private MenuButton frequencyMB;
 	@FXML private TextField locationTF;
 	@FXML private TextField medicationNameTF;
@@ -36,6 +38,7 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
 	private Patient patient;
 	private Visit visit;
 	private String mode;
+	private String frequency;
 	private List<PatientPrescriptionItemController> prescriptionListItemControllers;
 	private List<String> temporaryPrescriptions = new ArrayList<>();
 	private List<String> temporaryDosages = new ArrayList<>();
@@ -63,6 +66,19 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
 			temporaryDosages = visit.getDosages();
 		}
 		
+		// Initialize spinner
+		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 999, 0); // Example range and initial value
+		dosageSP.setValueFactory(valueFactory);
+		dosageSP.getValueFactory().setValue(null); // Now you can set the value
+		
+		 // Add event handlers to each MenuItem
+		 for (MenuItem item : frequencyMB.getItems()) {
+		     item.setOnAction(event -> {
+		         frequency = ((MenuItem) event.getSource()).getText();
+		         // You can perform any additional actions with the selected text here
+		     });
+		 }
+		
 		updateLabels();
 		updatePrescriptionsList();
 	}
@@ -70,9 +86,9 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
     @FXML
     void handleAddPrescription(MouseEvent event) {
     	String medication = medicationNameTF.getText();
-    	String dosage = (String) dosageSP.getValue();
+    	String dosage = dosageSP.getValue().toString();
     	temporaryPrescriptions.add(medication);
-    	temporaryDosages.add(dosage);
+    	temporaryDosages.add(dosage + "mg " + frequency);
     	medicationNameTF.clear();
     	dosageSP.getValueFactory().setValue(null);
     	updatePrescriptionsList();
@@ -182,10 +198,7 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
 	public void onDeleteItem(int index) {
 		temporaryPrescriptions.remove(index);
 		temporaryDosages.remove(index);
+		updatePrescriptionsList();
 	}
-//    @FXML
-//    void handleDeleteItem(ActionEvent event) {
-//
-//    }
 
 }

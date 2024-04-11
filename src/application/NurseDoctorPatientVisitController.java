@@ -137,9 +137,17 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     
     // Go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
-    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
-		controller.initialize(patient, visit, "Edit");
-		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    	if (UserManager.getInstance().getCurrentUserRole() == Role.NURSE) {
+    		// if the role is nurse, send to the edit patient info page
+    		PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
+    		controller.initialize(patient, visit, "Edit");
+    		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    	} else {
+    		// if the role is doctor, send to the edit prescription/physical exam notes page
+    		DoctorExaminationPrescriptionController controller = (DoctorExaminationPrescriptionController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/doctor_examination_prescription.fxml");
+    		controller.initialize(patient, visit, "Edit");
+    		System.out.println("Assign Prescription Medication and edit Physical Examination for " + patient.getName() + " on " + visit.getVisitDate().toString());
+    	}
     }
     
     // Go to patient info creation screen and initialize it for the patient
