@@ -21,7 +21,7 @@ public class PatientListItemController {
     public void setLabels(Patient patient) {
     	this.patient = patient;
 	    
-	    // set patient visit date
+	    // Set patient visit date
 	    List<Visit> visitHistory = patient.getVisitHistory();
 	    
 	    String dateStr = "Never";
@@ -32,18 +32,20 @@ public class PatientListItemController {
 	    
     	dateLabel.setText(dateStr);
     	
-    	// set patient name 
+    	// Set patient name 
     	nameLabel.setText(patient.getName());
     	
-    	// set patient DOB
+    	// Set patient DOB
     	dobLabel.setText(patient.getDOB().toString());
     }
- // Method to retrieve the associated patient
+  
+    // Method to retrieve the associated patient
     public Patient getPatient() {
     	return patient;
     }
     
- // Method to handle the action of clicking the message button
+    // Method to handle the action of clicking the message button
+    // Notifies parent controller if it exists about a message button click and logs it
     @FXML
     public void handleMessageButtonClick() {
     	if (parentController != null)
@@ -51,7 +53,8 @@ public class PatientListItemController {
     	System.out.println("Message Button Clicked");
     }
     
- // Method to handle the action of clicking the view info button
+    // Method to handle the action of clicking the view info button
+    // Notifies the parent controller if it exists about a view info button click and logs it
     @FXML
     public void handleViewInfoButtonClick() {
     	if (parentController != null)
@@ -59,7 +62,8 @@ public class PatientListItemController {
     	System.out.println("Patient Info Edit Clicked");
     }
     
- // Method to handle the action of clicking the patient entry
+    // Method to handle the action of clicking the patient entry
+    // Notifies the parent controller if it exists about a list item button click and logs it
     @FXML
     public void handleListItemClick() {
     	if (parentController != null)
@@ -67,26 +71,27 @@ public class PatientListItemController {
     	System.out.println("Item Clicked");
     }
     
- // Method to handle mouse entering the patient entry
+    // Method to handle mouse entering the patient entry
+    // Edits the styles of the buttons based on the action of hover or press
     @FXML
     void handleMouseEnter(MouseEvent event) {
     	patientEntry.getStyleClass().add("hover");
     }
 
- // Method to handle mouse exiting the patient entry
+    // Method to handle mouse exiting the patient entry
     @FXML
     void handleMouseExit(MouseEvent event) {
     	patientEntry.getStyleClass().remove("hover");
     	patientEntry.getStyleClass().remove("pressed");
     }
 
- // Method to handle mouse pressing on the patient entry
+    // Method to handle mouse pressing on the patient entry
     @FXML
     void handleMousePress(MouseEvent event) {
     	patientEntry.getStyleClass().add("pressed");
     }
     
-    // pass parent controller to nurse/doctor patient list view
+    // Pass parent controller to nurse/doctor patient list view
     public void setParentController(PatientListItemListener parentController) {
         this.parentController = parentController;
     }
