@@ -214,3 +214,4 @@ public class VisitHistoryManager {
 		}
 	}
 }
+//all comments completed

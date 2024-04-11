@@ -5,9 +5,9 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
+//Class representing a visit made by a patient
 public class Visit {
-	// information about each visit
+	// information about each visit from the patient
 	private String height;
 	private String weight;
 	private String temperature;
@@ -23,14 +23,17 @@ public class Visit {
 	private LocalDateTime visitDateFormatted;
 	private LocalDate visitDate;
 	
+	// Default constructor
 	public Visit() {}
 	
+	// Constructor with essential visit details
 	public Visit(String healthConcerns, LocalDateTime dateTime, LocalDate date) {
 		this.healthConcerns = healthConcerns;
 		this.visitDateFormatted = dateTime;
 		this.visitDate = date;
 	}
 	
+	// Constructor with full visit details
 	public Visit(String height, String weight, String temperature, String bloodPressure, List<String> immunizations,
 			List<String> allergies, List<String> prescribedMedication, String healthConcerns, List<String> dosages,
 			String location, String physicalExamNotes, String medicationNotes) {
@@ -51,6 +54,7 @@ public class Visit {
 	}
 	
 	// I'm going insane
+	// Getters and setters for visit attributes
 	public String getHeight() {
 		return height;
 	}
