@@ -103,7 +103,7 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
     @FXML
     void previousScene(ActionEvent event) {
     	// return back to patientList
-    	SceneManager.loadScene(getClass(), "nurse_doctor_patient_list", event);
+    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
     }
 	
    

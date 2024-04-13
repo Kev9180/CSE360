@@ -79,10 +79,25 @@ public class SceneManager {
     	return null;
     }
     
+    // adds an element to a container at an index (useful for lists)
     public static Object addContainerElement(Class<?> clazz, Pane parentContainer, int indexToAdd, String fxmlString) {
     	try {
     		FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlString));
 	    	parentContainer.getChildren().add(indexToAdd, loader.load());
+	    	Object controller = loader.getController();
+	    	return controller;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    // empties out a container completely and inserts a new container
+    public static Object setContainerElement(Class<?> clazz, Pane parentContainer, String fxmlString) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlString));
+    		parentContainer.getChildren().clear();
+	    	parentContainer.getChildren().add(loader.load());
 	    	Object controller = loader.getController();
 	    	return controller;
 		} catch (IOException e) {
