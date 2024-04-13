@@ -1,0 +1,8 @@
+@import "styles.css";
+.selected {
+    -fx-stroke: -color-accent;
+}
+
+.deselected {
+    -fx-stroke: #777777;
+}

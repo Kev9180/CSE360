@@ -17,7 +17,7 @@
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Role Selection" textAlignment="CENTER" textFill="#2b2138">
                      <font>
-                        <Font name="Calibri" size="24.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="240.0" prefWidth="360.0" spacing="15.0">

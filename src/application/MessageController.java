@@ -25,6 +25,7 @@ public class MessageController {
 		loadRecipientList();
 	}
 	
+	// Method for formatting and sending a message by retrieving the recipient and sender ids
 	public void sendMessage() {
 		System.out.println("Send Message button pressed");
 		String recipientName = recipientCB.getValue();
@@ -34,18 +35,21 @@ public class MessageController {
 		int recipientId = getUserIdFromRecipientName(recipientName);
 		int senderId = DatabaseUtil.getCurrentUserId();
 		
+		// If valid the message will be sent and the form will be cleared in preparation for a new message
 		if (recipientId != -1 && senderId != -1) {
 			DatabaseUtil.sendMessage(senderId, recipientId, subject, messageBody);
 			clearForm();
 		}
 	}
 	
+	// Method resets the recipient ComboBox, the subject field, and the message field
 	public void clearForm() {
 		recipientCB.setValue(null);
 		subjectTF.setText("");
 		messageText.setText("");
 	}
 	
+	// Method uses a string to extract a users role, first and last name, and searches the database to return the corresponding user
 	private int getUserIdFromRecipientName(String recipientName) {
 		String[] parts = recipientName.split(" ");
 		
@@ -72,6 +76,7 @@ public class MessageController {
 		return DatabaseUtil.getUserIdByNameAndRole(firstName, lastName, role);
 	}
 	
+	// Depending on the users role, the available recipients are displayed in a selection control
 	private void loadRecipientList() {
 		List<User> userList = null;
 		ObservableList<String> recipients = FXCollections.observableArrayList();
@@ -103,26 +108,15 @@ public class MessageController {
 		recipientCB.setItems(recipients);
 	}
 	
+	// Preselects a default for the recipient
 	public void setDefaultOption(String option) {
 		recipientCB.setValue(option);
 	}
 	
+	// Navigates back to the screen defined after event has been triggered
+	@FXML
 	public void goBack(ActionEvent event) throws Exception {
-		String fxmlFile = "";
-		Role currentUserRole = UserManager.getInstance().getCurrentUserRole();
-		
-		if (currentUserRole.equals(Role.PATIENT))
-			fxmlFile = "/FXML/patient_message_board.fxml";
-		else if (currentUserRole.equals(Role.NURSE) || currentUserRole.equals(Role.DOCTOR)) {
-			fxmlFile = "/FXML/nurse_patient_list.fxml";
-			NurseViewController controller = (NurseViewController) SceneManager.loadScene(getClass(), fxmlFile, event);
-			controller.messageButton(new ActionEvent());
-			return;
-		}
-		else
-			fxmlFile = "/FXML/role_selection.fxml";
-		
+		String fxmlFile = "/FXML/patient_view.fxml";
 		SceneManager.loadScene(getClass(), fxmlFile, event);
-		
 	}
 }

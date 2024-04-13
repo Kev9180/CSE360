@@ -94,7 +94,7 @@
 
 #selectedbutton
 {
-	-fx-background-color:  -color-accent-selected;
+	-fx-background-color: white;
 	-fx-border-width: 0px;
 	-fx-textFill: #603bd1;
 	-fx-stroke: #6039d2;
@@ -111,7 +111,16 @@
 #unselectedbutton:hover
 {
 	-fx-border-color: transparent;
-	-fx-background-color:  -color-accent-hover-light;
+	-fx-background-color: #EDE6ED;
+	-fx-border-width: 0px;
+	-fx-textFill: -color-accent;
+	-fx-stroke: -color-accent;
+}
+
+#unselectedbutton:pressed
+{
+	-fx-border-color: transparent;
+	-fx-background-color:  #DED7DE;
 	-fx-border-width: 0px;
 	-fx-textFill: -color-accent;
 	-fx-stroke: -color-accent;
@@ -139,7 +148,7 @@
 {
 	-fx-border-style: hidden hidden solid hidden;
 	-fx-border-color: -color-accent;
-	-fx-border-width: 4px;
+	-fx-border-width: 2px;
 	-fx-background-color:  -color-appbackground;
 }
 
@@ -147,14 +156,14 @@
 {
 	-fx-border-style: hidden hidden solid hidden;
 	-fx-border-color: -color-accent;
-	-fx-border-width: 4px;
+	-fx-border-width: 2px;
 	-fx-background-color:  -color-hover;
 }
 
 
 #unselectedoption
 {
-	-fx-border-width: 4px;
+	-fx-border-width: 2px;
 	-fx-border-color: transparent;
 	-fx-background-color:  -color-appbackground;
 	-fx-transition: -fx-background-color 0.9s;
@@ -162,14 +171,14 @@
 
 #unselectedoption:hover
 {
-	-fx-border-width: 4px;
+	-fx-border-width: 2px;
 	-fx-border-color: transparent;
 	-fx-background-color:  -color-hover;
 }
 
 #unselectedoption:pressed
 {
-	-fx-border-width: 4px;
+	-fx-border-width: 2px;
 	-fx-border-color: transparent;
 	-fx-background-color:  -color-pressed;
 }

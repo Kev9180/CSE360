@@ -1,0 +1,17 @@
+Patient Username: bmc
+First Name: Edward
+Last Name: Ling
+Height: 1000
+Weight: 120
+Temperature: 10
+Blood Pressure: 120/120
+Allergies: None!
+Immunizations: Ligya|2024-04-20
+Prescribed Medications: grass,sunlight
+Health Concerns: healthy
+Dosage: 1mg 2x Daily,24mg Every other day
+Location: CVS
+Physical Exam Notes: meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, meow, 
+Medication Notes: eat
+Visit Date: 2024-04-13
+Visit Date Formatted: 2024-04-13T05:14:48.805343200

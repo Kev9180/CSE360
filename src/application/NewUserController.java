@@ -35,13 +35,13 @@ public class NewUserController {
 		Platform.runLater(() -> clearFieldsBtn.requestFocus());
 	}
 	
-	//Method to create a new account as well as a new User and Patient entity for the new patient
+	// Method to create a new account as well as a new User and Patient entity for the new patient
 	public void createNewPatientAccount() throws Exception {
 		if (!validateFields()) {
 			return;
 		}
 		
-		//Collect the form data from the textfields, pickers, and password fields
+		// Collect the form data from the textfields, pickers, and password fields
 		String firstName = firstNameTF.getText().strip();
 		String lastName = lastNameTF.getText().strip();
 		LocalDate dateOfBirth = dateOfBirthPicker.getValue();
@@ -59,7 +59,7 @@ public class NewUserController {
 			
 		DatabaseUtil.addUser(new Patient(username, password, patientRole, firstName, lastName, dateOfBirth, phoneNumber, streetAddress, city, state, zipcode, email, secQuestion, secAnswer));
 		
-		//Show a confirmation alert to let the user know their account has been created
+		// Show a confirmation alert to let the user know their account has been created
 		showAlert("Account Created!", "The new patient account was successfully created. Thank you!");
 		
 		//TODO: Print a confirmation to the console for testing purposes
@@ -69,7 +69,7 @@ public class NewUserController {
 		SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", zipcodeTF);
 	}
 	
-	//Method to verify that password matches confirmPassword, and email matches confirmEmail
+	// Method to verify that password matches confirmPassword, and email matches confirmEmail
 	public boolean validateFields() {
 		String username = usernameTF.getText().strip();
 		String password = passwordPF.getText().strip();
@@ -77,7 +77,7 @@ public class NewUserController {
 		String email = emailTF.getText().strip();
 		String confirmEmail = confirmEmailTF.getText().strip();
 		
-		//Check for empty fields
+		// Check for empty fields
 	    if (firstNameTF.getText().isBlank() || lastNameTF.getText().isBlank() ||
 	        dateOfBirthPicker.getValue() == null || phoneNumberTF.getText().isBlank() ||
 	        streetAddressTF.getText().isBlank() || cityTF.getText().isBlank() ||
@@ -91,7 +91,7 @@ public class NewUserController {
 	        return false;
 	    }
 		
-	    //Check if passwords and emails match
+	    // Check if passwords and emails match
 		if (!password.equals(confirmPW)) {
 			showAlert("Passwords do not match", "Please ensure that your passwords match.");
 			return false;
@@ -100,17 +100,17 @@ public class NewUserController {
 			return false;
 		}
 		
-		//Check if the username is taken
+		// Check if the username is taken
 		if (DatabaseUtil.usernameExists(username)) {
 			showAlert("Username Taken", "Please choose a different username.");
 			return false;
 		}
 		
-		//If all the checks pass, return true
+		// If all the checks pass, return true
 		return true;
 	}
 	
-	//Method to show an alert window with a specified prompt
+	// Method to show an alert window with a specified prompt
 	public void showAlert(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");
@@ -119,7 +119,7 @@ public class NewUserController {
 		alert.showAndWait();
 	}
 	
-	//Method to clear all of the text fields and date picker
+	// Method to clear all of the text fields and date picker
 	public void clearFields() {
 		firstNameTF.setText("");
 	    lastNameTF.setText("");
@@ -141,7 +141,7 @@ public class NewUserController {
 	}
 	
 	
-	//Take the user back to the patient login screen if they press the back button
+	// Take the user back to the patient login screen if they press the back button
     public void goBack(ActionEvent event) throws Exception {    	
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }

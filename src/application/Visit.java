@@ -2,11 +2,12 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
+//Class representing a visit made by a patient
 public class Visit {
-	// information about each visit
+	// information about each visit from the patient
 	private String height;
 	private String weight;
 	private String temperature;
@@ -15,16 +16,26 @@ public class Visit {
 	private List<String> allergies = new ArrayList<String>();
 	private List<String> prescribedMedication = new ArrayList<String>();
 	private String healthConcerns;
-	private String dosage;
+	private List<String> dosages = new ArrayList<String>();
 	private String location;
 	private String physicalExamNotes;
 	private String medicationNotes;
-	private LocalDateTime visitDate;
+	private LocalDateTime visitDateFormatted;
+	private LocalDate visitDate;
 	
+	// Default constructor
 	public Visit() {}
 	
+	// Constructor with essential visit details
+	public Visit(String healthConcerns, LocalDateTime dateTime, LocalDate date) {
+		this.healthConcerns = healthConcerns;
+		this.visitDateFormatted = dateTime;
+		this.visitDate = date;
+	}
+	
+	// Constructor with full visit details
 	public Visit(String height, String weight, String temperature, String bloodPressure, List<String> immunizations,
-			List<String> allergies, List<String> prescribedMedication, String healthConcerns, String dosage,
+			List<String> allergies, List<String> prescribedMedication, String healthConcerns, List<String> dosages,
 			String location, String physicalExamNotes, String medicationNotes) {
 		this.height = height;
 		this.weight = weight;
@@ -34,14 +45,16 @@ public class Visit {
 		this.allergies = allergies;
 		this.prescribedMedication = prescribedMedication;
 		this.healthConcerns = healthConcerns;
-		this.dosage = dosage;
+		this.dosages = dosages;
 		this.location = location;
 		this.physicalExamNotes = physicalExamNotes;
 		this.medicationNotes = medicationNotes;
-		this.visitDate = LocalDateTime.now();
+		this.visitDateFormatted = LocalDateTime.now();
+		this.visitDate = LocalDate.now();
 	}
 	
 	// I'm going insane
+	// Getters and setters for visit attributes
 	public String getHeight() {
 		return height;
 	}
@@ -90,11 +103,11 @@ public class Visit {
 	public void setHealthConcerns(String healthConcerns) {
 		this.healthConcerns = healthConcerns;
 	}
-	public String getDosage() {
-		return dosage;
+	public List<String> getDosages() {
+		return dosages;
 	}
-	public void setDosage(String dosage) {
-		this.dosage = dosage;
+	public void setDosages(List<String> dosages) {
+		this.dosages = dosages;
 	}
 	public String getLocation() {
 		return location;
@@ -114,10 +127,16 @@ public class Visit {
 	public void setMedicationNotes(String medicationNotes) {
 		this.medicationNotes = medicationNotes;
 	}
-	public LocalDateTime getVisitDate() {
-		return this.visitDate;
+	public LocalDateTime getVisitDateFormatted() {
+		return visitDateFormatted;
 	}
-	public void setVisitDate(LocalDateTime date) {
+	public void setVisitDateFormatted(LocalDateTime date) {
+		this.visitDateFormatted = date;
+	}
+	public LocalDate getVisitDate() {
+		return visitDate;
+	}
+	public void setVisitDate(LocalDate date) {
 		this.visitDate = date;
 	}
 }

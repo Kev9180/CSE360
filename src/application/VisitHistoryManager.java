@@ -28,7 +28,7 @@ public class VisitHistoryManager {
 		// The actual visit filename inside of the specific patient directory will be yyyy-MM-dd_HH-mm-ss_visit.txt
 		// Create a date formatter to format the date for the filename
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-		String filename = visit.getVisitDate().format(formatter) + "_visit.txt";
+		String filename = visit.getVisitDateFormatted().format(formatter) + "_visit.txt";
 		
 		try (FileWriter writer = new FileWriter(new File(directory, filename))) {
 			writer.write("Patient Username: " + patientUsername + "\n");
@@ -45,11 +45,12 @@ public class VisitHistoryManager {
             writer.write("Prescribed Medications: " + String.join(",", visit.getPrescribedMedication()) + "\n");
             
             writer.write("Health Concerns: " + visit.getHealthConcerns() + "\n");
-            writer.write("Dosage: " + visit.getDosage() + "\n");
+            writer.write("Dosage: " + String.join(",", visit.getDosages()) + "\n");
             writer.write("Location: " + visit.getLocation() + "\n");
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +64,6 @@ public class VisitHistoryManager {
 		
 		// If the directory doesn't exist, then this patient doesn't have any visits associated with them
 		if (!directory.exists()) {
-			System.out.println("Error: No visit history found for Patient ID: " + patientUsername);
 			return visits;
 		}
 		
@@ -118,7 +118,7 @@ public class VisitHistoryManager {
                         visit.setHealthConcerns(parts[1]);
                         break;
                     case "Dosage":
-                        visit.setDosage(parts[1]);
+                        visit.setDosages(parseListFromString(parts[1]));
                         break;
                     case "Location":
                         visit.setLocation(parts[1]);
@@ -130,8 +130,11 @@ public class VisitHistoryManager {
                         visit.setMedicationNotes(parts[1]);
                         break;
                     case "Visit Date":
-                        visit.setVisitDate(LocalDateTime.parse(parts[1]));
+                        visit.setVisitDate(LocalDate.parse(parts[1]));
                         break;
+                    case "Visit Date Formatted":
+                    	visit.setVisitDateFormatted(LocalDateTime.parse(parts[1]));
+                    	break;
 					}
 				}
 			}
@@ -162,12 +165,12 @@ public class VisitHistoryManager {
 	}
 	
 	// Method to update specific visit information - Doctor's portion will need to use this function
-	public static void updateVisit(Patient patient, LocalDate visitDate, String location, String physicalExamNotes, String medicationNotes) throws IOException {
+	public static void updateVisit(Patient patient, LocalDateTime localDateTime, String location, String physicalExamNotes, String medicationNotes) throws IOException {
 		String patientUsername = patient.getUsername();
 		String directoryName = BASE_DIRECTORY + patientUsername + "_VisitHistory";
 		File directory = new File(directoryName);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String filename = visitDate.format(formatter) + "_visit.txt";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+		String filename = localDateTime.format(formatter) + "_visit.txt";
 		File visitFile = new File(directory, filename);
 		
 		// If the file couldn't be found, then it doesn't exist or there was an error
@@ -200,13 +203,15 @@ public class VisitHistoryManager {
             writer.write("Prescribed Medications: " + String.join(",", visit.getPrescribedMedication()) + "\n");
             
             writer.write("Health Concerns: " + visit.getHealthConcerns() + "\n");
-            writer.write("Dosage: " + visit.getDosage() + "\n");
+            writer.write("Dosages: " + String.join(",", visit.getDosages()) + "\n");
             writer.write("Location: " + visit.getLocation() + "\n");
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 }
+//all comments completed

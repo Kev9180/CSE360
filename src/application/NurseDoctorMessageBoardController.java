@@ -72,7 +72,7 @@ public class NurseDoctorMessageBoardController {
     	messagesTable.setPlaceholder(new Label("No messages!"));
     }
 	
-	//
+	// Loads and displays the gui for a new message to be written
     public void composeNewMessage() {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/compose_message.fxml"));
@@ -86,6 +86,7 @@ public class NurseDoctorMessageBoardController {
     	System.out.println("New Message button pressed");
     }
     
+    // Checks if a message thread already exists within messages, if found return true
     private boolean isDuplicateMessage(ObservableList<MessageThread> messageThreads, int threadId) {
     	return messageThreads.stream().anyMatch(thread -> thread.getThreadId() == threadId);
     	//return false;
@@ -130,21 +131,21 @@ public class NurseDoctorMessageBoardController {
     	messagesTable.setItems(messageThreads);
     }
     
-	//Handle back button (goes home)
+	// Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
     	UserManager userManager = UserManager.getInstance();
     	userManager.logout();
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-	//Handle logout button 
+	// Handle logout button 
     public void logout(ActionEvent event) throws Exception {
     	UserManager userManager = UserManager.getInstance();
     	userManager.logout();
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-    
+    // Prevents further processing of a button click, logs a message, then navigates to a new screen using a scene manager
     @FXML
     private void patientListButton(ActionEvent event) throws Exception {
         event.consume();

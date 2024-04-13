@@ -1,0 +1,17 @@
+Patient Username: username
+First Name: first
+Last Name: last
+Height: null
+Weight: null
+Temperature: null
+Blood Pressure: null
+Allergies: nice
+Immunizations: Vaxei|2024-07-27
+Prescribed Medications: 
+Health Concerns: null
+Dosage: 0
+Location: null
+Physical Exam Notes: null
+Medication Notes: null
+Visit Date: 2024-04-09
+Visit Date Formatted: 2024-04-09T03:23:56.419558500

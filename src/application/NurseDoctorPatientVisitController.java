@@ -2,8 +2,10 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class NurseViewController implements PatientListItemListener, Initializable{
+public class NurseDoctorPatientVisitController implements PatientListItemListener, SidebarListener, Initializable{
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -32,20 +34,20 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     @FXML private VBox patientList;
     
-    @FXML private HBox parentContainer; // holds everything
+    @FXML private HBox parentContainer; // Holds everything
   
     
     private List<Patient> patients;
     
     private List<PatientListItemController> controllers;
     
-    // tell the table what the columns should consist of
+    // Tell the table what the columns should consist of
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// mark initial vbox to be the one to be replaced
+		// Mark initial vbox to be the one to be replaced
 		
 		patients = PatientManager.getInstance().getPatients();
-		// initially sort by most recent visit date
+		// Initially sort by most recent visit date
         Collections.sort(patients, new Comparator<Patient>() {
             @Override
             public int compare(Patient o1, Patient o2) {
@@ -55,23 +57,30 @@ public class NurseViewController implements PatientListItemListener, Initializab
             	List<Visit> visit2 = o2.getVisitHistory();
 
             	// Get the visit dates from patients
-                LocalDateTime d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
-                LocalDateTime d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
+                LocalDate d1 = (o1.getVisitHistory().isEmpty() || o1.getVisitHistory().getLast() == null) ? null : o1.getVisitHistory().getLast().getVisitDate();
+                LocalDate d2 = (o2.getVisitHistory().isEmpty() || o2.getVisitHistory().getLast() == null) ? null : o2.getVisitHistory().getLast().getVisitDate();
 
                 // Handle null cases
                 if (d1 == null && d2 == null)	return 0; // Both dates are null, consider them equal
-                else if (d1 == null)  			return -1; // Null dates should come before non-null dates
-                else if (d2 == null)  			return 1; // Null dates should come before non-null dates
+                else if (d1 == null)  			return 1; // Null dates should come after non-null dates
+                else if (d2 == null)  			return -1; // Null dates should come after non-null dates
                 
-                return d1.compareTo(d2);
+                return d2.compareTo(d1);
             }
         });
         
         updatePatientList();
         
-        // also update patient count
+        // Also update patient count
         allCount.setText("" + patients.size());
+        
+        // set sidebar
+        SidebarController controller = (SidebarController) SceneManager.addContainerElement(getClass(), parentContainer, 0, "/FXML/sidebar.fxml");
+		controller.setListener(this);
 		
+		Sidebar[] buttons_array = {Sidebar.PATIENTLIST, Sidebar.MESSAGES};
+		List<Sidebar> buttons = Arrays.asList(buttons_array);
+		controller.setButtons(buttons);
 	}
     
 	
@@ -79,32 +88,41 @@ public class NurseViewController implements PatientListItemListener, Initializab
 	
 	
     
-	//Handle back button (goes home)
+	// Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	logoutStaff();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+		logout(event);
+		SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-	//Handle logout button 
-    public void logout(ActionEvent event) throws Exception {
-    	logoutStaff();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
-    }
+    // Handle patients/messaging button
+	@Override
+	public void handleClick(Sidebar action, ActionEvent event) {
+		switch (action) {
+		case PATIENTLIST:
+			event.consume();
+			SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
+			break;
+		case MESSAGES:
+	    	event.consume();
+	    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+		}
+		
+	}
     
     public void messageButton(ActionEvent event) throws Exception {
     	event.consume();
     	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
-    
-    public void selectPatients(ActionEvent event) throws Exception {
-    	event.consume();
-    	SceneManager.loadScene(getClass(), "/FXML/nurse_patient_list.fxml", event);
-    }
-    
-    public void selectMessages(ActionEvent event) throws Exception {
-    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
-    	
-    }
+//    
+//    public void selectPatients(ActionEvent event) throws Exception {
+//    	event.consume();
+//    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
+//    }
+//    
+//    public void selectMessages(ActionEvent event) throws Exception {
+//    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+//    	
+//    }
     
     @Override
     public void onMessageButtonClick(Patient patient) {
@@ -118,7 +136,7 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     @Override
     public void onListItemClick(Patient patient) {
-    	NurseVisitHistoryController controller = (NurseVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_visit_history.fxml");
+    	NurseDoctorVisitHistoryController controller = (NurseDoctorVisitHistoryController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1,  "/FXML/nurse_doctor_visit_history.fxml");
     	controller.initialize(patient, this);
     }
     
@@ -134,25 +152,33 @@ public class NurseViewController implements PatientListItemListener, Initializab
     
     
     
-    // go to patient info edit screen for the patient's visit
+    // Go to patient info edit screen for the patient's visit
     public void onItemClick(Patient patient, Visit visit, Pane container) {
-    	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
-		controller.initialize(patient, visit, "Edit");
-		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    	if (UserManager.getInstance().getCurrentUserRole() == Role.NURSE) {
+    		// if the role is nurse, send to the edit patient info page
+    		PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
+    		controller.initialize(patient, visit, "Edit");
+    		System.out.println("Edit Patient Info Form for Patient" + patient.getName() + " on " + visit.getVisitDate().toString());
+    	} else {
+    		// if the role is doctor, send to the edit prescription/physical exam notes page
+    		DoctorExaminationPrescriptionController controller = (DoctorExaminationPrescriptionController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/doctor_examination_prescription.fxml");
+    		controller.initialize(patient, visit, "Edit");
+    		System.out.println("Assign Prescription Medication and edit Physical Examination for " + patient.getName() + " on " + visit.getVisitDate().toString());
+    	}
     }
     
-    // go to patient info creation screen and initialize it for the patient
+    // Go to patient info creation screen and initialize it for the patient
     public void onNewVisitClicked(Patient patient, Pane container) {
     	PatientVisitInfoController controller = (PatientVisitInfoController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/patient_visit_info.fxml");
     	controller.initialize(patient, null, "New");
     	System.out.println("New Patient Info Form for Patient" + patient.getName());
     }
     
-    // update patient list method
+    // Update patient list method
     public void updatePatientList() {
 		controllers = new ArrayList<>();
     	
-		// create patientListItems
+		// Create patientListItems
         // Load list items dynamically
         for (int i = 0; i < patients.size(); i++) {
             try {
@@ -168,24 +194,22 @@ public class NurseViewController implements PatientListItemListener, Initializab
         }
     }
     
-    /* im sorry i know this is awful */
-    
     public void categoryAll(ActionEvent event) throws Exception {
-    	// activate categoryAll button
+    	// Activate categoryAll button
     	categoryAllButton.setId("selectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
     	allLabel.setTextFill(Color.web("#6039d2"));
     	allCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryCurrent button
+    	// Deactivate categoryCurrent button
     	categoryCurrentButton.setId("unselectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#666666"));
     	currentCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryPrevious button
+    	// Deactivate categoryPrevious button
     	categoryPreviousButton.setId("unselectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
@@ -194,21 +218,21 @@ public class NurseViewController implements PatientListItemListener, Initializab
     }
     
     public void categoryCurrent(ActionEvent event) throws Exception {
-    	// activate categoryCurrent button
+    	// Activate categoryCurrent button
     	categoryCurrentButton.setId("selectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#6039d2"));
     	currentCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryAll button
+    	// Deactivate categoryAll button
     	categoryAllButton.setId("unselectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
     	allLabel.setTextFill(Color.web("#666666"));
     	allCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryPrevious button
+    	// Deactivate categoryPrevious button
     	categoryPreviousButton.setId("unselectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
@@ -218,21 +242,21 @@ public class NurseViewController implements PatientListItemListener, Initializab
     }
     
     public void categoryPrevious(ActionEvent event) throws Exception {
-    	// activate categoryPrevious button
+    	// Activate categoryPrevious button
     	categoryPreviousButton.setId("selectedoption");
     	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
     	Label previousLabel = (Label) previousBP.getLeft();
     	previousLabel.setTextFill(Color.web("#6039d2"));
     	previousCount.setTextFill(Color.web("#6039d2"));
     	
-    	// deactivate categoryCurrent button
+    	// Deactivate categoryCurrent button
     	categoryCurrentButton.setId("unselectedoption");
     	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
     	Label currentLabel = (Label) currentBP.getLeft();
     	currentLabel.setTextFill(Color.web("#666666"));
     	currentCount.setTextFill(Color.web("#666666"));
     	
-    	// deactivate categoryAll button
+    	// Deactivate categoryAll button
     	categoryAllButton.setId("unselectedoption");
     	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
     	Label allLabel = (Label) allBP.getLeft();
@@ -240,20 +264,23 @@ public class NurseViewController implements PatientListItemListener, Initializab
     	allCount.setTextFill(Color.web("#666666"));
     }
 
-    //Method to logout the patient before going back to the previous screen
-    public void logoutStaff() {
+
+	@Override
+	public void logout(ActionEvent event) {
+		// TODO Auto-generated method stub
     	UserManager userManager = UserManager.getInstance();
     	
-    	//Get the current logged in user
+    	// Get the current logged in user
     	User currentUser = userManager.getCurrentUser();
     	
-    	//If currentUser is not null, log the user out
+    	// If currentUser is not null, log the user out
     	if (currentUser != null) {
     		System.out.println("Current user: " + currentUser.getUsername() + " logged out.");
     		userManager.logout();
     	} else {
     		System.out.println("No user currently logged in.");
     	}
-    }
-
+    	
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+	}
 }

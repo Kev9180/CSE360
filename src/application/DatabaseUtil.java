@@ -102,12 +102,12 @@ public class DatabaseUtil {
 		Patient myPatient = new Patient("username1", "password", Role.PATIENT, "first", "last", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit = new Visit("100", "100", "100", "100", null, null, null, "concerns", "10", "location", "examNotes",
+		Visit myVisit = new Visit("100", "100", "100", "100", null, null, null, "concerns", null, "location", "examNotes",
 				"medicationNotes");
 		Patient myPatient2 = new Patient("username2", "password", Role.PATIENT, "first2", "last2", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit2 = new Visit("100", "100", "100", "100", null, null, null, "concerns", "10", "location", "examNotes",
+		Visit myVisit2 = new Visit("100", "100", "100", "100", null, null, null, "concerns", null, "location", "examNotes",
 				"medicationNotes");
 		myPatient.addVisit(myVisit);
 		addUser(myPatient);
@@ -364,7 +364,7 @@ public class DatabaseUtil {
 		try (Connection connection = DriverManager.getConnection(DB_URL); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, username);
 			
-			// Attempt to find a user with the matching username in the databse
+			// Attempt to find a user with the matching username in the database
 			try (ResultSet rs = pstmt.executeQuery()) {
 				// If a user was found, extract their role and return the new User
 				if (rs.next()) {
@@ -774,7 +774,7 @@ public class DatabaseUtil {
             if (rs.next()) {
                 return rs.getString("firstName") + " " + rs.getString("lastName");
             }
-        } catch (SQLException e) {	// PRint the error
+        } catch (SQLException e) {	// Print the error
             System.err.println("Error fetching sender name: " + e.getMessage());
         }
         return "Unknown Sender";

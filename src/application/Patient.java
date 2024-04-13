@@ -2,37 +2,36 @@ package application;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Patient extends User {
-	//Personal and contact information
+	// Personal and contact information
 	private LocalDate dateOfBirth;
 	private String email;
 	private String phoneNumber;
 	
-	//Security question attributes
+	// Security question attributes
 	private String securityQuestion;
 	private String securityAnswer;
 	
-	//Address attributes
+	// Address attributes
 	private String address;
 	private String city;
 	private String state;
 	private String zipcode;
 	
-	//Payment attributes
+	// Payment attributes
 	private String bankName;
 	private String cardNumber;
 	private String cardCVV;
 	private LocalDate cardExpiration;
 	
-	//Insurance attributes
+	// Insurance attributes
 	private String insuranceProvider;
 	private String memberId;
 	private String groupNumber;
 	
-	//Pharmacy attributes
+	// Pharmacy attributes
 	private String pharmacyName;
 	private String pharmacyAddress;
 	private String pharmacyCity;
@@ -41,14 +40,14 @@ public class Patient extends User {
 	private String pharmacyPhoneNumber;
 	private String pharmacyEmail;
 	
-	//Constructor - creates a new patient and user object and updates the personal and contact information
+	// Constructor - creates a new patient and user object and updates the personal and contact information
 	public Patient(String username, String password, Role role, String firstName, String lastName, 
 				   LocalDate dateOfBirth, String phoneNumber, String streetAddress, String city,
 				   String state, String zipcode, String email, String securityQuestion, String securityAnswer) {
-		//Call the User superclass constructor
+		// Call the User superclass constructor
 		super(username, password, role, firstName, lastName);
 		
-		//Update Patient attributes
+		// Update Patient attributes
 		this.dateOfBirth = dateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.address = streetAddress;
@@ -60,7 +59,7 @@ public class Patient extends User {
 		this.securityAnswer = securityAnswer;
 	}
 	
-	//Update payment details for a patient
+	// Update payment details for a patient
 	public void updatePaymentInfo(String bank, String cardNum, String securityCode, LocalDate expiration) {
 		this.bankName = bank;
 		this.cardNumber = cardNum;
@@ -68,14 +67,14 @@ public class Patient extends User {
 		this.cardExpiration = expiration;
 	}
 	
-	//Update insurance information for a patient
+	// Update insurance information for a patient
 	public void updateInsuranceInfo(String provider, String memberId, String groupNum) {
 		this.insuranceProvider = provider;
 		this.memberId = memberId;
 		this.groupNumber = groupNum;
 	}
 	
-	//Update preferred pharmacy information for a patient
+	// Update preferred pharmacy information for a patient
 	public void updatedPharmacyInfo(String pharmName, String pharmAddress, String pharmCity, String pharmState,
 									String pharmZip, String pharmPhoneNum, String pharmEmail) {
 		this.pharmacyName = pharmName;
@@ -87,15 +86,17 @@ public class Patient extends User {
 		this.pharmacyEmail = pharmEmail;
 	}
 	
+	// Stores a visit record for a patient using the visit history manager
 	public void addVisit(Visit visit) {
 		try {
 			VisitHistoryManager.storeVisit(this, visit);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//visitHistory.add(visit);
+		// visitHistory.add(visit);
 	}
 	
+	// Getters and Setters
 	public String getUsername() {
 		return super.getUsername();
 	}
@@ -304,20 +305,20 @@ public class Patient extends User {
 		this.pharmacyPhoneNumber = phoneNum;
 	}
 	
-	//Getter for visit history
+	// Getter for visit history
 	public List<Visit> getVisitHistory() {
 		return VisitHistoryManager.getVisitsForPatient(this.getUsername());
 	}
 	
+	// Setter for visit history
 	public void setVisit(Visit oldVisit, Visit newVisit) {
 		try {
-			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDate(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
+			VisitHistoryManager.updateVisit(this, oldVisit.getVisitDateFormatted(), newVisit.getLocation(), newVisit.getPhysicalExamNotes(), newVisit.getMedicationNotes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//
 	public String serialize() {
 		return "";
 	}

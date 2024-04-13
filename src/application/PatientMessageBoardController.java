@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -18,12 +16,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class PatientMessageBoardController {
 	@FXML private VBox messageContainer;
 
     @FXML private Button newMessageBtn;
+    @FXML private Button backBtn;
     
     @FXML private TableView<MessageThread> messagesTable;
     @FXML private TableColumn<MessageThread, String> senderColumn;
@@ -74,7 +72,9 @@ public class PatientMessageBoardController {
     	messagesTable.setPlaceholder(new Label("No messages!"));
     }
     
-    //
+    // Loads a new message composition interface, clears existing content, adds the newly loaded interface into container
+    // Prepares the message application for a new message to be sent
+    // Logs a confirmation indicating a new message button was pressed
     public void composeNewMessage() {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/compose_message.fxml"));
@@ -88,6 +88,7 @@ public class PatientMessageBoardController {
     	System.out.println("New Message button pressed");
     }
     
+    // Checks if a message thread exists within an observable list, uses a stream and any match method to determine if there is a match
     private boolean isDuplicateMessage(ObservableList<MessageThread> messageThreads, int threadId) {
     	return messageThreads.stream().anyMatch(thread -> thread.getThreadId() == threadId);
     	//return false;
@@ -132,57 +133,14 @@ public class PatientMessageBoardController {
     	messagesTable.setItems(messageThreads);
     }
     
-	//Handle back button (goes home)
+	// Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	loadScene("/FXML/patient_view.fxml", event);
+    	SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
     }
     
-	//Handle logout button 
+	// Handle logout button 
     public void logout(ActionEvent event) throws Exception {
-        loadScene("/FXML/role_selection.fxml", event);
-    }
-    
-    @FXML
-    private void appointmentButton(ActionEvent event) {
-        event.consume();
-        System.out.println("appointment button");
-    }
-    
-    @FXML
-    private void aboutUsButton(ActionEvent event) {
-        event.consume();
-        System.out.println("about us button");
-    }
-    
-    @FXML
-    private void refillButton(ActionEvent event) {
-        event.consume();
-        System.out.println("refill button");
-    }
-    
-    @FXML
-    private void settingButton(ActionEvent event) {
-        event.consume();
-        System.out.println("setting button");
-    }
-    
-    @FXML
-    private void mainButton(ActionEvent event) throws Exception {
-        event.consume();
-        System.out.println("main button");
-        loadScene("/FXML/patient_view.fxml", event);
-    }
-    	
-    //Method to load the scene
-    private void loadScene(String fxmlFile, ActionEvent event) throws Exception {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-    	Parent root = loader.load();
-    	loader.getController();
-        Scene scene = new Scene(root, 800, 600);
-        scene.getStylesheets().add(getClass().getResource("/CSS/styles.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
     // Method to open the message thread, load all messages from the thread, and concat them all together
@@ -261,4 +219,11 @@ public class PatientMessageBoardController {
     	
     	loadMessages();
     }
+    
+    // Directs the user back to a patient view screen
+    @FXML
+    public void goBack(ActionEvent event) throws Exception {
+		String fxmlFile = "/FXML/patient_view.fxml";
+		SceneManager.loadScene(getClass(), fxmlFile, event);
+	}
 }
