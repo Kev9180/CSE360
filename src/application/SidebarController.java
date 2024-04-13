@@ -54,7 +54,7 @@ public class SidebarController {
     	
     	// clear sidebar of unecessary items
     	if (!buttons.contains(Sidebar.DASHBOARD)) {
-    		container.getChildren().remove(patientListB);
+    		container.getChildren().remove(dashboardB);
     	}
     	if (!buttons.contains(Sidebar.PATIENTLIST)) {
     		container.getChildren().remove(patientListB);
