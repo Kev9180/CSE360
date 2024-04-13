@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -21,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class NurseDoctorPatientVisitController implements PatientListItemListener, Initializable{
+public class NurseDoctorPatientVisitController implements PatientListItemListener, SidebarListener, Initializable{
 
     @FXML private Button categoryAllButton;
     @FXML private Button categoryCurrentButton;
@@ -72,7 +73,14 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
         
         // Also update patient count
         allCount.setText("" + patients.size());
+        
+        // set sidebar
+        SidebarController controller = (SidebarController) SceneManager.addContainerElement(getClass(), parentContainer, 0, "/FXML/sidebar.fxml");
+		controller.setListener(this);
 		
+		Sidebar[] buttons_array = {Sidebar.PATIENTLIST, Sidebar.MESSAGES};
+		List<Sidebar> buttons = Arrays.asList(buttons_array);
+		controller.setButtons(buttons);
 	}
     
 	
@@ -82,30 +90,39 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     
 	// Handle back button (goes home)
     public void previousScene(ActionEvent event) throws Exception {
-    	logoutStaff();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+		logout(event);
+		SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
     }
     
-	// Handle logout button 
-    public void logout(ActionEvent event) throws Exception {
-    	logoutStaff();
-    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
-    }
+    // Handle patients/messaging button
+	@Override
+	public void handleClick(Sidebar action, ActionEvent event) {
+		switch (action) {
+		case PATIENTLIST:
+			event.consume();
+			SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
+			break;
+		case MESSAGES:
+	    	event.consume();
+	    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+		}
+		
+	}
     
     public void messageButton(ActionEvent event) throws Exception {
     	event.consume();
     	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
-    
-    public void selectPatients(ActionEvent event) throws Exception {
-    	event.consume();
-    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
-    }
-    
-    public void selectMessages(ActionEvent event) throws Exception {
-    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
-    	
-    }
+//    
+//    public void selectPatients(ActionEvent event) throws Exception {
+//    	event.consume();
+//    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
+//    }
+//    
+//    public void selectMessages(ActionEvent event) throws Exception {
+//    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+//    	
+//    }
     
     @Override
     public void onMessageButtonClick(Patient patient) {
@@ -247,8 +264,10 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	allCount.setTextFill(Color.web("#666666"));
     }
 
-    // Method to logout the patient before going back to the previous screen
-    public void logoutStaff() {
+
+	@Override
+	public void logout(ActionEvent event) {
+		// TODO Auto-generated method stub
     	UserManager userManager = UserManager.getInstance();
     	
     	// Get the current logged in user
@@ -261,6 +280,7 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	} else {
     		System.out.println("No user currently logged in.");
     	}
-    }
-
+    	
+    	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
+	}
 }

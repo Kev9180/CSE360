@@ -88,7 +88,6 @@ public class PatientVisitInfoController implements PatientImmunizationItemListen
     		boolean dateFormattedNull = time == null;
     		System.out.println("Old visit date formatted is null: " + dateFormattedNull);
 
-    		
     		// pass in the old visit, so we know which one to change
     		newVisit.setVisitDate(visit.getVisitDate());
     		newVisit.setVisitDateFormatted(visit.getVisitDateFormatted());

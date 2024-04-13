@@ -78,5 +78,17 @@ public class SceneManager {
 		}
     	return null;
     }
+    
+    public static Object addContainerElement(Class<?> clazz, Pane parentContainer, int indexToAdd, String fxmlString) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlString));
+	    	parentContainer.getChildren().add(indexToAdd, loader.load());
+	    	Object controller = loader.getController();
+	    	return controller;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
 
 }

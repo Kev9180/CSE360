@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -96,6 +98,12 @@ public class NurseDoctorVisitHistoryController implements Initializable, Patient
     @FXML
     void handleNewVisitClicked(MouseEvent event) {
     	parentController.onNewVisitClicked(patient, parentContainer);
+    }
+    
+    @FXML
+    void previousScene(ActionEvent event) {
+    	// return back to patientList
+    	SceneManager.loadScene(getClass(), "nurse_doctor_patient_list", event);
     }
 	
    
