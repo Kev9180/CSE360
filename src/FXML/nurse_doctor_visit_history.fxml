@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -8,47 +9,52 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseDoctorVisitHistoryController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="600.0" spacing="8.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NurseDoctorVisitHistoryController">
    <children>
-      <HBox fx:id="parentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="772.0" spacing="12.0" style="-fx-background-color: #f8f8f8;">
+      <HBox fx:id="parentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="772.0" spacing="12.0">
          <children>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1072.0">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1072.0" spacing="12.0">
                <children>
-                  <VBox maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0">
-                     <children>
-                        <Label fx:id="name" prefHeight="35.0" prefWidth="507.0" text="Adam Adams" textFill="#6039d2">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label text="Visit History" textFill="#666666" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="24.0" />
-                     </VBox.margin>
-                  </VBox>
+                  <Button id="backbutton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#previousScene" stylesheets="@../CSS/button.css">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                           <children>
+                              <SVGPath content="M17.17,24a1,1,0,0,1-.71-.29L8.29,15.54a5,5,0,0,1,0-7.08L16.46.29a1,1,0,1,1,1.42,1.42L9.71,9.88a3,3,0,0,0,0,4.24l8.17,8.17a1,1,0,0,1,0,1.42A1,1,0,0,1,17.17,24Z" fill="#777777" />
+                              <Label text="Go Back" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
                   <BorderPane prefHeight="54.0" prefWidth="600.0">
-                     <left>
-                        <Label prefHeight="35.0" prefWidth="184.0" text="Select a Visit:" textFill="#777777" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <padding>
-                              <Insets left="2.0" />
-                           </padding>
-                        </Label>
-                     </left>
                      <right>
                         <Button id="composebutton" fx:id="newVisitButton" mnemonicParsing="false" onMouseClicked="#handleNewVisitClicked" prefHeight="33.0" prefWidth="94.0" stylesheets="@../CSS/button.css" text="New Visit" textFill="WHITE" BorderPane.alignment="CENTER" />
                      </right>
                      <padding>
                         <Insets right="16.0" />
                      </padding>
+                     <center>
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="name" prefHeight="35.0" prefWidth="507.0" text="Adam Adams" textFill="#6039d2">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Visit History" textFill="#666666" />
+                           </children>
+                        </VBox>
+                     </center>
                   </BorderPane>
-                  <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="457.0" minWidth="600.0" prefWidth="600.0" stylesheets="@../CSS/scrollpane.css" vbarPolicy="ALWAYS">
+                  <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="600.0" prefHeight="0.0" prefWidth="600.0" stylesheets="@../CSS/scrollpane.css" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="visitList" scaleShape="false" spacing="4.0">
                            <children>
@@ -106,4 +112,7 @@
          </children>
       </HBox>
    </children>
+   <padding>
+      <Insets left="20.0" top="24.0" />
+   </padding>
 </VBox>
