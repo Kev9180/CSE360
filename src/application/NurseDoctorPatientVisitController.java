@@ -109,10 +109,10 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
 		
 	}
     
-//    public void messageButton(ActionEvent event) throws Exception {
-//    	event.consume();
-//    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
-//    }
+    public void messageButton(ActionEvent event) throws Exception {
+    	event.consume();
+    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
+    }
 //    
 //    public void selectPatients(ActionEvent event) throws Exception {
 //    	event.consume();
@@ -283,5 +283,4 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	
     	SceneManager.loadScene(getClass(), "/FXML/role_selection.fxml", event);
 	}
-
 }
