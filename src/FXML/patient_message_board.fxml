@@ -6,62 +6,54 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fefefe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientMessageBoardController">
-   <center>
-      <VBox fx:id="messageContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="620.0" BorderPane.alignment="CENTER">
+
+<VBox fx:id="messageContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientMessageBoardController">
+   <children>
+      <HBox prefHeight="600.0" prefWidth="620.0" spacing="12.0" style="-fx-background-color: #fefefe;">
          <children>
-            <HBox prefHeight="600.0" prefWidth="620.0" spacing="12.0" style="-fx-background-color: #fefefe;">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0">
                <children>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0">
+                  <VBox prefHeight="46.0" prefWidth="590.0">
                      <children>
-                        <VBox prefHeight="46.0" prefWidth="590.0">
-                           <children>
-                              <Label text="Messages" textFill="#6039d2">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label textFill="#666666" />
-                           </children>
-                           <VBox.margin>
-                              <Insets top="24.0" />
-                           </VBox.margin>
-                        </VBox>
-                        
-                        <Separator prefWidth="200.0" />
-                        <TableView fx:id="messagesTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
-                          <columns>
-                            <TableColumn fx:id="senderColumn" prefWidth="150.0" text="From" />
-                            <TableColumn fx:id="subjectColumn" prefWidth="300.0" text="Subject" />
-                              <TableColumn fx:id="actionsColumn" prefWidth="105.0" text="Actions" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="300.0">
-                           <children>
-                              <Button fx:id="backBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #3ea3f4;" text="Back" textFill="WHITE" />
-                            <Button fx:id="newMessageBtn" mnemonicParsing="false" onAction="#composeNewMessage" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #6039d2;" stylesheets="@../CSS/button.css" text="New Message" textFill="WHITE" />
-                           </children>
-                           <padding>
-                              <Insets right="30.0" />
-                           </padding>
-                        </HBox>
+                        <Label text="Messages" textFill="#6039d2">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label textFill="#666666" />
                      </children>
+                     <VBox.margin>
+                        <Insets top="24.0" />
+                     </VBox.margin>
                   </VBox>
+                  
+                        <Separator prefWidth="200.0" />
+                  <TableView fx:id="messagesTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="590.0" stylesheets="@../CSS/table.css">
+                    <columns>
+                      <TableColumn fx:id="senderColumn" prefWidth="150.0" text="From" />
+                      <TableColumn fx:id="subjectColumn" prefWidth="300.0" text="Subject" />
+                        <TableColumn fx:id="actionsColumn" prefWidth="105.0" text="Actions" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="300.0">
+                     <children>
+                        <Button fx:id="backBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #3ea3f4;" text="Back" textFill="WHITE" />
+                      <Button fx:id="newMessageBtn" mnemonicParsing="false" onAction="#composeNewMessage" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #6039d2;" stylesheets="@../CSS/button.css" text="New Message" textFill="WHITE" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
-         <BorderPane.margin>
-            <Insets right="12.0" />
-         </BorderPane.margin>
-      </VBox>
-   </center>
-</BorderPane>
+      </HBox>
+   </children>
+</VBox>

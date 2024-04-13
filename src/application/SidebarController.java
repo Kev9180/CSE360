@@ -2,12 +2,14 @@ package application;
 import java.util.List;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,7 +36,9 @@ import javafx.scene.shape.SVGPath;
 public class SidebarController {
 
 	@FXML private VBox container;
+	@FXML private BorderPane outerContainer;
 	
+	@FXML private Button dashboardB;
 	@FXML private Button patientListB;
 	@FXML private Button patientResultsB;
 	@FXML private Button messagingB;
@@ -49,6 +53,9 @@ public class SidebarController {
     public void setButtons(List<Sidebar> buttons) {
     	
     	// clear sidebar of unecessary items
+    	if (!buttons.contains(Sidebar.DASHBOARD)) {
+    		container.getChildren().remove(patientListB);
+    	}
     	if (!buttons.contains(Sidebar.PATIENTLIST)) {
     		container.getChildren().remove(patientListB);
     	}
@@ -71,6 +78,18 @@ public class SidebarController {
     	// defer until after rendering, or else children will be undefined
     	Platform.runLater(() -> {
     		setSelected(0);
+    		
+    		// cute little gradient to simulate glass texture
+            outerContainer.getScene().setOnMouseMoved(event -> {
+                double mouseX = event.getX();
+                double mouseY = event.getY();
+                outerContainer.styleProperty().bind(Bindings.createStringBinding(() ->
+                String.format("-fx-background-color: radial-gradient(center %dpx %dpx, radius %dpx, #f7f1f7 0%%, #f0edf4 100%%);",
+                        (int) (mouseX), 
+                        (int) (mouseY), 
+                        (int) (Math.max(outerContainer.getWidth(), outerContainer.getHeight()) / 3)),
+                outerContainer.widthProperty(), outerContainer.heightProperty()));
+            });
     	});
     	
     }
@@ -121,6 +140,15 @@ public class SidebarController {
     	button.setId("selectedbutton");
     }
 
+    @FXML
+    void handleDashboardClicked(ActionEvent event) {
+    	// select button
+    	setSelected(container.getChildren().indexOf(dashboardB));
+    	
+    	// call listener method
+    	listener.handleClick(Sidebar.DASHBOARD, event);    	
+    }
+    
     @FXML
     void handlePatientListClicked(ActionEvent event) {
     	// select button

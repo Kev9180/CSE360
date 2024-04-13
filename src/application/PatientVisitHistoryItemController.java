@@ -28,7 +28,7 @@ public class PatientVisitHistoryItemController {
         dateLabel.setText(dateStr);
         
         // Set physical exam notes
-        String examStr = visit.getPhysicalExamNotes() == "" ? "N/A" : visit.getPhysicalExamNotes();
+        String examStr = (visit.getPhysicalExamNotes().contains("null") && visit.getPhysicalExamNotes().length() == 4) ? "N/A" : visit.getPhysicalExamNotes();
         examLabel.setText(examStr);
         
         // Set health concerns

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" minWidth="182.0" style="-fx-background-color: #F3EDF4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SidebarController">
+<BorderPane fx:id="outerContainer" maxHeight="1.7976931348623157E308" minWidth="182.0" style="-fx-background-color: #f0edf4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SidebarController">
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="180.0" spacing="24.0" BorderPane.alignment="CENTER">
          <padding>
@@ -52,16 +52,40 @@
             <Circle fill="#3ea3f4" radius="16.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
             <VBox fx:id="container" prefWidth="156.0" spacing="12.0">
                <children>
+                  <Button id="unselectedbutton" fx:id="dashboardB" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleDashboardClicked" prefHeight="36.0" prefWidth="156.0" stylesheets="@../CSS/button.css" text="dashboardB" textFill="WHITE">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" prefWidth="160.0" spacing="12.0">
+                           <children>
+                              <StackPane maxHeight="24.0" maxWidth="24.0" prefHeight="24.0" prefWidth="24.0">
+                                 <children>
+                                    <SVGPath fx:id="icon1" content="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z&#10;M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z&#10;M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z&#10;M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z" fill="#6039d2" scaleX="0.8" scaleY="0.8" />
+                                 </children>
+                              </StackPane>
+                              <Label text="Dashboard" textFill="#222222">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Button id="unselectedbutton" fx:id="patientListB" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handlePatientListClicked" prefHeight="36.0" prefWidth="156.0" stylesheets="@../CSS/button.css" text="patientListB" textFill="WHITE">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefWidth="160.0" spacing="12.0">
                            <children>
                               <StackPane maxHeight="24.0" maxWidth="24.0" prefHeight="24.0" prefWidth="24.0">
                                  <children>
-                                    <SVGPath fx:id="icon" content="m7.5 13a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5zm7.5 17v-.5a7.5 7.5 0 0 0 -15 0v.5a1 1 0 0 0 2 0v-.5a5.5 5.5 0 0 1 11 0v.5a1 1 0 0 0 2 0zm9-5a7 7 0 0 0 -11.667-5.217 1 1 0 1 0 1.334 1.49 5 5 0 0 1 8.333 3.727 1 1 0 0 0 2 0zm-6.5-9a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5z" fill="#6039d2" scaleX="0.8" scaleY="0.8" />
+                                    <SVGPath fx:id="icon" content="m7.5 13a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5zm7.5 17v-.5a7.5 7.5 0 0 0 -15 0v.5a1 1 0 0 0 2 0v-.5a5.5 5.5 0 0 1 11 0v.5a1 1 0 0 0 2 0zm9-5a7 7 0 0 0 -11.667-5.217 1 1 0 1 0 1.334 1.49 5 5 0 0 1 8.333 3.727 1 1 0 0 0 2 0zm-6.5-9a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5z" fill="#666666" scaleX="0.8" scaleY="0.8" />
                                  </children>
                               </StackPane>
-                              <Label text="Patient List" textFill="#222222">
+                              <Label text="Patient List" textFill="#666666">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
