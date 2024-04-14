@@ -98,9 +98,13 @@ public class NewAppointmentFormController {
 	        visitDateTime = LocalDateTime.of(visitDate, selectedTime);
 	    }
 	    
+	    // fetch the requested doctor
+	    String requestedProviderUsername = requestedProviderCB.getValue().split(" \\| Username: ")[1];
+	    User requestedProvider = DatabaseUtil.getUserByUsername(requestedProviderUsername);
+	    
 	    // Create a new visit for the patient, which will represent the patient's requested visit
 	    // On the date of the visit, the nurse/doctor will choose this visit from the patient's visit history list, and then fill in the information
-	    visit = new Visit(healthConcerns, visitDateTime, visitDate);
+	    visit = new Visit(healthConcerns, visitDateTime, visitDate, requestedProvider);
 	    
 	    //A dd the visit to the patient's visit history
 	    VisitHistoryManager.storeVisit(patient, visit);

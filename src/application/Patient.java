@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Patient extends User {
@@ -40,6 +43,10 @@ public class Patient extends User {
 	private String pharmacyPhoneNumber;
 	private String pharmacyEmail;
 	
+//	// Appointment Information
+//	private List<LocalDateTime> startTimes;
+//	private List<LocalDateTime> endTimes;
+//	
 	// Constructor - creates a new patient and user object and updates the personal and contact information
 	public Patient(String username, String password, Role role, String firstName, String lastName, 
 				   LocalDate dateOfBirth, String phoneNumber, String streetAddress, String city,
@@ -57,6 +64,7 @@ public class Patient extends User {
 		this.email = email;
 		this.securityQuestion = securityQuestion;
 		this.securityAnswer = securityAnswer;
+		
 	}
 	
 	// Update payment details for a patient
@@ -85,6 +93,11 @@ public class Patient extends User {
 		this.pharmacyPhoneNumber = pharmPhoneNum;
 		this.pharmacyEmail = pharmEmail;
 	}
+
+//	public void addAppointment(LocalDateTime startTime, LocalDateTime endTime) {
+//		startTimes.add(startTime);
+//		endTimes.add(endTime);
+//	}
 	
 	// Stores a visit record for a patient using the visit history manager
 	public void addVisit(Visit visit) {
@@ -318,6 +331,50 @@ public class Patient extends User {
 			e.printStackTrace();
 		}
 	}
+	
+//	// Getter for Appointments <startTime, endTime>
+//	public List<List<LocalDateTime>> getAppointments() {
+//		List<List<LocalDateTime>> startAndEndTimes = new ArrayList<>();;
+//		startAndEndTimes.add(startTimes);
+//		startAndEndTimes.add(endTimes);
+//		return startAndEndTimes;
+//	}
+//	
+//	// convert appointments into format: Start,End|Start,end
+//	public String getAppointmentsString() {
+//		String result = "";
+//		for (int i = 0; i < startTimes.size(); i ++) {
+//			result += startTimes.get(i) + ",";
+//			result += endTimes.get(i);
+//			result += "|";
+//		}
+//		return result;
+//	}
+//	
+//	public void convertAppointmentsString(String appointmentsString) {
+//        String[] pairs = appointmentsString.split("\\|");
+//
+//        // Iterate through each pair
+//        for (String pair : pairs) {
+//        	if (pair.strip() == "")
+//        		return;
+//        	
+//            // Split each pair by ','
+//            String[] dateTimeStrings = pair.split(",");
+//
+//            // Parse start and end dates and add them to respective lists
+//            LocalDateTime startDate = LocalDateTime.parse(dateTimeStrings[0]);
+//            LocalDateTime endDate = LocalDateTime.parse(dateTimeStrings[1]);
+//
+//            startTimes.add(startDate);
+//            endTimes.add(endDate);
+//        }
+//	}
+//	
+//	public void removeAppointment(int index) {
+//		startTimes.remove(index);
+//		endTimes.remove(index);
+//	}
 	
 	public String serialize() {
 		return "";

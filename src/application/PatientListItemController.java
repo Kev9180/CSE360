@@ -6,7 +6,9 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 //Controller class for each individual patient entry in the patient list view
 public class PatientListItemController {
 	// FXML annotations to inject UI elements from the FXML file
@@ -14,12 +16,25 @@ public class PatientListItemController {
     @FXML private Label nameLabel; // Label displaying the name of the patient
     @FXML private Label dobLabel; // Label displaying the date of birth of the patient
     @FXML private StackPane patientEntry; // StackPane containing the patient entry
+    @FXML private Circle scheduledIndicator;
+    @FXML private AnchorPane anchorPaneColor;
     
     private Patient patient;
+    private boolean patientHasScheduled;
     private PatientListItemListener parentController;
     // Method to set the labels of the UI elements based on the provided patient information
     public void setLabels(Patient patient) {
     	this.patient = patient;
+    	
+    	// find if user has a future scheduled appointment
+    	for (Visit visit : patient.getVisitHistory()) {
+    		if (visit.getIsScheduled()) {
+    			patientHasScheduled = true;
+    			scheduledIndicator.setVisible(true);
+    			anchorPaneColor.setStyle("-fx-background-color: linear-gradient(to bottom right, #FAFAFF, white);");
+    			break;		
+    		}
+    	}
 	    
 	    // Set patient visit date
 	    List<Visit> visitHistory = patient.getVisitHistory();
@@ -76,6 +91,7 @@ public class PatientListItemController {
     @FXML
     void handleMouseEnter(MouseEvent event) {
     	patientEntry.getStyleClass().add("hover");
+    	anchorPaneColor.setStyle("");
     }
 
     // Method to handle mouse exiting the patient entry
@@ -83,12 +99,15 @@ public class PatientListItemController {
     void handleMouseExit(MouseEvent event) {
     	patientEntry.getStyleClass().remove("hover");
     	patientEntry.getStyleClass().remove("pressed");
+    	if (patientHasScheduled)
+    		anchorPaneColor.setStyle("-fx-background-color: linear-gradient(to bottom right, #FAFAFF, white);");
     }
 
     // Method to handle mouse pressing on the patient entry
     @FXML
     void handleMousePress(MouseEvent event) {
     	patientEntry.getStyleClass().add("pressed");
+    	anchorPaneColor.setStyle("");
     }
     
     // Pass parent controller to nurse/doctor patient list view

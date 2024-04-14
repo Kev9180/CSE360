@@ -102,12 +102,12 @@ public class DatabaseUtil {
 		Patient myPatient = new Patient("username1", "password", Role.PATIENT, "first", "last", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit = new Visit("100", "100", "100", "100", null, null, null, "concerns", null, "location", "examNotes",
+		Visit myVisit = new Visit("100", "100", "100", "100", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "concerns", new ArrayList<>(), "location", "examNotes",
 				"medicationNotes");
 		Patient myPatient2 = new Patient("username2", "password", Role.PATIENT, "first2", "last2", LocalDate.now(),
 				"1234567890", "address", "city", "state", "00000", "email@example.com", "securityQuestion",
 				"securityAnswer");
-		Visit myVisit2 = new Visit("100", "100", "100", "100", null, null, null, "concerns", null, "location", "examNotes",
+		Visit myVisit2 = new Visit("100", "100", "100", "100", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "concerns", new ArrayList<>(), "location", "examNotes",
 				"medicationNotes");
 		myPatient.addVisit(myVisit);
 		addUser(myPatient);
@@ -155,6 +155,7 @@ public class DatabaseUtil {
 				pstmt.setString(26, patient.getPharmZipcode() != null ? patient.getPharmZipcode() : null);
 				pstmt.setString(27, patient.getPharmPhoneNum() != null ? patient.getPharmPhoneNum() : null);
 				pstmt.setString(28, patient.getPharmEmail() != null ? patient.getPharmEmail() : null);
+
 			} else {
 				// Set all the patient attribute fields to null for doctors and nurses
 				for (int i = 6; i <= 28; i++) {
@@ -225,7 +226,7 @@ public class DatabaseUtil {
 	
 	// Method to update values for a patient
 	public static void updatePatientValues(Patient patient) {
-	    String sql = "UPDATE userList SET password=?, firstName=?, lastName=?, dateOfBirth=?, email=?, phoneNumber=?, address=?, city=?, state=?, zipcode=?, bankName=?, cardNumber=?, cardCVV=?, cardExpiration=?, insuranceProvider=?, memberId=?, groupNumber=?, pharmacyName=?, pharmacyAddress=?, pharmacyCity=?, pharmacyState=?, pharmacyZipcode=?, pharmacyPhoneNumber=?, pharmacyEmail=? WHERE username=?";
+	    String sql = "UPDATE userList SET password=?, firstName=?, lastName=?, dateOfBirth=?, email=?, phoneNumber=?, address=?, city=?, state=?, zipcode=?, bankName=?, cardNumber=?, cardCVV=?, cardExpiration=?, insuranceProvider=?, memberId=?, groupNumber=?, pharmacyName=?, pharmacyAddress=?, pharmacyCity=?, pharmacyState=?, pharmacyZipcode=?, pharmacyPhoneNumber=?, pharmacyEmail=?, WHERE username=?";
 	    
 	 // Make the connection to the db and prepare the sql stmt
 	    try (Connection connection = DriverManager.getConnection(DB_URL); PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -434,6 +435,8 @@ public class DatabaseUtil {
 			patient.setPharmPhoneNum(rs.getString("pharmacyPhoneNumber"));
 		if (rs.getString("pharmacyEmail") != null)
 			patient.setPharmEmail(rs.getString("pharmacyEmail"));
+		if (rs.getString("pharmacyEmail") != null)
+			patient.setPharmEmail(rs.getString("appointments"));
 
 		return patient;
 	}

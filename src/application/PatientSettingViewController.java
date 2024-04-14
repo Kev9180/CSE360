@@ -47,8 +47,7 @@ public class PatientSettingViewController {
 			if (username.equals(patient.getUsername()))
 				this.patient = patient;
 		}
-		
-		
+
 		populateFields();
 	}
 	

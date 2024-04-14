@@ -50,7 +50,9 @@ public class VisitHistoryManager {
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
-            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted() + "\n");
+            writer.write("Is Scheduled: " + visit.getIsScheduled() + "\n");
+            writer.write("Requested Provider: " + (visit.getRequestedProvider() == null ? "none" : visit.getRequestedProvider().getUsername()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -135,6 +137,12 @@ public class VisitHistoryManager {
                     case "Visit Date Formatted":
                     	visit.setVisitDateFormatted(LocalDateTime.parse(parts[1]));
                     	break;
+                    case "Is Scheduled":
+                    	visit.setIsScheduled(Boolean.parseBoolean(parts[1]));
+                    	break;
+                    case "Requested Provider":
+                    	visit.setRequestedProvider(DatabaseUtil.getUserByUsername(parts[1]));
+                    	break;
 					}
 				}
 			}
@@ -208,7 +216,9 @@ public class VisitHistoryManager {
             writer.write("Physical Exam Notes: " + visit.getPhysicalExamNotes() + "\n");
             writer.write("Medication Notes: " + visit.getMedicationNotes() + "\n");
             writer.write("Visit Date: " + visit.getVisitDate() + "\n");
-            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted());
+            writer.write("Visit Date Formatted: " + visit.getVisitDateFormatted() + "\n");
+            writer.write("Is Scheduled: " + visit.getIsScheduled() + "\n");
+            writer.write("Requested Provider: " + (visit.getRequestedProvider() == null ? "none" : visit.getRequestedProvider().getUsername()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

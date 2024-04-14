@@ -84,7 +84,7 @@ public class SidebarController {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
                 outerContainer.styleProperty().bind(Bindings.createStringBinding(() ->
-                String.format("-fx-background-color: radial-gradient(center %dpx %dpx, radius %dpx, #f7f1f7 0%%, #f0edf4 100%%);",
+                String.format("-fx-background-color: radial-gradient(center %dpx %dpx, radius %dpx, #f2eaf7 0%%, #f0edf4 100%%);",
                         (int) (mouseX), 
                         (int) (mouseY), 
                         (int) (Math.max(outerContainer.getWidth(), outerContainer.getHeight()) / 3)),

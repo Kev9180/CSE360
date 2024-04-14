@@ -214,23 +214,26 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	sortPatientsByDate();
     }
     
-    // shows patients that do not yet have a visit
+    // shows patients that have a future scheduled appointment
     public void categoryCurrent(ActionEvent event) throws Exception {
     	// Activate categoryCurrent button
     	setCategoryButton(categoryCurrentButton, true);
 		setCategoryButton(categoryAllButton, false);
 		setCategoryButton(categoryPreviousButton, false);
 		
-		// show and sort all patients by first name
+		// show and sort all patients that have a scheduledVisit
     	List<Patient> tempList = PatientManager.getInstance().getPatients();
     	patients = new ArrayList<>();
     	for (int i = 0; i < tempList.size(); i ++) {
-    		if (tempList.get(i).getVisitHistory().size() == 0) {
-    			patients.add(tempList.get(i));
-    		}
+			for (Visit visit: tempList.get(i).getVisitHistory()) {
+				if (visit.getIsScheduled()) {
+					patients.add(tempList.get(i));
+					break;
+				}
+			}
     	}
 
-    	sortPatientsByFirstName();
+    	sortPatientsByDate();
     }
     
     // shows patients that do have a visit
@@ -240,13 +243,16 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
 		setCategoryButton(categoryCurrentButton, false);
 		setCategoryButton(categoryAllButton, false);
 		
-    	// sort and show all patients by date
+    	// sort and show all patients that have a non scheduled visit
     	List<Patient> tempList = PatientManager.getInstance().getPatients();
     	patients = new ArrayList<>();
     	for (int i = 0; i < tempList.size(); i ++) {
-    		if (tempList.get(i).getVisitHistory().size() > 0) {
-    			patients.add(tempList.get(i));
-    		}
+			for (Visit visit: tempList.get(i).getVisitHistory()) {
+				if (!visit.getIsScheduled()) {
+					patients.add(tempList.get(i));
+					break;
+				}
+			}
     	}
 
     	sortPatientsByDate();

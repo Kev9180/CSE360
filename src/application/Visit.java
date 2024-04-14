@@ -22,15 +22,19 @@ public class Visit {
 	private String medicationNotes;
 	private LocalDateTime visitDateFormatted;
 	private LocalDate visitDate;
+	private boolean isScheduled; // scheduled appointment, patient has not visited yet 
+	private User requestedProvider;
 	
 	// Default constructor
 	public Visit() {}
 	
 	// Constructor with essential visit details
-	public Visit(String healthConcerns, LocalDateTime dateTime, LocalDate date) {
+	public Visit(String healthConcerns, LocalDateTime dateTime, LocalDate date, User requestedProvider) {
 		this.healthConcerns = healthConcerns;
 		this.visitDateFormatted = dateTime;
 		this.visitDate = date;
+		this.isScheduled = true;
+		this.requestedProvider = requestedProvider;
 	}
 	
 	// Constructor with full visit details
@@ -138,5 +142,17 @@ public class Visit {
 	}
 	public void setVisitDate(LocalDate date) {
 		this.visitDate = date;
+	}
+	public boolean getIsScheduled() {
+		return isScheduled;
+	}
+	public void setIsScheduled(boolean isScheduled) {
+		this.isScheduled = isScheduled;
+	}
+	public User getRequestedProvider() {
+		return requestedProvider;
+	}
+	public void setRequestedProvider(User requestedProvider) {
+		this.requestedProvider = requestedProvider;
 	}
 }

@@ -37,8 +37,8 @@ public class PatientVisitInfoController implements PatientImmunizationItemListen
 	private Patient patient;
 	private Visit visit;
 	private String mode;
-	private List<PatientImmunizationItemController> immunizationListItemControllers;
-	private List<String> temporaryImmunizations = new ArrayList<>();;
+	private List<PatientImmunizationItemController> immunizationListItemControllers = new ArrayList<>();
+	private List<String> temporaryImmunizations = new ArrayList<>();
 	
 	// sets labels
 	// @Params: patient contains info about which patient was clicked on
@@ -171,6 +171,9 @@ public class PatientVisitInfoController implements PatientImmunizationItemListen
     // fetch the immunizations from the current state of the table
     public List<String> getImmunizationsList() {
     	List<String> output = new ArrayList<>();
+    	if (immunizationListItemControllers.size() == 0) {
+    		return output;
+    	}
     	for (PatientImmunizationItemController listItemController : immunizationListItemControllers) {
     		String immunization = listItemController.getLabels();
     		output.add(immunization);

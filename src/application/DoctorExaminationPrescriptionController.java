@@ -107,6 +107,10 @@ public class DoctorExaminationPrescriptionController implements PatientPrescript
 		// pass in the old visit, so we know which one to change
 		newVisit.setVisitDate(visit.getVisitDate());
 		newVisit.setVisitDateFormatted(visit.getVisitDateFormatted());
+		
+		// mark the appointment as completed (patient visited)
+		newVisit.setIsScheduled(false);
+		
 		patient.addVisit(newVisit);
 		System.out.println("Visit Updated");
     	

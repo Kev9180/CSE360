@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
 <StackPane fx:id="visitEntry" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" onMousePressed="#handleMousePress" styleClass="listItem" stylesheets="@../CSS/button.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientVisitHistoryItemController">
    <children>
-      <AnchorPane onMouseClicked="#handleListItemClick" prefHeight="48.0" prefWidth="588.0" styleClass="listItem" stylesheets="@../CSS/button.css">
+      <AnchorPane fx:id="anchorPaneColor" onMouseClicked="#handleListItemClick" prefHeight="48.0" prefWidth="588.0" styleClass="listItem" stylesheets="@../CSS/button.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -16,6 +17,7 @@
             <Label fx:id="examLabel" alignment="CENTER" layoutX="134.0" layoutY="16.0" prefHeight="17.0" prefWidth="177.0" text="I've come to make an announcement" textAlignment="CENTER" textFill="#1e1e1e" />
             <Label fx:id="concernsLabel" alignment="CENTER" layoutX="332.0" layoutY="16.0" prefHeight="17.0" prefWidth="155.0" text="Shadow the Hedgehog is a cool guy" textAlignment="CENTER" textFill="#1e1e1e" />
             <Label fx:id="prescriptionLabel" alignment="CENTER" layoutX="495.0" layoutY="16.0" prefHeight="17.0" prefWidth="94.0" text="Pristiq 25mg" textAlignment="CENTER" textFill="#1e1e1e" />
+            <Circle fx:id="scheduledIndicator" fill="#6039d2" layoutY="24.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
          </children>
       </AnchorPane>
    </children>

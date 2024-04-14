@@ -1,0 +1,19 @@
+Patient Username: patient1
+First Name: John
+Last Name: Doe
+Height: 123
+Weight: 10
+Temperature: 9000
+Blood Pressure: 0
+Allergies: John
+Immunizations: John|2024-04-03
+Prescribed Medications: 
+Health Concerns: John
+Dosage: 
+Location: null
+Physical Exam Notes: null
+Medication Notes: null
+Visit Date: 2024-04-14
+Visit Date Formatted: 2024-04-14T05:21:17.062400100
+Is Scheduled: false
+Requested Provider: none

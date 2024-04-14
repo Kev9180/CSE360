@@ -70,7 +70,7 @@
                      <graphic>
                         <BorderPane prefHeight="41.0">
                            <left>
-                              <Label text="Current Patients" textFill="#666666" textOverrun="CLIP" BorderPane.alignment="CENTER">
+                              <Label text="Scheduled Patients" textFill="#666666" textOverrun="CLIP" BorderPane.alignment="CENTER">
                                  <padding>
                                     <Insets right="8.0" />
                                  </padding>

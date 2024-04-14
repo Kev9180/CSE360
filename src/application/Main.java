@@ -12,7 +12,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		DatabaseUtil.initializeDatabase();
 		DatabaseUtil.initializeMessageDatabase();
-		// DatabaseUtil.preloadUsers();
+		//DatabaseUtil.preloadUsers();
 		
 		// Gets role selection fxml file and sets as root screen to be the opener
 		try {		

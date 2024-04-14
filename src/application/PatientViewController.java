@@ -30,16 +30,16 @@ public class PatientViewController implements SidebarListener, Initializable {
 			SceneManager.loadScene(getClass(), "/FXML/patient_view.fxml", event);
 			break;
 		case MESSAGES:
-			messageButton(event);
+			SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_message_board.fxml");
 			break;
 		case APPOINTMENTS:
-			newAppointmentButton(event);
+			SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/new_appointment_form.fxml");
 			break;
 		case MYINFO: 
-			settingButton(event);
+			SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_setting_view.fxml");
 			break;
 		case MYVISITS:
-			visitHistoryButton(event);
+			SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_appointment_view.fxml");
 			break;
 		default:
 			break;
@@ -62,25 +62,25 @@ public class PatientViewController implements SidebarListener, Initializable {
     // Clears the existing content in a designated container and adds the newly loaded message board to the container
     @FXML
     private void messageButton(ActionEvent event) {
-   		SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_message_board.fxml");
+    	handleClick(Sidebar.MESSAGES, event);
     }
     
     // Switches the application view to settings when triggered
     @FXML
     private void settingButton(ActionEvent event) {
-    	SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_setting_view.fxml");
+    	handleClick(Sidebar.MYINFO, event);
     }
    
     // Switches the application view to display a new appointment form when triggered
     @FXML
     private void newAppointmentButton(ActionEvent event) {
-    	SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/new_appointment_form.fxml");
+    	handleClick(Sidebar.APPOINTMENTS, event);
     }
     
     // Switches the application view to display a patients visit history
     @FXML
     private void visitHistoryButton(ActionEvent event) {
-		SceneManager.setContainerElement(getClass(), screenContainer, "/FXML/patient_appointment_view.fxml");
+		handleClick(Sidebar.MYVISITS, event);
     }
     
     // Switches the application view to display a patients appointments
