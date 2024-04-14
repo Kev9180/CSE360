@@ -44,9 +44,23 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     // Tell the table what the columns should consist of
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Mark initial vbox to be the one to be replaced
-		
+		// initially sort patients by date
 		patients = PatientManager.getInstance().getPatients();
+        sortPatientsByDate();
+        
+        // Also update patient count
+        allCount.setText("" + patients.size());
+        
+        // set sidebar
+        SidebarController controller = (SidebarController) SceneManager.addContainerElement(getClass(), parentContainer, 0, "/FXML/sidebar.fxml");
+		controller.setListener(this);
+		
+		Sidebar[] buttons_array = {Sidebar.PATIENTLIST, Sidebar.MESSAGES};
+		List<Sidebar> buttons = Arrays.asList(buttons_array);
+		controller.setButtons(buttons);
+	}
+	
+	public void sortPatientsByDate() {
 		// Initially sort by most recent visit date
         Collections.sort(patients, new Comparator<Patient>() {
             @Override
@@ -70,17 +84,17 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
         });
         
         updatePatientList();
+	}
+	
+	public void sortPatientsByFirstName() {
+		// Initially sort by most recent visit date
+        Collections.sort(patients, new Comparator<Patient>() {
+            public int compare(Patient o1, Patient o2) {
+                return o1.getFirstName().compareTo(o2.getFirstName());
+            }
+        });
         
-        // Also update patient count
-        allCount.setText("" + patients.size());
-        
-        // set sidebar
-        SidebarController controller = (SidebarController) SceneManager.addContainerElement(getClass(), parentContainer, 0, "/FXML/sidebar.fxml");
-		controller.setListener(this);
-		
-		Sidebar[] buttons_array = {Sidebar.PATIENTLIST, Sidebar.MESSAGES};
-		List<Sidebar> buttons = Arrays.asList(buttons_array);
-		controller.setButtons(buttons);
+        updatePatientList();
 	}
     
 	
@@ -113,16 +127,6 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     	event.consume();
     	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
     }
-//    
-//    public void selectPatients(ActionEvent event) throws Exception {
-//    	event.consume();
-//    	SceneManager.loadScene(getClass(), "/FXML/nurse_doctor_patient_list.fxml", event);
-//    }
-//    
-//    public void selectMessages(ActionEvent event) throws Exception {
-//    	NurseDoctorMessageBoardController controller = (NurseDoctorMessageBoardController) SceneManager.replaceContainerElement(getClass(), parentContainer, 1, "/FXML/nurse_doctor_message_board.fxml");
-//    	
-//    }
     
     @Override
     public void onMessageButtonClick(Patient patient) {
@@ -177,9 +181,13 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
     // Update patient list method
     public void updatePatientList() {
 		controllers = new ArrayList<>();
-    	
+		
+    	// delete preexisting list
+		while (patientList.getChildren().size() > 1) {
+			patientList.getChildren().remove(1);
+		}
+		
 		// Create patientListItems
-        // Load list items dynamically
         for (int i = 0; i < patients.size(); i++) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/patient_list_item.fxml"));
@@ -194,74 +202,69 @@ public class NurseDoctorPatientVisitController implements PatientListItemListene
         }
     }
     
+    // shows all patients
     public void categoryAll(ActionEvent event) throws Exception {
     	// Activate categoryAll button
-    	categoryAllButton.setId("selectedoption");
-    	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
-    	Label allLabel = (Label) allBP.getLeft();
-    	allLabel.setTextFill(Color.web("#6039d2"));
-    	allCount.setTextFill(Color.web("#6039d2"));
+    	setCategoryButton(categoryAllButton, true);
+    	setCategoryButton(categoryCurrentButton, false);
+    	setCategoryButton(categoryPreviousButton, false);
     	
-    	// Deactivate categoryCurrent button
-    	categoryCurrentButton.setId("unselectedoption");
-    	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
-    	Label currentLabel = (Label) currentBP.getLeft();
-    	currentLabel.setTextFill(Color.web("#666666"));
-    	currentCount.setTextFill(Color.web("#666666"));
-    	
-    	// Deactivate categoryPrevious button
-    	categoryPreviousButton.setId("unselectedoption");
-    	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
-    	Label previousLabel = (Label) previousBP.getLeft();
-    	previousLabel.setTextFill(Color.web("#666666"));
-    	previousCount.setTextFill(Color.web("#666666"));
+    	// sort and show all patients by date
+    	patients = PatientManager.getInstance().getPatients();
+    	sortPatientsByDate();
     }
     
+    // shows patients that do not yet have a visit
     public void categoryCurrent(ActionEvent event) throws Exception {
     	// Activate categoryCurrent button
-    	categoryCurrentButton.setId("selectedoption");
-    	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
-    	Label currentLabel = (Label) currentBP.getLeft();
-    	currentLabel.setTextFill(Color.web("#6039d2"));
-    	currentCount.setTextFill(Color.web("#6039d2"));
-    	
-    	// Deactivate categoryAll button
-    	categoryAllButton.setId("unselectedoption");
-    	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
-    	Label allLabel = (Label) allBP.getLeft();
-    	allLabel.setTextFill(Color.web("#666666"));
-    	allCount.setTextFill(Color.web("#666666"));
-    	
-    	// Deactivate categoryPrevious button
-    	categoryPreviousButton.setId("unselectedoption");
-    	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
-    	Label previousLabel = (Label) previousBP.getLeft();
-    	previousLabel.setTextFill(Color.web("#666666"));
-    	previousCount.setTextFill(Color.web("#666666"));
-   
+    	setCategoryButton(categoryCurrentButton, true);
+		setCategoryButton(categoryAllButton, false);
+		setCategoryButton(categoryPreviousButton, false);
+		
+		// show and sort all patients by first name
+    	List<Patient> tempList = PatientManager.getInstance().getPatients();
+    	patients = new ArrayList<>();
+    	for (int i = 0; i < tempList.size(); i ++) {
+    		if (tempList.get(i).getVisitHistory().size() == 0) {
+    			patients.add(tempList.get(i));
+    		}
+    	}
+
+    	sortPatientsByFirstName();
     }
     
+    // shows patients that do have a visit
     public void categoryPrevious(ActionEvent event) throws Exception {
     	// Activate categoryPrevious button
-    	categoryPreviousButton.setId("selectedoption");
-    	BorderPane previousBP = (BorderPane) categoryPreviousButton.getGraphic();
-    	Label previousLabel = (Label) previousBP.getLeft();
-    	previousLabel.setTextFill(Color.web("#6039d2"));
-    	previousCount.setTextFill(Color.web("#6039d2"));
-    	
-    	// Deactivate categoryCurrent button
-    	categoryCurrentButton.setId("unselectedoption");
-    	BorderPane currentBP = (BorderPane) categoryCurrentButton.getGraphic();
-    	Label currentLabel = (Label) currentBP.getLeft();
-    	currentLabel.setTextFill(Color.web("#666666"));
-    	currentCount.setTextFill(Color.web("#666666"));
-    	
-    	// Deactivate categoryAll button
-    	categoryAllButton.setId("unselectedoption");
-    	BorderPane allBP = (BorderPane) categoryAllButton.getGraphic();
-    	Label allLabel = (Label) allBP.getLeft();
-    	allLabel.setTextFill(Color.web("#666666"));
-    	allCount.setTextFill(Color.web("#666666"));
+    	setCategoryButton(categoryPreviousButton, true);
+		setCategoryButton(categoryCurrentButton, false);
+		setCategoryButton(categoryAllButton, false);
+		
+    	// sort and show all patients by date
+    	List<Patient> tempList = PatientManager.getInstance().getPatients();
+    	patients = new ArrayList<>();
+    	for (int i = 0; i < tempList.size(); i ++) {
+    		if (tempList.get(i).getVisitHistory().size() > 0) {
+    			patients.add(tempList.get(i));
+    		}
+    	}
+
+    	sortPatientsByDate();
+    }
+    
+    public void setCategoryButton(Button button, boolean isSelected) {
+    	BorderPane container = (BorderPane) button.getGraphic();
+    	Label leftLabel = (Label) container.getLeft(); // name of the category
+    	Label rightLabel = (Label) container.getRight(); // displays the number of patients within category
+    	if (isSelected) {
+        	button.setId("selectedoption");
+    		leftLabel.setTextFill(Color.web("#6039d2"));
+    		rightLabel.setTextFill(Color.web("#6039d2"));
+    	} else {
+        	button.setId("unselectedoption");
+    		leftLabel.setTextFill(Color.web("#888888"));
+    		rightLabel.setTextFill(Color.web("#888888"));
+    	}
     }
 
 

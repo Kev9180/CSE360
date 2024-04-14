@@ -38,6 +38,9 @@ public class PatientViewController implements SidebarListener, Initializable {
 		case MYINFO: 
 			settingButton(event);
 			break;
+		case MYVISITS:
+			visitHistoryButton(event);
+			break;
 		default:
 			break;
 		}
@@ -50,7 +53,7 @@ public class PatientViewController implements SidebarListener, Initializable {
         SidebarController controller = (SidebarController) SceneManager.addContainerElement(getClass(), parentContainer, 0, "/FXML/sidebar.fxml");
 		controller.setListener(this);
 		
-		Sidebar[] buttons_array = {Sidebar.DASHBOARD, Sidebar.MESSAGES, Sidebar.APPOINTMENTS, Sidebar.MYINFO};
+		Sidebar[] buttons_array = {Sidebar.DASHBOARD, Sidebar.MESSAGES, Sidebar.APPOINTMENTS, Sidebar.MYINFO, Sidebar.MYVISITS};
 		List<Sidebar> buttons = Arrays.asList(buttons_array);
 		controller.setButtons(buttons);
 	}

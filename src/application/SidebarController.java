@@ -113,7 +113,7 @@ public class SidebarController {
     	SVGPath icon = (SVGPath) sp.getChildren().get(0);
     	Label label = (Label) hbox.getChildren().get(1);
     	
-    	icon.setFill(Color.web("#777777"));
+    	icon.setStyle("-fx-fill: #777777");
     	label.setTextFill(Color.web("#666666"));
     	button.setEffect(null);
     	button.setId("unselectedbutton");
@@ -126,7 +126,7 @@ public class SidebarController {
     	SVGPath icon = (SVGPath) sp.getChildren().get(0);
     	Label label = (Label) hbox.getChildren().get(1);
     	
-    	icon.setFill(Color.web("#6039d2"));
+    	icon.setStyle("-fx-fill: linear-gradient(to bottom right, #6039d2, #d059d2);");
     	label.setTextFill(Color.web("#222222"));
     	
     	DropShadow shadow = new DropShadow();

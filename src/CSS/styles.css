@@ -1,12 +1,3 @@
-@font-face {
-    font-family: 'Open Sans', sans-serif;
-    src: url('/Assets/OpenSans-Regular.ttf');
-}
-@font-face {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
-    src: url('/Assets/OpenSans-SemiBold.ttf');
-}
 
 .root {
 	/* Color Variables */
